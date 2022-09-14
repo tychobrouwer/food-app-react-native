@@ -30,9 +30,14 @@ export const stylesMain = StyleSheet.create({
 
   flex: {
     flexDirection: "row",
+    alignItems: "center",
   },
 
   link: {
     color: "blue",
-  }
+  },
+
+  checkbox: {
+    margin: 5,
+  },
 });

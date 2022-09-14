@@ -1,6 +1,6 @@
-import { Text, View, TextInput, TouchableOpacity, CheckBox } from 'react-native';
-
+import { Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { useState } from "react";
+import Checkbox from 'expo-checkbox';
 
 import { stylesMain } from '../styles/main_styles.js'
 import { stylesLogin } from '../styles/login_styles.js'
@@ -8,6 +8,7 @@ import { stylesLogin } from '../styles/login_styles.js'
 export const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isSelected, setSelection] = useState(false);
 
   return (
     <View style={stylesMain.container}>
@@ -33,19 +34,34 @@ export const LoginScreen = ({ navigation }) => {
           />
         </View>
 
-        <View style={stylesMain.flex}>
-          <CheckBox
-            value={isSelected}
-            onValueChange={setSelection}
-            style={styles.checkbox}
-          />
-          <Text style={styles.label}>Remember me</Text>
+        <View style={[stylesMain.flex, { marginBottom: 20 }]}>
+          <TouchableOpacity
+            style={[stylesMain.flex, { marginRight: "10%" }]}
+            onPress={() =>
+              setSelection(!isSelected)
+            }
+          >
+            <Checkbox
+              value={isSelected}
+              style={stylesMain.checkbox}
+            />
+
+            <Text style={stylesMain.checkboxText}>Remember me</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            // onPress={() =>
+            //   navigation.navigate('Signup')
+            // }
+          >
+            <Text style={stylesMain.link}>Forgot password?</Text>
+          </TouchableOpacity>
         </View>
 
         <TouchableOpacity
           style={stylesLogin.loginBtn}
           onPress={() => {
-            navigation.navigate('Home', { email: 'email', name: 'test' });
+            navigation.navigate('Home', { email: 'email' });
           }}
         >
           <Text>LOGIN</Text>
@@ -54,7 +70,7 @@ export const LoginScreen = ({ navigation }) => {
           <Text style={stylesMain.text}>Not registered yet? </Text>
           <TouchableOpacity
             onPress={() =>
-              navigation.push('Signup', {})
+              navigation.navigate('Signup')
             }
           >
             <Text style={stylesMain.link}>Create an Account</Text>
