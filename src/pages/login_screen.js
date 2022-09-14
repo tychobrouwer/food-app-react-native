@@ -44,9 +44,9 @@ export const LoginScreen = ({ navigation }) => {
 
         <TouchableOpacity
           style={stylesLogin.loginBtn}
-          onPress={() =>
-            navigation.navigate('Home', { params: { name: email }})
-          }
+          onPress={() => {
+            navigation.navigate('Home', { email: 'email', name: 'test' });
+          }}
         >
           <Text>LOGIN</Text>
         </TouchableOpacity>
@@ -54,7 +54,7 @@ export const LoginScreen = ({ navigation }) => {
           <Text style={stylesMain.text}>Not registered yet? </Text>
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate('Signup', {})
+              navigation.push('Signup', {})
             }
           >
             <Text style={stylesMain.link}>Create an Account</Text>

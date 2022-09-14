@@ -52,11 +52,12 @@ export const SignupScreen = ({ navigation }) => {
         >
           <Text>SIGN UP</Text>
         </TouchableOpacity>
+        
         <View style={stylesMain.flex}>
           <Text style={stylesMain.text}>Already a user? </Text>
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate('Login', {})
+              navigation.pop('Login', {})
             }
           >
             <Text style={stylesMain.link}>login</Text>

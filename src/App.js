@@ -40,20 +40,3 @@ const defaultScreenOpt = {
   headerShown: false,
   animation: 'none',
 }
-
-const transitionConfig = {
-  animation: 'spring',
-  config: {
-    stiffness: 5,
-    damping: 500,
-    mass: 3,
-    overshootClamping: true,
-    restDisplacementThreshold: 0.01,
-    restSpeedThreshold: 0.01,
-  },
-
-  // animation: 'timing',
-  // config: {
-  //   duration: 0,
-  // }
-}
