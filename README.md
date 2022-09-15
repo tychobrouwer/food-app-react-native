@@ -7,36 +7,36 @@
 6. Scan the QR code from the console with your phone (for IOS with the camera app).
 
 # Structure
-|-- src
-|    |-- components
-|    |    |-- big-btn
-|    |    |    |-- index.js
-|    |    |-- big-text-input
-|    |    |    |-- index.js
-|    |    |-- global-state
-|    |    |    |-- index.js
-|    |    |-- screen-default
-|    |    |    |-- index.js
-|    |-- screens
-|    |    |-- home
-|    |    |    |-- index.js
-|    |    |    |-- styles.js
-|    |    |-- login
-|    |    |    |-- index.js
-|    |    |    |-- styles.js
-|    |    |-- signup
-|    |    |    |-- index.js
-|    |    |    |-- styles.js
-|    |    |-- splash
-|    |    |    |-- index.js
-|    |    |    |-- styles.js
-|    |-- styles
-|    |    |-- index.js
-|    |-- utils
-|    |    |-- authentication
-|    |    |    |-- index.js
-|    |    |-- capitalize
-|    |    |    |-- index.js
-|    |    |-- validate-email
-|    |    |    |-- index.js
-|    |-- App.js
+|-- src\
+|    |-- components\
+|    |    |-- big-btn\
+|    |    |    |-- index.js\
+|    |    |-- big-text-input\
+|    |    |    |-- index.js\
+|    |    |-- global-state\
+|    |    |    |-- index.js\
+|    |    |-- screen-default\
+|    |    |    |-- index.js\
+|    |-- screens\
+|    |    |-- home\
+|    |    |    |-- index.js\
+|    |    |    |-- styles.js\
+|    |    |-- login\
+|    |    |    |-- index.js\
+|    |    |    |-- styles.js\
+|    |    |-- signup\
+|    |    |    |-- index.js\
+|    |    |    |-- styles.js\
+|    |    |-- splash\
+|    |    |    |-- index.js\
+|    |    |    |-- styles.js\
+|    |-- styles\
+|    |    |-- index.js\
+|    |-- utils\
+|    |    |-- authentication\
+|    |    |    |-- index.js\
+|    |    |-- capitalize\
+|    |    |    |-- index.js\
+|    |    |-- validate-email\
+|    |    |    |-- index.js\
+|    |-- App.js\
