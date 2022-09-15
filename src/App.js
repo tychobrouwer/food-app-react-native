@@ -21,14 +21,14 @@ export default function App() {
     <GlobalState initialState={state} dispatch={dispatch}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Login"
+          initialRouteName="SignIn"
           screenOptions={{
             headerShown: false,
             animation: 'none',
           }}
         >
           <Stack.Screen
-            name='Login'
+            name='SignIn'
             component={LoginScreen}
           />
           <Stack.Screen 
@@ -36,7 +36,7 @@ export default function App() {
             component={HomeScreen}
           />
           <Stack.Screen 
-            name='Signup'
+            name='SignUp'
             component={SignupScreen}
           />
         </Stack.Navigator>

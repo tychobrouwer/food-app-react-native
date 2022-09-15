@@ -112,12 +112,12 @@ export const LoginScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
 
-        <BigBtn 
+        <BigBtn
           title='LOGIN'
           onPress={() => {
-            if (authenticate()) {   
+            if (authenticate()) {
               dispatch({type: SET_CREDENTIALS, payload: { email: email, password: password }});
-          
+
               navigation.navigate('Home', { email: email });
             }
           }}
@@ -127,7 +127,7 @@ export const LoginScreen = ({ navigation }) => {
           <Text style={stylesMain.text}>Not registered yet? </Text>
           <TouchableOpacity
             onPress={() =>
-              navigation.push('Signup')
+              navigation.push('SignUp')
             }
           >
             <Text style={stylesMain.link}>Create an Account</Text>

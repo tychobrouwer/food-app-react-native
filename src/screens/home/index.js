@@ -20,7 +20,7 @@ export const HomeScreen = ({ navigation, route }) => {
       <Button
         title="Logout"
         onPress={() =>
-          navigation.navigate('Login')
+          navigation.navigate('SignIn')
         }
       />
     </ScreenDefault>
