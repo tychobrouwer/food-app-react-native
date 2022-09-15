@@ -6,39 +6,31 @@
 5. Run ```npm start```.
 6. Scan the QR code from the console with your phone (for IOS with the camera app).
 
-# Structure
+# Project Structure
 ```
-|-- src\
-|    |-- components\
-|    |    |-- big-btn\
-|    |    |    |-- index.js\
-|    |    |-- big-text-input\
-|    |    |    |-- index.js\
-|    |    |-- global-state\
-|    |    |    |-- index.js\
-|    |    |-- screen-default\
-|    |    |    |-- index.js\
-|    |-- screens\
-|    |    |-- home\
-|    |    |    |-- index.js\
-|    |    |    |-- styles.js\
-|    |    |-- login\
-|    |    |    |-- index.js\
-|    |    |    |-- styles.js\
-|    |    |-- signup\
-|    |    |    |-- index.js\
-|    |    |    |-- styles.js\
-|    |    |-- splash\
-|    |    |    |-- index.js\
-|    |    |    |-- styles.js\
-|    |-- styles\
-|    |    |-- index.js\
-|    |-- utils\
-|    |    |-- authentication\
-|    |    |    |-- index.js\
-|    |    |-- capitalize\
-|    |    |    |-- index.js\
-|    |    |-- validate-email\
-|    |    |    |-- index.js\
-|    |-- App.js\
+|-- assets
+|    |-- adaptive-icon.png
+|    |-- favicon.png
+|    |-- icon.png
+|    |-- splash.png
+|-- src
+|    |-- components
+|    |    |-- big-btn
+|    |    |-- big-text-input
+|    |    |-- global-state
+|    |    |-- screen-default
+|    |-- screens
+|    |    |-- home
+|    |    |-- login
+|    |    |-- signup
+|    |    |-- splash
+|    |-- styles
+|    |-- utils
+|    |    |-- authentication
+|    |    |-- capitalize
+|    |    |-- validate-email
+|    |-- App.js
+|-- app.json
+|-- babel.config.js
+|-- package.json
 ```
