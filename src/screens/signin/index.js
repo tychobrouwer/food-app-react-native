@@ -2,18 +2,19 @@ import React, { useContext, useState } from 'react'
 import { Text, View, TouchableOpacity } from 'react-native';
 import Checkbox from 'expo-checkbox';
 
-import { GlobalStateContext, GlobalDispatchContext, SET_CREDENTIALS } from '../../components/global-state'
+import { GlobalDispatchContext, SET_CREDENTIALS } from '../../components/global-state'
 
 import { stylesMain } from '../../styles'
-import { stylesLogin } from './styles.js'
+import { styles } from './styles.js'
+
 import BigBtn from '../../components/big-btn';
 import BigTextInput from '../../components/big-text-input';
+import ScreenDefault from '../../components/screen-wrapper';
 
+import { secureStoreSet } from '../../utils/secure-store';
 import validateEmail from '../../utils/validate-email';
-import ScreenDefault from '../../components/screen-default';
 
 export const LoginScreen = ({ navigation }) => {
-  const globalState = useContext(GlobalStateContext);
   const dispatch = useContext(GlobalDispatchContext);
 
   const [email, setEmail] = useState('');
@@ -57,14 +58,15 @@ export const LoginScreen = ({ navigation }) => {
 
   return (
     <ScreenDefault>
-      <Text style={stylesLogin.loginText}>LOGIN</Text>
+      <Text style={styles.loginText}>LOGIN</Text>
 
-      <View style={stylesLogin.loginContainer}>
+      <View style={styles.loginContainer}>
         <BigTextInput
           style={setRed('email')}
           placeholder='Email'
           autoComplete='email'
           keyboardType='email-address'
+          value={email}
           onChangeText={(email) => {
             setEmail(email);
             resetCheckLogin();
@@ -80,10 +82,11 @@ export const LoginScreen = ({ navigation }) => {
           placeholder='Password'
           autoComplete='password'
           secureTextEntry={true}
+          value={password}
           onChangeText={(password) => {
             setPassword(password);
             resetCheckLogin();
-        }}
+          }}
         />
 
         <View style={stylesMain.notification}>
@@ -116,9 +119,19 @@ export const LoginScreen = ({ navigation }) => {
           title='LOGIN'
           onPress={() => {
             if (authenticate()) {
-              dispatch({type: SET_CREDENTIALS, payload: { email: email, password: password }});
+              console.log('login using:', email, staySignedIn ? 'stay signed in' : '');
+              dispatch({type: SET_CREDENTIALS, payload: { email: email, token: password }});
 
-              navigation.navigate('Home', { email: email });
+              if (staySignedIn) {
+                secureStoreSet('email', email);
+                secureStoreSet('token', password);
+              }
+
+              setEmail('');
+              setPassword('');
+              setStaySignedIn(false);
+
+              navigation.navigate('Home');
             }
           }}
         />

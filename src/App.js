@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import GlobalState, { reducer } from "./components/global-state";
 
+import { SplashScreen } from './screens/splash';
 import { LoginScreen } from './screens/signin';
 import { HomeScreen } from './screens/home';
 import { SignupScreen } from './screens/signup';
@@ -21,12 +22,16 @@ export default function App() {
     <GlobalState initialState={state} dispatch={dispatch}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="SignIn"
+          initialRouteName='Splash'
           screenOptions={{
             headerShown: false,
             animation: 'none',
           }}
         >
+          <Stack.Screen
+            name='Splash'
+            component={SplashScreen}
+          />
           <Stack.Screen
             name='SignIn'
             component={LoginScreen}

@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export const stylesLogin = StyleSheet.create({
+export const styles = StyleSheet.create({
   loginText: {
     fontSize: '36px',
     fontWeight: 'bold',

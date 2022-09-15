@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, TextInput } from 'react-native';
 
-import { stylesMain } from '../../styles';
+import { styles } from './styles';
 
 export default class BigTextInput extends Component {
   constructor(props) {
@@ -10,9 +10,9 @@ export default class BigTextInput extends Component {
 
   render() { 
     return (
-      <View style={[stylesMain.inputView, this.props.style]}>
+      <View style={[styles.inputView, this.props.style]}>
         <TextInput
-          style={stylesMain.TextInput}
+          style={styles.TextInput}
           placeholder={this.props.placeholder}
           placeholderTextColor='grey'
           autoComplete={this.props.autoComplete}
@@ -20,6 +20,7 @@ export default class BigTextInput extends Component {
           secureTextEntry={this.props.secureTextEntry}
           importantForAutofill='yes'
           onChangeText={this.props.onChangeText}
+          value={this.props.value}
         />
       </View>
     );

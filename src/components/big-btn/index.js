@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 
-import { stylesMain } from '../../styles';
+import { styles } from './styles';
 
 export default class BigBtn extends Component {
   constructor(props) {
@@ -11,7 +11,7 @@ export default class BigBtn extends Component {
   render() { 
     return (
       <TouchableOpacity
-        style={stylesMain.bigBtn}
+        style={styles.bigBtn}
         onPress={this.props.onPress}
       >
         <Text>{this.props.title}</Text> 
