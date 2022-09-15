@@ -27,7 +27,7 @@ The "assets" folder is designated for images or fonts used in the app like the i
 |    |    |-- screen-default
 |    |-- screens
 |    |    |-- home
-|    |    |-- login
+|    |    |-- signin
 |    |    |-- signup
 |    |    |-- splash
 |    |-- styles

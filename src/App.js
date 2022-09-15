@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import GlobalState, { reducer } from "./components/global-state";
 
-import { LoginScreen } from './screens/login';
+import { LoginScreen } from './screens/signin';
 import { HomeScreen } from './screens/home';
 import { SignupScreen } from './screens/signup';
 
