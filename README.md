@@ -7,6 +7,7 @@
 6. Scan the QR code from the console with your phone (for IOS with the camera app).
 
 # Structure
+```
 |-- src\
 |    |-- components\
 |    |    |-- big-btn\
@@ -40,15 +41,4 @@
 |    |    |-- validate-email\
 |    |    |    |-- index.js\
 |    |-- App.js\
-
-├── cats_vs_dogs\
-│   ├── test_cat_dog\
-│   ├── testing\
-│   │   ├── cats\
-│   │   └── dogs\
-│   └── training\
-│       ├── cats\
-│       └── dogs\
-└── PetImages\
-    ├── Cat\
-    └── Dog\
+```
