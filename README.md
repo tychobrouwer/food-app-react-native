@@ -31,22 +31,26 @@ This is a project for the course Engineering Design - group 172. Instructions on
 
 ### To push updates to your fork repository
 
-1. Run ```git add .```.
-2. Run ```git commit -m "message about what is changed"```.
-3. Run ```git git push origin main```.
+1. Run ```cd path/project/directory``` to navigate to your project folder.
+2. Run ```npm run lint-fix``` to fix any styling issues.
+3. Run ```git add .```.
+4. Run ```git commit -m "message about what is changed"```.
+5. Run ```git git push origin main```.
 
 ### To pull updates from the original repository
 
-1. Run ```git pull upstream main```.
+1. Run ```cd path/project/directory``` to navigate to your project folder.
+2. Run ```git pull upstream main```.
 
 ### To push updates to the original repository
 
-1. Go to ```https://github.com/"Your GitHub username"/Food_App_React_Native.git```.
-2. Navigate to **Pull requests**.
-3. Press on **New pull request**.
-4. You can leave the default settings and press **Create pull request**.
-5. Give the request a title and maybe a comment and press **Create pull request**.
-6. You will have to wait for me to accept the request for it to be added to the repository.
+1. First push updates to your fork repository.
+2. Go to ```https://github.com/"Your GitHub username"/Food_App_React_Native.git```.
+3. Navigate to **Pull requests**.
+4. Press on **New pull request**.
+5. You can leave the default settings and press **Create pull request**.
+6. Give the request a title and maybe a comment and press **Create pull request**.
+7. You will have to wait for me to accept the request for it to be added to the repository.
 
 ## App
 
