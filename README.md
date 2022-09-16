@@ -1,21 +1,26 @@
 This is a project for the course Engineering Design - group 172. To use the app follow the instructions below.
 
 # Install
-1. Make a GitHub account
-1. Install git (download current [here](https://git-scm.com/downloads)).
-   - Make sure during installation ```add to path``` is checked.
-   - After installation run ```git config --global user.name "Your GitHub name here"```
-   - An run ```git config --global user.email "Your GitHub email here"```
-2. Install node.js (download current [here](https://nodejs.org/en/)).
-3. Download the expo go app in the AppStore or PlayStore.
-4. Make a folder for the project on your pc (if no spaces it is easier).
-4. Run ```cd path/project/directory```.
-5. Run ```git init```.
-5. Run ```git clone https://github.com/TychoBrouwer/Food_App_React_Native.git```.
-5. Run ```npm install```.
-6. In ```node_modules/expo/AppEntry.js``` change the App import to ```'../../src/App'```.
-7. Run ```npm start```.
-8. Scan the QR code from the console with your phone (for IOS with the camera app).
+1. Make a GitHub account.
+2. Fork the repository at ```https://github.com/TychoBrouwer/Food_App_React_Native.git```.
+   - In the top right click Fork.
+   - Leave the default settings and create fork.
+3. Install git (download current [here](https://git-scm.com/downloads)).
+   - Make sure during installation **add to path** is checked.
+   - After installation run ```git config --global user.name "Your GitHub name here"```.
+   - An run                 ```git config --global user.email "Your GitHub email here"```.
+4. Install node.js (download current [here](https://nodejs.org/en/)).
+5. Download the expo go app in the AppStore or PlayStore.
+6. Make a folder for the project on your pc (no spaces to make it easier).
+7. Run ```cd path/project/directory```.
+8. Run ```git init```.
+9. Run ```git remote add origin https://github.com/"Your GitHub username"/Food_App_React_Native.git```.
+10. Run ```git remote add upstream https://github.com/TychoBrouwer/Food_App_React_Native.git```.
+11. Run ```git pull upstream main```
+12. Run ```npm install```.
+13. In ```node_modules/expo/AppEntry.js``` change the App import to ```'../../src/App'```.
+14. Run ```npm start```.
+15. Scan the QR code from the console with your phone (for IOS with the camera app).
 
 # TO DO's (and thoughts)
 - Make database with REST API (express js?) (with mongodb?)
