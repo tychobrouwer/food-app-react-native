@@ -1,18 +1,19 @@
 import React, { useContext, useState } from 'react'
 import { Text, View, TouchableOpacity } from 'react-native';
 import Checkbox from 'expo-checkbox';
+import * as Crypto from 'expo-crypto';
 
-import { GlobalDispatchContext, SET_CREDENTIALS } from '../../components/global-state'
+import { GlobalDispatchContext, SET_CREDENTIALS } from '../../components/global-state';
 
-import { stylesMain } from '../../styles'
-import { styles } from './styles.js'
+import { stylesMain } from '../../styles';
+import { styles } from './styles.js';
 
 import BigBtn from '../../components/big-btn';
 import BigTextInput from '../../components/big-text-input';
 import ScreenDefault from '../../components/screen-wrapper';
 
+import { authenticate, getClientSalt } from '../../utils/authentication';
 import { secureStoreSet } from '../../utils/secure-store';
-import validateEmail from '../../utils/validate-email';
 
 export const LoginScreen = ({ navigation }) => {
   const dispatch = useContext(GlobalDispatchContext);
@@ -23,25 +24,15 @@ export const LoginScreen = ({ navigation }) => {
   const [emailText, setEmailText] = useState('');
   const [passwordText, setPasswordText] = useState('');
 
-  const authenticate = () => {
-    const emailEmptyCheck = email !== '';
-    const emailValidCheck = validateEmail(email) !== null
-    const passwordEmptyCheck = password !== '';
-  
-    if (!emailEmptyCheck) {
-      setEmailText('Enter an email.');
-    } else if (!emailValidCheck) {
-      setEmailText('Enter a valid email.');
-    } else if (!passwordEmptyCheck) {
-      setPasswordText('Enter a password.');
-    }
-  
-    return emailEmptyCheck && passwordEmptyCheck && emailValidCheck;
-  }
-
   const resetCheckLogin = () => {
     setPasswordText('');
     setEmailText('');
+  }
+
+  const resetLogin = () => {
+    setEmail('');
+    setPassword('');
+    setStaySignedIn(false);
   }
 
   const setRed = (field) => {
@@ -54,6 +45,41 @@ export const LoginScreen = ({ navigation }) => {
     }
 
     return returnStyle;
+  }
+
+  const handleLogin = async () => {
+    const salt = await getClientSalt(email);
+
+    const passwordHash = await Crypto.digestStringAsync(
+      Crypto.CryptoDigestAlgorithm.SHA256,
+      password + salt,
+    );
+
+    const authResult = await authenticate(email, passwordHash, staySignedIn);
+
+    if (authResult.result) {
+      console.log('login using:', email, staySignedIn ? 'stay signed in' : '');
+
+      dispatch({type: SET_CREDENTIALS, payload: { email: email, token: passwordHash }});
+
+      if (staySignedIn) {
+        await secureStoreSet('email', email);
+        await secureStoreSet('token', passwordHash);
+      }
+    
+      resetLogin();
+
+      navigation.navigate('Home');
+    } else {
+      const errorType = authResult.message.type;
+      const errorValue = authResult.message.value;
+
+      if (errorType === 'email') {
+        setEmailText(errorValue);
+      } else if (errorType === 'password') {
+        setPasswordText(errorValue);
+      }
+    }
   }
 
   return (
@@ -118,21 +144,7 @@ export const LoginScreen = ({ navigation }) => {
         <BigBtn
           title='LOGIN'
           onPress={() => {
-            if (authenticate()) {
-              console.log('login using:', email, staySignedIn ? 'stay signed in' : '');
-              dispatch({type: SET_CREDENTIALS, payload: { email: email, token: password }});
-
-              if (staySignedIn) {
-                secureStoreSet('email', email);
-                secureStoreSet('token', password);
-              }
-
-              setEmail('');
-              setPassword('');
-              setStaySignedIn(false);
-
-              navigation.navigate('Home');
-            }
+            handleLogin();
           }}
         />
 

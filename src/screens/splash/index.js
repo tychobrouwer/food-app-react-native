@@ -3,6 +3,7 @@ import React, { useEffect, useContext, useState } from 'react';
 import { secureStoreGet } from '../../utils/secure-store';
 import { GlobalDispatchContext, SET_CREDENTIALS } from '../../components/global-state'
 import Loader from '../../components/loader';
+import { authenticate } from '../../utils/authentication';
 
 export const SplashScreen = ({ navigation }) => {
   const dispatch = useContext(GlobalDispatchContext);
@@ -12,37 +13,34 @@ export const SplashScreen = ({ navigation }) => {
   useEffect(() => {
     const bootstrapAsync = async () => {
       let email;
-      let userToken;
+      let passwordHash;
 
       console.log('retrieving saved email and token');
 
       try {
         email = await secureStoreGet('email');
-        userToken = await secureStoreGet('token');
+        passwordHash = await secureStoreGet('token');
       } catch (e) {
         navigation.navigation('SignIn');
       }
 
-      console.log('email and token retrieved:', email, userToken);
+      console.log('saved account found:', email);
 
-      // validate token here
-      const valid = userToken && email;
+      const authResult = await authenticate(email, passwordHash);
 
-      setLoading(false);
+      if (authResult.result) {
+        console.log('email and password valid');
 
-      if (valid) {
-        console.log('email and token valid');
-
-        dispatch({type: SET_CREDENTIALS, payload: { email: email, token: userToken }});
+        dispatch({type: SET_CREDENTIALS, payload: { email: email, token: passwordHash }});
 
         navigation.navigate('Home');
       } else {
-        console.log('no valid email and token found');
-
         setTimeout(() => {
           navigation.navigate('SignIn');
         }, 1000);
       }
+
+      setLoading(false);
     };
 
     if (loading) {
