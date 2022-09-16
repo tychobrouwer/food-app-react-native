@@ -17,6 +17,7 @@ This is a project for the course Engineering Design - group 172. Instructions on
    - And run ```git config --global user.email "Your GitHub email here"```.
 5. Install node.js (download current [here](https://nodejs.org/en/)).
    - Select **64-bit Git for Windows Setup** under **Standalone Installer**.
+   - In the install wizard you can leave default on everything.
 6. Download the **Expo Go** app in the AppStore or PlayStore.
 7. Make a folder for the project on your pc (no spaces to make it easier).
 8. Run ```cd path/project/directory``` to navigate to your project folder.
