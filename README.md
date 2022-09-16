@@ -6,20 +6,22 @@ This is a project for the course Engineering Design - group 172. Instructions on
    - In the top right click **Fork**.
    - Leave the default settings and **Create fork**.
 3. Install git (download current [here](https://git-scm.com/downloads)).
-   - Make sure during installation **add to path** is checked.
+   - In the install wizard you can leave default on almost everything.
+   - But you can choose you text editor, just select it in the dropdown.
+   - Also make sure **Git from the command line and also from 3rd-party software** is checked.
    - After installation run ```git config --global user.name "Your GitHub name here"```.
-   - An run                 ```git config --global user.email "Your GitHub email here"```.
+   - And run ```git config --global user.email "Your GitHub email here"```.
 4. Install node.js (download current [here](https://nodejs.org/en/)).
    - Select **64-bit Git for Windows Setup** under **Standalone Installer**.
 5. Download the **Expo Go** app in the AppStore or PlayStore.
 6. Make a folder for the project on your pc (no spaces to make it easier).
-7. Run ```cd path/project/directory```.
-8. Run ```git init```.
+7. Run ```cd path/project/directory``` to navigate to your project folder.
+8. Run ```git init``` to initiate a Git repository in the current directory.
 9. Run ```git remote add origin https://github.com/"Your GitHub username"/Food_App_React_Native.git```.
 10. Run ```git remote add upstream https://github.com/TychoBrouwer/Food_App_React_Native.git```.
 11. Run ```git pull origin main```.
-12. Run ```npm install```.
-13. In ```node_modules/expo/AppEntry.js``` change the App import to ```'../../src/App'```.
+12. Run ```npm install``` to install the necessary packages.
+13. In your text editor in ```node_modules/expo/AppEntry.js``` change the App import to ```'../../src/App'```.
 14. Run ```npm start``` to start the Expo server.
 15. Scan the QR code from the console with your phone (for IOS with the camera app).
 
