@@ -99,8 +99,11 @@ The **assets** folder is designated for images or fonts used in the app like the
 |    |    |-- secure-store
 |    |    |-- validate-email
 |    |-- App.js
+|-- .eslintrc
+|-- .gitignore
 |-- app.json
 |-- babel.config.js
 |-- package-lock.json
 |-- package.json
+|-- README.md
 ```
