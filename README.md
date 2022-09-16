@@ -40,9 +40,10 @@ This is a project for the course Engineering Design - group 172. Instructions on
 3. Press on **New pull request**.
 4. You can leave the default settings and press **Create pull request**. 
 5. Give the request a title and maybe a comment and press **Create pull request**. 
+6. You will have to wait for me to accept the request for it to be added to the repository.
 
 # App
-The app is written in [React Native](https://reactnative.dev/docs/getting-started) using [Expo Go](https://docs.expo.dev/). React Native uses [React](https://reactjs.org/docs/getting-started.html), which is a framework for JavaScript. The links are to their documentation, if something is unclear just search Google for **React Native "thing you want to do"** and you will probably find some guide or forum. Other resources that are useful are [W3schools](https://www.w3schools.com/js/), [Stack Overflow](https://stackoverflow.com/), the [JavaScript Docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript), and for specific npm packages [npm](https://www.npmjs.com/).
+The app is written in [React Native](https://reactnative.dev/docs/getting-started) using [Expo Go](https://docs.expo.dev/). React Native uses [React](https://reactjs.org/docs/getting-started.html), which is a framework for JavaScript. The links are to their documentation, if something is unclear just search Google for **React Native "thing you want to do"** and you will probably find some guide or forum post explaining how to implement it. Other resources that are useful are [W3schools](https://www.w3schools.com/js/), [Stack Overflow](https://stackoverflow.com/), the [JavaScript Docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript), and for specific npm packages [npm](https://www.npmjs.com/).
 
 Expo Go is used to run the project on your own device, without having to submit the app to the AppStore or PlayStore. Expo Go can also hot reload the app as soon as changes where made to the code.
 
