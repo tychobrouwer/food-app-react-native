@@ -1,23 +1,31 @@
-import React, { Component } from 'react';
-import { ScrollView, KeyboardAvoidingView, TouchableWithoutFeedback, View, Keyboard } from 'react-native';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import { stylesMain } from '../../styles';
+import {
+  ScrollView, KeyboardAvoidingView, TouchableWithoutFeedback, View, Keyboard, Platform,
+} from 'react-native';
 
-export default class ScreenDefault extends Component {
-  render() { 
-    return (
-      <ScrollView keyboardShouldPersistTaps="handled">
-        <KeyboardAvoidingView 
-          style={{ flex: 1 }}
-          {...(Platform.OS === 'ios' && { behavior: 'padding' })}
-        >
-          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <View style={stylesMain.container}>
-              { this.props.children }
-            </View>
-          </TouchableWithoutFeedback>
-        </KeyboardAvoidingView>
-      </ScrollView>
-    );
-  }
-}
+import stylesMain from '../../styles';
+
+const ScreenDefault = function ScreenDefault({ children }) {
+  return (
+    <ScrollView keyboardShouldPersistTaps="handled">
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={stylesMain.container}>
+            { children }
+          </View>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
+    </ScrollView>
+  );
+};
+
+ScreenDefault.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+export default ScreenDefault;

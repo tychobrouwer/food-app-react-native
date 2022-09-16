@@ -1,14 +1,15 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, {
+  useEffect, useContext,
+} from 'react';
+import PropTypes from 'prop-types';
 
 import { secureStoreGet } from '../../utils/secure-store';
-import { GlobalDispatchContext, SET_CREDENTIALS } from '../../components/global-state'
-import Loader from '../../components/loader';
+import { GlobalDispatchContext, SET_CREDENTIALS } from '../../components/global-state';
 import { authenticate } from '../../utils/authentication';
+import Loader from '../../components/loader';
 
-export const SplashScreen = ({ navigation }) => {
+const LoadingScreen = function LoadingScreen({ navigation }) {
   const dispatch = useContext(GlobalDispatchContext);
-
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const bootstrapAsync = async () => {
@@ -20,35 +21,40 @@ export const SplashScreen = ({ navigation }) => {
       try {
         email = await secureStoreGet('email');
         passwordHash = await secureStoreGet('token');
+
+        console.log('saved account found:', email);
+
+        const authResult = await authenticate(email, passwordHash);
+
+        if (authResult.result) {
+          console.log('email and password valid');
+
+          dispatch({ type: SET_CREDENTIALS, payload: { email, passwordHash } });
+
+          navigation.navigate('Home');
+        } else {
+          // TEMP just wait 1 second for show
+          await new Promise((resolve) => {
+            setTimeout(resolve, 1000);
+          });
+        }
       } catch (e) {
-        navigation.navigation('SignIn');
+        console.warn(e);
+      } finally {
+        navigation.navigate('SignIn');
       }
-
-      console.log('saved account found:', email);
-
-      const authResult = await authenticate(email, passwordHash);
-
-      if (authResult.result) {
-        console.log('email and password valid');
-
-        dispatch({type: SET_CREDENTIALS, payload: { email: email, token: passwordHash }});
-
-        navigation.navigate('Home');
-      } else {
-        setTimeout(() => {
-          navigation.navigate('SignIn');
-        }, 1000);
-      }
-
-      setLoading(false);
     };
 
-    if (loading) {
-      bootstrapAsync();
-    }
-  });
+    bootstrapAsync();
+  }, []);
 
-  return (
-    <Loader/>
-  )
-}
+  return (<Loader />);
+};
+
+LoadingScreen.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+};
+
+export default LoadingScreen;

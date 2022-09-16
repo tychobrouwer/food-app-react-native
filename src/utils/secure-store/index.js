@@ -9,11 +9,11 @@ export async function secureStoreDelete(key) {
 }
 
 export async function secureStoreGet(key) {
-  let result = await SecureStore.getItemAsync(key);
+  const result = await SecureStore.getItemAsync(key);
 
   if (result) {
     return result;
-  } else {
-    return false;
   }
+
+  return false;
 }

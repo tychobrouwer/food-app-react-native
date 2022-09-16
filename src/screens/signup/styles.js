@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   loginText: {
     fontSize: '36px',
     fontWeight: 'bold',
@@ -13,3 +13,5 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
+export default styles;

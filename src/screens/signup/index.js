@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
+import PropTypes from 'prop-types';
 
 import BigBtn from '../../components/big-btn';
 import BigTextInput from '../../components/big-text-input';
 import ScreenDefault from '../../components/screen-wrapper';
 
-import { stylesMain } from '../../styles'
-import { styles } from './styles.js'
+import stylesMain from '../../styles';
+import styles from './styles';
 
-export const SignupScreen = ({ navigation }) => {
+const SignupScreen = function SignupScreen({ navigation }) {
   const [email, setEmail] = useState('');
   const [password1, setPassword1] = useState('');
   const [password2, setPassword2] = useState('');
@@ -19,46 +20,46 @@ export const SignupScreen = ({ navigation }) => {
 
       <View style={styles.loginContainer}>
         <BigTextInput
-          placeholder='Email'
-          autoComplete='email'
-          keyboardType='email-address'
+          placeholder="Email"
+          autoComplete="email"
+          keyboardType="email-address"
           value={email}
-          onChangeText={(email) => {
+          onChangeText={() => {
             setEmail(email);
           }}
         />
 
         <View style={stylesMain.notification}>
-          <Text style={stylesMain.notificationText}></Text>
+          <Text style={stylesMain.notificationText} />
         </View>
 
         <BigTextInput
           style={{ marginBottom: 25 }}
-          placeholder='Password'
-          autoComplete='password'
-          secureTextEntry={true}
+          placeholder="Password"
+          autoComplete="password"
+          secureTextEntry
           value={password1}
-          onChangeText={(password1) => {
+          onChangeText={() => {
             setPassword1(password1);
           }}
         />
 
         <BigTextInput
-          placeholder='Password'
-          autoComplete='password'
-          secureTextEntry={true}
+          placeholder="Password"
+          autoComplete="password"
+          secureTextEntry
           value={password2}
-          onChangeText={(password2) => {
+          onChangeText={() => {
             setPassword2(password2);
           }}
         />
 
         <View style={stylesMain.notification}>
-          <Text style={stylesMain.notificationText}></Text>
+          <Text style={stylesMain.notificationText} />
         </View>
 
         <BigBtn
-          title='SIGN UP'
+          title="SIGN UP"
           onPress={() => {
             navigation.pop(1);
           }}
@@ -67,9 +68,7 @@ export const SignupScreen = ({ navigation }) => {
         <View style={stylesMain.flex}>
           <Text style={stylesMain.text}>Already a user? </Text>
           <TouchableOpacity
-            onPress={() =>
-              navigation.pop(1)
-            }
+            onPress={() => navigation.pop(1)}
           >
             <Text style={stylesMain.link}>login</Text>
           </TouchableOpacity>
@@ -78,3 +77,11 @@ export const SignupScreen = ({ navigation }) => {
     </ScreenDefault>
   );
 };
+
+SignupScreen.propTypes = {
+  navigation: PropTypes.shape({
+    pop: PropTypes.func.isRequired,
+  }).isRequired,
+};
+
+export default SignupScreen;

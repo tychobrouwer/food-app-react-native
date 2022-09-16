@@ -1,28 +1,48 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View, TextInput } from 'react-native';
+import PropTypes from 'prop-types';
 
-import { styles } from './styles';
+import styles from './styles';
 
-export default class BigTextInput extends Component {
-  constructor(props) {
-    super(props);
-  }
+const BigTextInput = function BigTextInput(
+  {
+    style, placeholder, autoComplete, keyboardType, secureTextEntry, onChangeText, value,
+  },
+) {
+  return (
+    <View style={[styles.inputView, style]}>
+      <TextInput
+        style={styles.TextInput}
+        value={value}
+        placeholder={placeholder}
+        placeholderTextColor="grey"
+        autoComplete={autoComplete}
+        keyboardType={keyboardType}
+        secureTextEntry={secureTextEntry}
+        importantForAutofill="yes"
+        onChangeText={onChangeText}
+      />
+    </View>
+  );
+};
 
-  render() { 
-    return (
-      <View style={[styles.inputView, this.props.style]}>
-        <TextInput
-          style={styles.TextInput}
-          placeholder={this.props.placeholder}
-          placeholderTextColor='grey'
-          autoComplete={this.props.autoComplete}
-          keyboardType={this.props.keyboardType}
-          secureTextEntry={this.props.secureTextEntry}
-          importantForAutofill='yes'
-          onChangeText={this.props.onChangeText}
-          value={this.props.value}
-        />
-      </View>
-    );
-  }
-}
+BigTextInput.propTypes = {
+  style: PropTypes.objectOf(PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ])),
+  value: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  autoComplete: PropTypes.string.isRequired,
+  keyboardType: PropTypes.string,
+  secureTextEntry: PropTypes.bool,
+  onChangeText: PropTypes.func.isRequired,
+};
+
+BigTextInput.defaultProps = {
+  style: {},
+  secureTextEntry: false,
+  keyboardType: 'default',
+};
+
+export default BigTextInput;

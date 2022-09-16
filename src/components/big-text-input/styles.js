@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   inputView: {
     borderColor: 'grey',
     borderWidth: 2,
@@ -22,3 +22,5 @@ export const styles = StyleSheet.create({
     color: 'black',
   },
 });
+
+export default styles;

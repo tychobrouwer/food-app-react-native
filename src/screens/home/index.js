@@ -1,22 +1,26 @@
-import React, { useContext } from 'react'
+import React, { useContext } from 'react';
 import { Text, Button } from 'react-native';
+import PropTypes from 'prop-types';
 
-import { GlobalStateContext, GlobalDispatchContext } from '../../components/global-state'
+import { GlobalStateContext } from '../../components/global-state';
 import ScreenDefault from '../../components/screen-wrapper';
 import { secureStoreDelete } from '../../utils/secure-store';
 
-export const HomeScreen = ({ navigation }) => {
-  const globalState = useContext(GlobalStateContext)
-  const dispatch = useContext(GlobalDispatchContext)
+const HomeScreen = function HomeScreen({ navigation }) {
+  const globalState = useContext(GlobalStateContext);
 
   return (
     <ScreenDefault>
-      <Text style={{marginTop: "40%"}}>This is {globalState.credentials.email}'s profile</Text>
+      <Text style={{ marginTop: '40%' }}>
+        This is&nbsp;
+        { globalState.credentials.email }
+        &apoc;s profile
+      </Text>
 
       <Button
         title="Logout"
         onPress={() => {
-          console.log('log out user:', globalState.credentials.email);
+          console.log(`log out user: ${globalState.credentials.email}`);
 
           secureStoreDelete('email');
           secureStoreDelete('token');
@@ -27,3 +31,11 @@ export const HomeScreen = ({ navigation }) => {
     </ScreenDefault>
   );
 };
+
+HomeScreen.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+};
+
+export default HomeScreen;

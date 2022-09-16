@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export const stylesMain = StyleSheet.create({
+const stylesMain = StyleSheet.create({
   body: {
     backgroundColor: '#fff',
   },
@@ -36,3 +36,5 @@ export const stylesMain = StyleSheet.create({
     margin: 5,
   },
 });
+
+export default stylesMain;

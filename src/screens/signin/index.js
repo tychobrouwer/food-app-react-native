@@ -1,12 +1,13 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import Checkbox from 'expo-checkbox';
+import PropTypes from 'prop-types';
 import * as Crypto from 'expo-crypto';
 
 import { GlobalDispatchContext, SET_CREDENTIALS } from '../../components/global-state';
 
-import { stylesMain } from '../../styles';
-import { styles } from './styles.js';
+import stylesMain from '../../styles';
+import styles from './styles';
 
 import BigBtn from '../../components/big-btn';
 import BigTextInput from '../../components/big-text-input';
@@ -15,7 +16,7 @@ import ScreenDefault from '../../components/screen-wrapper';
 import { authenticate, getClientSalt } from '../../utils/authentication';
 import { secureStoreSet } from '../../utils/secure-store';
 
-export const LoginScreen = ({ navigation }) => {
+const LoginScreen = function LoginScreen({ navigation }) {
   const dispatch = useContext(GlobalDispatchContext);
 
   const [email, setEmail] = useState('');
@@ -27,25 +28,25 @@ export const LoginScreen = ({ navigation }) => {
   const resetCheckLogin = () => {
     setPasswordText('');
     setEmailText('');
-  }
+  };
 
   const resetLogin = () => {
     setEmail('');
     setPassword('');
     setStaySignedIn(false);
-  }
+  };
 
   const setRed = (field) => {
     let returnStyle;
-    
-    if (field === 'email' && emailText !== '') { 
-      returnStyle = { borderColor: 'red' }
+
+    if (field === 'email' && emailText !== '') {
+      returnStyle = { borderColor: 'red' };
     } else if (field === 'password' && passwordText !== '') {
-      returnStyle = { borderColor: 'red' }
+      returnStyle = { borderColor: 'red' };
     }
 
     return returnStyle;
-  }
+  };
 
   const handleLogin = async () => {
     const salt = await getClientSalt(email);
@@ -60,13 +61,13 @@ export const LoginScreen = ({ navigation }) => {
     if (authResult.result) {
       console.log('login using:', email, staySignedIn ? 'stay signed in' : '');
 
-      dispatch({type: SET_CREDENTIALS, payload: { email: email, token: passwordHash }});
+      dispatch({ type: SET_CREDENTIALS, payload: { email, token: passwordHash } });
 
       if (staySignedIn) {
         await secureStoreSet('email', email);
         await secureStoreSet('token', passwordHash);
       }
-    
+
       resetLogin();
 
       navigation.navigate('Home');
@@ -80,7 +81,7 @@ export const LoginScreen = ({ navigation }) => {
         setPasswordText(errorValue);
       }
     }
-  }
+  };
 
   return (
     <ScreenDefault>
@@ -89,11 +90,11 @@ export const LoginScreen = ({ navigation }) => {
       <View style={styles.loginContainer}>
         <BigTextInput
           style={setRed('email')}
-          placeholder='Email'
-          autoComplete='email'
-          keyboardType='email-address'
+          placeholder="Email"
+          autoComplete="email"
+          keyboardType="email-address"
           value={email}
-          onChangeText={(email) => {
+          onChangeText={() => {
             setEmail(email);
             resetCheckLogin();
           }}
@@ -105,11 +106,11 @@ export const LoginScreen = ({ navigation }) => {
 
         <BigTextInput
           style={setRed('password')}
-          placeholder='Password'
-          autoComplete='password'
-          secureTextEntry={true}
+          placeholder="Password"
+          autoComplete="password"
+          secureTextEntry
           value={password}
-          onChangeText={(password) => {
+          onChangeText={() => {
             setPassword(password);
             resetCheckLogin();
           }}
@@ -132,28 +133,20 @@ export const LoginScreen = ({ navigation }) => {
             <Text style={stylesMain.checkboxText}>Remember me</Text>
           </View>
 
-          <TouchableOpacity
-            // onPress={() =>
-            //   navigation.navigate('Signup')
-            // }
-          >
+          <TouchableOpacity>
             <Text style={stylesMain.link}>Forgot password?</Text>
           </TouchableOpacity>
         </View>
 
         <BigBtn
-          title='LOGIN'
-          onPress={() => {
-            handleLogin();
-          }}
+          title="LOGIN"
+          onPress={() => handleLogin()}
         />
 
         <View style={stylesMain.flex}>
           <Text style={stylesMain.text}>Not registered yet? </Text>
           <TouchableOpacity
-            onPress={() =>
-              navigation.push('SignUp')
-            }
+            onPress={() => navigation.push('SignUp')}
           >
             <Text style={stylesMain.link}>Create an Account</Text>
           </TouchableOpacity>
@@ -162,3 +155,12 @@ export const LoginScreen = ({ navigation }) => {
     </ScreenDefault>
   );
 };
+
+LoginScreen.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
+
+export default LoginScreen;

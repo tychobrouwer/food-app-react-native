@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   bigBtn: {
     width: '80%',
     borderRadius: 25,
@@ -12,3 +12,5 @@ export const styles = StyleSheet.create({
     marginBottom: 20,
   },
 });
+
+export default styles;

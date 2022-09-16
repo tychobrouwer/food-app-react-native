@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 // Set up global contexts
 export const GlobalStateContext = React.createContext();
@@ -16,7 +16,7 @@ export const reducer = (state, action) => {
     case SET_CREDENTIALS: {
       return {
         ...state,
-        credentials: payload
+        credentials: payload,
       };
     }
 
@@ -25,13 +25,11 @@ export const reducer = (state, action) => {
   }
 };
 
-function GlobalState(props) {
-  const { initialState, dispatch } = props;
-
+function GlobalState({ initialState, dispatch, children }) {
   return (
     <GlobalStateContext.Provider value={initialState}>
       <GlobalDispatchContext.Provider value={dispatch}>
-        {props.children}
+        {children}
       </GlobalDispatchContext.Provider>
     </GlobalStateContext.Provider>
   );
@@ -39,11 +37,12 @@ function GlobalState(props) {
 
 GlobalState.propTypes = {
   // The state returned from setting up the reducer using the React Hook `useReducer`.
-  initialState: PropTypes.object.isRequired,
-
+  initialState: PropTypes.objectOf(PropTypes.oneOfType([
+    PropTypes.any,
+  ])).isRequired,
   // The dispatch function returned from setting up the reducer using the React Hook `useReducer`.
   dispatch: PropTypes.func.isRequired,
-  children: PropTypes.node
+  children: PropTypes.node.isRequired,
 };
 
 export default GlobalState;

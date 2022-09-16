@@ -1,21 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
+import PropTypes from 'prop-types';
 
-import { styles } from './styles';
+import styles from './styles';
 
-export default class BigBtn extends Component {
-  constructor(props) {
-    super(props);
-  }
+const BigBtn = function BigBtn({ onPress, title }) {
+  return (
+    <TouchableOpacity
+      style={styles.bigBtn}
+      onPress={onPress}
+    >
+      <Text>{title}</Text>
+    </TouchableOpacity>
+  );
+};
 
-  render() { 
-    return (
-      <TouchableOpacity
-        style={styles.bigBtn}
-        onPress={this.props.onPress}
-      >
-        <Text>{this.props.title}</Text> 
-      </TouchableOpacity>
-    );
-  }
-}
+BigBtn.propTypes = {
+  onPress: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+};
+
+export default BigBtn;
