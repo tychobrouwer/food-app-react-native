@@ -94,8 +94,8 @@ const SignInScreen = function SignInScreen({ navigation }) {
           autoComplete="email"
           keyboardType="email-address"
           value={email}
-          onChangeText={() => {
-            setEmail(email);
+          onChangeText={(emailValue) => {
+            setEmail(emailValue);
             resetCheckLogin();
           }}
         />
@@ -110,8 +110,8 @@ const SignInScreen = function SignInScreen({ navigation }) {
           autoComplete="password"
           secureTextEntry
           value={password}
-          onChangeText={() => {
-            setPassword(password);
+          onChangeText={(passwordValue) => {
+            setPassword(passwordValue);
             resetCheckLogin();
           }}
         />

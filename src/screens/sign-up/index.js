@@ -24,8 +24,8 @@ const SignUpScreen = function SignUpScreen({ navigation }) {
           autoComplete="email"
           keyboardType="email-address"
           value={email}
-          onChangeText={() => {
-            setEmail(email);
+          onChangeText={(emailValue) => {
+            setEmail(emailValue);
           }}
         />
 
@@ -39,8 +39,8 @@ const SignUpScreen = function SignUpScreen({ navigation }) {
           autoComplete="password"
           secureTextEntry
           value={password1}
-          onChangeText={() => {
-            setPassword1(password1);
+          onChangeText={(passwordValue) => {
+            setPassword1(passwordValue);
           }}
         />
 
@@ -49,8 +49,8 @@ const SignUpScreen = function SignUpScreen({ navigation }) {
           autoComplete="password"
           secureTextEntry
           value={password2}
-          onChangeText={() => {
-            setPassword2(password2);
+          onChangeText={(passwordValue) => {
+            setPassword2(passwordValue);
           }}
         />
 

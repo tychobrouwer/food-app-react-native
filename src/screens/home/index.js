@@ -14,7 +14,7 @@ const HomeScreen = function HomeScreen({ navigation }) {
       <Text style={{ marginTop: '40%' }}>
         This is&nbsp;
         { globalState.credentials.email }
-        &apoc;s profile
+        &apos;s profile
       </Text>
 
       <Button
