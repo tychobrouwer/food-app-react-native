@@ -3,9 +3,9 @@ This is a project for the course Engineering Design - group 172. To use the app 
 # Install
 1. Make a GitHub account
 1. Install git (download current [here](https://git-scm.com/downloads)).
-..* Make sure during installation ```add to path``` is checked.
-..* After installation run ```git config --global user.name "Your GitHub name here"```
-..* An run ```git config --global user.email "Your GitHub email here"```
+   - Make sure during installation ```add to path``` is checked.
+   - After installation run ```git config --global user.name "Your GitHub name here"```
+   - An run ```git config --global user.email "Your GitHub email here"```
 2. Install node.js (download current [here](https://nodejs.org/en/)).
 3. Download the expo go app in the AppStore or PlayStore.
 4. Make a folder for the project on your pc (if no spaces it is easier).
