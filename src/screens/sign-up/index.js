@@ -9,7 +9,7 @@ import ScreenDefault from '../../components/screen-wrapper';
 import stylesMain from '../../styles';
 import styles from './styles';
 
-const SignupScreen = function SignupScreen({ navigation }) {
+const SignUpScreen = function SignUpScreen({ navigation }) {
   const [email, setEmail] = useState('');
   const [password1, setPassword1] = useState('');
   const [password2, setPassword2] = useState('');
@@ -78,10 +78,10 @@ const SignupScreen = function SignupScreen({ navigation }) {
   );
 };
 
-SignupScreen.propTypes = {
+SignUpScreen.propTypes = {
   navigation: PropTypes.shape({
     pop: PropTypes.func.isRequired,
   }).isRequired,
 };
 
-export default SignupScreen;
+export default SignUpScreen;

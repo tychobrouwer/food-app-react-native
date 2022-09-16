@@ -16,7 +16,7 @@ import ScreenDefault from '../../components/screen-wrapper';
 import { authenticate, getClientSalt } from '../../utils/authentication';
 import { secureStoreSet } from '../../utils/secure-store';
 
-const LoginScreen = function LoginScreen({ navigation }) {
+const SignInScreen = function SignInScreen({ navigation }) {
   const dispatch = useContext(GlobalDispatchContext);
 
   const [email, setEmail] = useState('');
@@ -156,11 +156,11 @@ const LoginScreen = function LoginScreen({ navigation }) {
   );
 };
 
-LoginScreen.propTypes = {
+SignInScreen.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
     push: PropTypes.func.isRequired,
   }).isRequired,
 };
 
-export default LoginScreen;
+export default SignInScreen;

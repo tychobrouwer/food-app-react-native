@@ -84,11 +84,12 @@ The **assets** folder is designated for images or fonts used in the app like the
 |    |    |-- screen-wrapper
 |    |-- screens
 |    |    |-- home
-|    |    |-- signin
-|    |    |-- signup
+|    |    |-- sign-in
+|    |    |-- sign-up
 |    |    |-- splash
 |    |-- styles
 |    |-- utils
+|    |    |-- authentication
 |    |    |-- capitalize
 |    |    |-- secure-store
 |    |    |-- validate-email

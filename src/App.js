@@ -5,9 +5,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import GlobalState, { reducer } from './components/global-state';
 
 import LoadingScreen from './screens/splash';
-import LoginScreen from './screens/signin';
+import SignInScreen from './screens/sign-in';
+import SignUpScreen from './screens/sign-up';
 import HomeScreen from './screens/home';
-import SignupScreen from './screens/signup';
 
 const initialState = {
   credentials: null,
@@ -34,15 +34,15 @@ export default function App() {
           />
           <Stack.Screen
             name="SignIn"
-            component={LoginScreen}
+            component={SignInScreen}
+          />
+          <Stack.Screen
+            name="SignUp"
+            component={SignUpScreen}
           />
           <Stack.Screen
             name="Home"
             component={HomeScreen}
-          />
-          <Stack.Screen
-            name="SignUp"
-            component={SignupScreen}
           />
         </Stack.Navigator>
       </NavigationContainer>
