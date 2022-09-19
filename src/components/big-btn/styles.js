@@ -7,8 +7,8 @@ const styles = StyleSheet.create({
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'grey',
-    color: 'white',
+    backgroundColor: '#fff',
+    color: '#60c9cd',
     marginBottom: 20,
   },
 });

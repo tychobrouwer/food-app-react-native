@@ -9,7 +9,7 @@ import stylesMain from '../../styles';
 
 const ScreenDefault = function ScreenDefault({ children }) {
   return (
-    <ScrollView keyboardShouldPersistTaps="handled">
+    <ScrollView keyboardShouldPersistTaps="handled" style={{ backgroundColor: '#60c9cd' }}>
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}

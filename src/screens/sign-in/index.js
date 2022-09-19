@@ -85,6 +85,7 @@ const SignInScreen = function SignInScreen({ navigation }) {
 
   return (
     <ScreenDefault>
+      <Text style={styles.titleText}>Welcome!</Text>
       <Text style={styles.loginText}>LOGIN</Text>
 
       <View style={styles.loginContainer}>

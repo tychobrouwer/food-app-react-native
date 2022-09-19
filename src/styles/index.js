@@ -1,13 +1,11 @@
 import { StyleSheet } from 'react-native';
 
 const stylesMain = StyleSheet.create({
-  body: {
-    backgroundColor: '#fff',
-  },
-
   container: {
     height: '100%',
     alignItems: 'center',
+    backgroundColor: '#60c9cd',
+    color: '#fff',
   },
 
   flex: {
@@ -26,7 +24,8 @@ const stylesMain = StyleSheet.create({
   },
 
   link: {
-    color: 'blue',
+    color: 'rgba(255, 102, 196, 0.53)',
+    fontWeight: 'bold',
     padding: 5,
     margin: -5,
   },
@@ -34,6 +33,10 @@ const stylesMain = StyleSheet.create({
   checkbox: {
     padding: 5,
     margin: 5,
+  },
+
+  checkboxText: {
+    color: '#fff',
   },
 });
 

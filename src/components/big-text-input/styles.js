@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   inputView: {
-    borderColor: 'grey',
+    borderColor: '#fff',
     borderWidth: 2,
     borderStyle: 'solid',
     borderRadius: 5,
@@ -19,7 +19,6 @@ const styles = StyleSheet.create({
     padding: 10,
     marginLeft: 'auto',
     marginRight: 'auto',
-    color: 'black',
   },
 });
 
