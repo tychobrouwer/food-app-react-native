@@ -44,7 +44,7 @@ const SignUpScreen = function SignUpScreen({ navigation }) {
 
     console.log(passwordHash, password, salt);
 
-    const authResult = await authSignUp(email, passwordHash, passwordHash1);
+    const authResult = await authSignUp(email, passwordHash, passwordHash1, salt);
 
     if (authResult.result) {
       console.log(`sign up using: ${email}`);

@@ -92,7 +92,7 @@ export const authSignIn = async (email, passwordHash) => {
   return { result, message };
 };
 
-export const authSignUp = async (email, passwordHash, passwordHash1) => {
+export const authSignUp = async (email, passwordHash, passwordHash1, salt) => {
   let message = { type: 'login', value: 'Login successful.' };
 
   const emailEmptyCheck = email !== '';
@@ -104,7 +104,6 @@ export const authSignUp = async (email, passwordHash, passwordHash1) => {
 
   if (emailEmptyCheck && emailValidCheck && passwordNotSameCheck) {
     try {
-      const salt = await newClientSalt(email);
       const emptyHash = await Crypto.digestStringAsync(
         Crypto.CryptoDigestAlgorithm.SHA256,
         salt,
