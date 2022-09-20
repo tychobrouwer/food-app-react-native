@@ -128,8 +128,9 @@ const SignInScreen = function SignInScreen({ navigation }) {
         </View>
 
         <View style={[stylesMain.flex, { marginBottom: 35, marginTop: 5 }]}>
-          <View
+          <TouchableOpacity
             style={[stylesMain.flex, { marginRight: '10%' }]}
+            onPress={() => setStaySignedIn(!staySignedIn)}
           >
             <Checkbox
               value={staySignedIn}
@@ -138,8 +139,8 @@ const SignInScreen = function SignInScreen({ navigation }) {
               onValueChange={setStaySignedIn}
             />
 
-            <Text style={[stylesMain.text, stylesMain.checkboxText]}>Remember me</Text>
-          </View>
+            <Text style={stylesMain.text}>Remember me</Text>
+          </TouchableOpacity>
 
           <TouchableOpacity>
             <Text style={stylesMain.link}>Forgot password?</Text>
