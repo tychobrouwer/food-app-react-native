@@ -7,7 +7,7 @@ const Loader = function Loader() {
   return (
     <View style={styles.loader}>
       <ActivityIndicator
-        color="grey"
+        color="#c98fe9"
         size="large"
       />
     </View>

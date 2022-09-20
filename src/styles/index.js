@@ -1,11 +1,16 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+const ScreenHeight = Dimensions.get('window').height;
 
 const stylesMain = StyleSheet.create({
   container: {
-    height: '100%',
     alignItems: 'center',
-    backgroundColor: '#60c9cd',
+    height: ScreenHeight,
+  },
+
+  text: {
     color: '#fff',
+    fontSize: 18,
   },
 
   flex: {
@@ -23,8 +28,14 @@ const stylesMain = StyleSheet.create({
     color: 'red',
   },
 
+  banner: {
+    alignItems: 'center',
+    height: '40%',
+  },
+
   link: {
-    color: 'rgba(255, 102, 196, 0.53)',
+    fontSize: 18,
+    color: '#c98fe9',
     fontWeight: 'bold',
     padding: 5,
     margin: -5,
@@ -33,10 +44,7 @@ const stylesMain = StyleSheet.create({
   checkbox: {
     padding: 5,
     margin: 5,
-  },
-
-  checkboxText: {
-    color: '#fff',
+    borderColor: '#fff',
   },
 });
 

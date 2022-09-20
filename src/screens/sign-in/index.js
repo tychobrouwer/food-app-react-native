@@ -1,5 +1,7 @@
 import React, { useContext, useState } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import {
+  Text, View, TouchableOpacity,
+} from 'react-native';
 import Checkbox from 'expo-checkbox';
 import PropTypes from 'prop-types';
 import * as Crypto from 'expo-crypto';
@@ -12,8 +14,10 @@ import styles from './styles';
 import BigBtn from '../../components/big-btn';
 import BigTextInput from '../../components/big-text-input';
 import ScreenDefault from '../../components/screen-wrapper';
+import LogoSvg from '../../components/logo';
 
 import { authSignIn, getClientSalt } from '../../utils/authentication';
+
 import { secureStoreSet } from '../../utils/secure-store';
 
 const SignInScreen = function SignInScreen({ navigation }) {
@@ -56,8 +60,6 @@ const SignInScreen = function SignInScreen({ navigation }) {
       `${password}${salt}`,
     );
 
-    console.log(passwordHash, password, salt);
-
     const authResult = await authSignIn(email, passwordHash);
 
     if (authResult.result) {
@@ -87,8 +89,10 @@ const SignInScreen = function SignInScreen({ navigation }) {
 
   return (
     <ScreenDefault>
-      <Text style={styles.titleText}>Welcome!</Text>
-      <Text style={styles.loginText}>LOGIN</Text>
+      <View style={stylesMain.banner}>
+        <Text style={[stylesMain.text, styles.titleText]}>Welcome!</Text>
+        <LogoSvg width={160} height={160} value="logo_name_below" />
+      </View>
 
       <View style={styles.loginContainer}>
         <BigTextInput
@@ -130,10 +134,11 @@ const SignInScreen = function SignInScreen({ navigation }) {
             <Checkbox
               value={staySignedIn}
               style={stylesMain.checkbox}
+              color={staySignedIn ? '#c98fe9' : undefined}
               onValueChange={setStaySignedIn}
             />
 
-            <Text style={stylesMain.checkboxText}>Remember me</Text>
+            <Text style={[stylesMain.text, stylesMain.checkboxText]}>Remember me</Text>
           </View>
 
           <TouchableOpacity>
@@ -151,7 +156,7 @@ const SignInScreen = function SignInScreen({ navigation }) {
           <TouchableOpacity
             onPress={() => navigation.push('SignUp')}
           >
-            <Text style={stylesMain.link}>Create an Account</Text>
+            <Text style={stylesMain.link}>Create Account</Text>
           </TouchableOpacity>
         </View>
       </View>

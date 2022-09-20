@@ -10,7 +10,7 @@ const BigBtn = function BigBtn({ onPress, title }) {
       style={styles.bigBtn}
       onPress={onPress}
     >
-      <Text>{title}</Text>
+      <Text style={styles.bigBtnText}>{title}</Text>
     </TouchableOpacity>
   );
 };

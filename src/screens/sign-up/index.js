@@ -42,8 +42,6 @@ const SignUpScreen = function SignUpScreen({ navigation }) {
       `${password1}${salt}`,
     );
 
-    console.log(passwordHash, password, salt);
-
     const authResult = await authSignUp(email, passwordHash, passwordHash1, salt);
 
     if (authResult.result) {
@@ -65,7 +63,9 @@ const SignUpScreen = function SignUpScreen({ navigation }) {
 
   return (
     <ScreenDefault>
-      <Text style={styles.loginText}>SIGNUP</Text>
+      <View style={stylesMain.banner}>
+        <Text style={[stylesMain.text, styles.titleText]}>Create Account</Text>
+      </View>
 
       <View style={styles.loginContainer}>
         <BigTextInput
@@ -122,7 +122,7 @@ const SignUpScreen = function SignUpScreen({ navigation }) {
           <TouchableOpacity
             onPress={() => navigation.pop(1)}
           >
-            <Text style={stylesMain.link}>login</Text>
+            <Text style={stylesMain.link}>Sign In</Text>
           </TouchableOpacity>
         </View>
       </View>

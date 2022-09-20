@@ -30,34 +30,64 @@ const HomeScreen = function HomeScreen({ navigation }) {
         </TouchableOpacity>
       </View>
       <View style={{ width: '100%', marginTop: '10%' }}>
-        <TouchableOpacity style={{ marginLeft: 'auto', marginRight: 'auto', height: 50, width: '80%', backgroundColor: '#fff', alignItems: 'center', borderRadius: 5, }}>
-          <Text style={{ fontSize: 32, marginTop: 'auto', marginBottom: 'auto', fontWeight: 'bold' }}>CALENDAR</Text>
+        <TouchableOpacity
+          style={{
+            marginLeft: 'auto', marginRight: 'auto', height: 50, width: '80%', backgroundColor: '#fff', alignItems: 'center', borderRadius: 5,
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 32, marginTop: 'auto', marginBottom: 'auto', fontWeight: 'bold',
+            }}
+          >
+            CALENDAR
+          </Text>
         </TouchableOpacity>
-        <View style={{ marginLeft: 'auto', marginRight: 'auto', height: 80, width: '80%', backgroundColor: '#fff', alignItems: 'center', borderRadius: 5, marginTop: 10 }}>
+        <View
+          style={{
+            marginLeft: 'auto', marginRight: 'auto', height: 80, width: '80%', backgroundColor: '#fff', alignItems: 'center', borderRadius: 5, marginTop: 10,
+          }}
+        >
           <View style={{ marginTop: 'auto', marginBottom: 'auto' }}>
             <Text>FOOD: chicken</Text>
             <Text>EXPIRATION DATE: 10/10/2022</Text>
           </View>
         </View>
-        <View style={{ marginLeft: 'auto', marginRight: 'auto', height: 80, width: '80%', backgroundColor: '#fff', alignItems: 'center', borderRadius: 5, marginTop: 10 }}>
+        <View
+          style={{
+            marginLeft: 'auto', marginRight: 'auto', height: 80, width: '80%', backgroundColor: '#fff', alignItems: 'center', borderRadius: 5, marginTop: 10,
+          }}
+        >
           <View style={{ marginTop: 'auto', marginBottom: 'auto' }}>
             <Text>FOOD: chicken</Text>
             <Text>EXPIRATION DATE: 10/10/2022</Text>
           </View>
         </View>
-        <View style={{ marginLeft: 'auto', marginRight: 'auto', height: 80, width: '80%', backgroundColor: '#fff', alignItems: 'center', borderRadius: 5, marginTop: 10 }}>
+        <View
+          style={{
+            marginLeft: 'auto', marginRight: 'auto', height: 80, width: '80%', backgroundColor: '#fff', alignItems: 'center', borderRadius: 5, marginTop: 10,
+          }}
+        >
           <View style={{ marginTop: 'auto', marginBottom: 'auto' }}>
             <Text>FOOD: chicken</Text>
             <Text>EXPIRATION DATE: 10/10/2022</Text>
           </View>
         </View>
-        <View style={{ marginLeft: 'auto', marginRight: 'auto', height: 80, width: '80%', backgroundColor: '#fff', alignItems: 'center', borderRadius: 5, marginTop: 10 }}>
+        <View
+          style={{
+            marginLeft: 'auto', marginRight: 'auto', height: 80, width: '80%', backgroundColor: '#fff', alignItems: 'center', borderRadius: 5, marginTop: 10,
+          }}
+        >
           <View style={{ marginTop: 'auto', marginBottom: 'auto' }}>
             <Text>FOOD: chicken</Text>
             <Text>EXPIRATION DATE: 10/10/2022</Text>
           </View>
         </View>
-        <View style={{ marginLeft: 'auto', marginRight: 'auto', height: 80, width: '80%', backgroundColor: '#fff', alignItems: 'center', borderRadius: 5, marginTop: 10 }}>
+        <View
+          style={{
+            marginLeft: 'auto', marginRight: 'auto', height: 80, width: '80%', backgroundColor: '#fff', alignItems: 'center', borderRadius: 5, marginTop: 10,
+          }}
+        >
           <View style={{ marginTop: 'auto', marginBottom: 'auto' }}>
             <Text>FOOD: chicken</Text>
             <Text>EXPIRATION DATE: 10/10/2022</Text>
@@ -78,7 +108,7 @@ const HomeScreen = function HomeScreen({ navigation }) {
           source={imageSource}
         />
       </View>
-      {/* <Text style={{ marginTop: '40%' }}>
+      <Text style={{ marginTop: '40%' }}>
         This is&nbsp;
         { globalState.credentials.email }
         &apos;s profile
@@ -94,7 +124,7 @@ const HomeScreen = function HomeScreen({ navigation }) {
 
           navigation.navigate('SignIn');
         }}
-      /> */}
+      />
 
     </ScreenDefault>
   );

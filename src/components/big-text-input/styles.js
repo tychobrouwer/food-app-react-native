@@ -13,12 +13,13 @@ const styles = StyleSheet.create({
   },
 
   TextInput: {
-    height: 50,
     width: '90%',
     flex: 1,
     padding: 10,
     marginLeft: 'auto',
     marginRight: 'auto',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 });
 

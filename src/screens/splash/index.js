@@ -18,16 +18,16 @@ const LoadingScreen = function LoadingScreen({ navigation }) {
         email = await secureStoreGet('email');
         passwordHash = await secureStoreGet('token');
 
-        console.log(`saved account found: ${email}`);
-
         const authResult = await authSignIn(email, passwordHash);
 
         if (authResult.result) {
-          console.log('email and password valid');
+          console.log(`saved account found: ${email}`);
 
           dispatch({ type: SET_CREDENTIALS, payload: { email, passwordHash } });
 
           navigation.navigate('Home');
+        } else {
+          console.log('no saved account found');
         }
       } catch (e) {
         console.log('no saved account found');

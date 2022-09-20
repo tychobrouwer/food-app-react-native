@@ -1,25 +1,17 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  loginText: {
-    fontSize: '36px',
-    fontWeight: 'bold',
-    marginTop: '30%',
-    color: '#fff',
-  },
-
   titleText: {
     fontSize: '36px',
     fontWeight: 'bold',
-    marginTop: '40%',
-    color: '#fff',
+    marginTop: '30%',
+    marginBottom: '5%',
   },
 
   loginContainer: {
     marginTop: '5%',
     width: '70%',
     alignItems: 'center',
-    color: '#fff',
   },
 });
 
