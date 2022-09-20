@@ -13,7 +13,7 @@ import BigBtn from '../../components/big-btn';
 import BigTextInput from '../../components/big-text-input';
 import ScreenDefault from '../../components/screen-wrapper';
 
-import { authenticate, getClientSalt } from '../../utils/authentication';
+import { authSignIn, getClientSalt } from '../../utils/authentication';
 import { secureStoreSet } from '../../utils/secure-store';
 
 const SignInScreen = function SignInScreen({ navigation }) {
@@ -48,18 +48,20 @@ const SignInScreen = function SignInScreen({ navigation }) {
     return returnStyle;
   };
 
-  const handleLogin = async () => {
+  const handleSignIn = async () => {
     const salt = await getClientSalt(email);
 
     const passwordHash = await Crypto.digestStringAsync(
       Crypto.CryptoDigestAlgorithm.SHA256,
-      password + salt,
+      `${password}${salt}`,
     );
 
-    const authResult = await authenticate(email, passwordHash, staySignedIn);
+    console.log(passwordHash, password, salt);
+
+    const authResult = await authSignIn(email, passwordHash);
 
     if (authResult.result) {
-      console.log('login using:', email, staySignedIn ? 'stay signed in' : '');
+      console.log('sign in using:', email, staySignedIn ? 'stay signed in' : '');
 
       dispatch({ type: SET_CREDENTIALS, payload: { email, token: passwordHash } });
 
@@ -72,13 +74,13 @@ const SignInScreen = function SignInScreen({ navigation }) {
 
       navigation.navigate('Home');
     } else {
-      const errorType = authResult.message.type;
-      const errorValue = authResult.message.value;
+      console.log(`failed sign in up using: ${email}`);
+      const { type, value } = authResult.message;
 
-      if (errorType === 'email') {
-        setEmailText(errorValue);
-      } else if (errorType === 'password') {
-        setPasswordText(errorValue);
+      if (type === 'email') {
+        setEmailText(value);
+      } else if (type === 'password') {
+        setPasswordText(value);
       }
     }
   };
@@ -141,7 +143,7 @@ const SignInScreen = function SignInScreen({ navigation }) {
 
         <BigBtn
           title="LOGIN"
-          onPress={() => handleLogin()}
+          onPress={() => handleSignIn()}
         />
 
         <View style={stylesMain.flex}>
