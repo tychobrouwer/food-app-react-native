@@ -117,8 +117,6 @@ const HomeScreen = function HomeScreen({ navigation }) {
       <Button
         title="Logout"
         onPress={() => {
-          console.log(`log out user: ${globalState.credentials.email}`);
-
           secureStoreDelete('email');
           secureStoreDelete('token');
 

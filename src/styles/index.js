@@ -47,6 +47,10 @@ const stylesMain = StyleSheet.create({
     borderColor: '#fff',
     // backgroundColor: '#fff',
   },
+
+  hidden: {
+    display: 'none',
+  },
 });
 
 export default stylesMain;

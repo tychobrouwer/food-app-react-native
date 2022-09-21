@@ -21,16 +21,10 @@ const LoadingScreen = function LoadingScreen({ navigation }) {
         const authResult = await authSignIn(email, passwordHash);
 
         if (authResult.result) {
-          console.log(`saved account found: ${email}`);
-
           dispatch({ type: SET_CREDENTIALS, payload: { email, passwordHash } });
 
           navigation.navigate('Home');
-        } else {
-          console.log('no saved account found');
         }
-      } catch (e) {
-        console.log('no saved account found');
       } finally {
         navigation.navigate('SignIn');
       }

@@ -15,6 +15,7 @@ import BigBtn from '../../components/big-btn';
 import BigTextInput from '../../components/big-text-input';
 import ScreenDefault from '../../components/screen-wrapper';
 import LogoSvg from '../../components/logo';
+import Loader from '../../components/loader';
 
 import { authSignIn, getClientSalt } from '../../utils/authentication';
 
@@ -28,6 +29,8 @@ const SignInScreen = function SignInScreen({ navigation }) {
   const [staySignedIn, setStaySignedIn] = useState(false);
   const [emailText, setEmailText] = useState('');
   const [passwordText, setPasswordText] = useState('');
+
+  const [loading, setLoading] = useState(false);
 
   const resetCheckLogin = () => {
     setPasswordText('');
@@ -53,6 +56,8 @@ const SignInScreen = function SignInScreen({ navigation }) {
   };
 
   const handleSignIn = async () => {
+    setLoading(true);
+
     const salt = await getClientSalt(email);
 
     const passwordHash = await Crypto.digestStringAsync(
@@ -63,8 +68,6 @@ const SignInScreen = function SignInScreen({ navigation }) {
     const authResult = await authSignIn(email, passwordHash);
 
     if (authResult.result) {
-      console.log('sign in using:', email, staySignedIn ? 'stay signed in' : '');
-
       dispatch({ type: SET_CREDENTIALS, payload: { email, token: passwordHash } });
 
       if (staySignedIn) {
@@ -76,7 +79,6 @@ const SignInScreen = function SignInScreen({ navigation }) {
 
       navigation.navigate('Home');
     } else {
-      console.log(`failed sign in up using: ${email}`);
       const { type, value } = authResult.message;
 
       if (type === 'email') {
@@ -85,10 +87,14 @@ const SignInScreen = function SignInScreen({ navigation }) {
         setPasswordText(value);
       }
     }
+
+    setLoading(false);
   };
 
   return (
     <ScreenDefault>
+      <Loader style={!loading ? stylesMain.hidden : {}} />
+
       <View style={stylesMain.banner}>
         <Text style={[stylesMain.text, styles.titleText]}>Welcome!</Text>
         <LogoSvg width={160} height={160} value="logo_name_below" />

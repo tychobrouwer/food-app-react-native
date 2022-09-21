@@ -6,6 +6,7 @@ import * as Crypto from 'expo-crypto';
 import BigBtn from '../../components/big-btn';
 import BigTextInput from '../../components/big-text-input';
 import ScreenDefault from '../../components/screen-wrapper';
+import Loader from '../../components/loader';
 
 import stylesMain from '../../styles';
 import styles from './styles';
@@ -19,6 +20,8 @@ const SignUpScreen = function SignUpScreen({ navigation }) {
   const [emailText, setEmailText] = useState('');
   const [passwordText, setPasswordText] = useState('');
 
+  const [loading, setLoading] = useState(false);
+
   const resetCheckSignUp = () => {
     setPasswordText('');
     setEmailText('');
@@ -31,6 +34,8 @@ const SignUpScreen = function SignUpScreen({ navigation }) {
   };
 
   const handleSignUp = async () => {
+    setLoading(true);
+
     const salt = await newClientSalt(email);
 
     const passwordHash = await Crypto.digestStringAsync(
@@ -45,12 +50,10 @@ const SignUpScreen = function SignUpScreen({ navigation }) {
     const authResult = await authSignUp(email, passwordHash, passwordHash1, salt);
 
     if (authResult.result) {
-      console.log(`sign up using: ${email}`);
-
       resetSignUp();
+
       navigation.pop(1);
     } else {
-      console.log(`failed sign up using: ${email}`);
       const { type, value } = authResult.message;
 
       if (type === 'email') {
@@ -59,10 +62,14 @@ const SignUpScreen = function SignUpScreen({ navigation }) {
         setPasswordText(value);
       }
     }
+
+    setLoading(false);
   };
 
   return (
     <ScreenDefault>
+      <Loader style={!loading ? stylesMain.hidden : {}} />
+
       <View style={stylesMain.banner}>
         <Text style={[stylesMain.text, styles.titleText]}>Create Account</Text>
       </View>
