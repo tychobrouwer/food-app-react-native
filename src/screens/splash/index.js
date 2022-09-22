@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { secureStoreGet } from '../../utils/secure-store';
 import { GlobalDispatchContext, SET_CREDENTIALS } from '../../components/global-state';
-import { authSignIn } from '../../utils/authentication';
+import { authSignIn, getClientSalt } from '../../utils/authentication';
 import Loader from '../../components/loader';
 
 const LoadingScreen = function LoadingScreen({ navigation }) {
@@ -11,22 +11,21 @@ const LoadingScreen = function LoadingScreen({ navigation }) {
 
   useEffect(() => {
     const bootstrapAsync = async () => {
-      let email;
-      let passwordHash;
-
       try {
-        email = await secureStoreGet('email');
-        passwordHash = await secureStoreGet('token');
+        const email = await secureStoreGet('email');
+        const passwordHash = await secureStoreGet('token');
 
-        const authResult = await authSignIn(email, passwordHash);
+        const salt = await getClientSalt(email);
+
+        const authResult = await authSignIn(email, passwordHash, salt);
 
         if (authResult.result) {
           dispatch({ type: SET_CREDENTIALS, payload: { email, passwordHash } });
 
-          navigation.navigate('Home');
+          navigation.replace('Home');
         }
       } finally {
-        navigation.navigate('SignIn');
+        navigation.replace('SignIn');
       }
     };
 
@@ -38,7 +37,7 @@ const LoadingScreen = function LoadingScreen({ navigation }) {
 
 LoadingScreen.propTypes = {
   navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired,
+    replace: PropTypes.func.isRequired,
   }).isRequired,
 };
 

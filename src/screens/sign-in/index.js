@@ -4,7 +4,6 @@ import {
 } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import PropTypes from 'prop-types';
-import * as Crypto from 'expo-crypto';
 
 import { GlobalDispatchContext, SET_CREDENTIALS } from '../../components/global-state';
 
@@ -14,12 +13,15 @@ import styles from './styles';
 import BigBtn from '../../components/big-btn';
 import BigTextInput from '../../components/big-text-input';
 import ScreenDefault from '../../components/screen-wrapper';
-import LogoSvg from '../../components/logo';
 import Loader from '../../components/loader';
+
+import LogoNameBelowImage from '../../../assets/logo/logo-name-below-image';
 
 import { authSignIn, getClientSalt } from '../../utils/authentication';
 
 import { secureStoreSet } from '../../utils/secure-store';
+
+const bcrypt = require('bcryptjs');
 
 const SignInScreen = function SignInScreen({ navigation }) {
   const dispatch = useContext(GlobalDispatchContext);
@@ -31,10 +33,12 @@ const SignInScreen = function SignInScreen({ navigation }) {
   const [passwordText, setPasswordText] = useState('');
 
   const [loading, setLoading] = useState(false);
+  const [bothRed, setBothRed] = useState(false);
 
   const resetCheckLogin = () => {
     setPasswordText('');
     setEmailText('');
+    setBothRed(false);
   };
 
   const resetLogin = () => {
@@ -50,6 +54,8 @@ const SignInScreen = function SignInScreen({ navigation }) {
       returnStyle = { borderColor: 'red' };
     } else if (field === 'password' && passwordText !== '') {
       returnStyle = { borderColor: 'red' };
+    } else if (bothRed) {
+      returnStyle = { borderColor: 'red' };
     }
 
     return returnStyle;
@@ -60,24 +66,21 @@ const SignInScreen = function SignInScreen({ navigation }) {
 
     const salt = await getClientSalt(email);
 
-    const passwordHash = await Crypto.digestStringAsync(
-      Crypto.CryptoDigestAlgorithm.SHA256,
-      `${password}${salt}`,
-    );
+    const passwordHash = bcrypt.hashSync(password, salt);
 
-    const authResult = await authSignIn(email, passwordHash);
+    const authResult = await authSignIn(email, passwordHash, salt);
 
     if (authResult.result) {
       dispatch({ type: SET_CREDENTIALS, payload: { email, token: passwordHash } });
 
       if (staySignedIn) {
-        await secureStoreSet('email', email);
-        await secureStoreSet('token', passwordHash);
+        secureStoreSet('email', email);
+        secureStoreSet('token', passwordHash);
       }
 
       resetLogin();
 
-      navigation.navigate('Home');
+      navigation.replace('Home');
     } else {
       const { type, value } = authResult.message;
 
@@ -85,6 +88,9 @@ const SignInScreen = function SignInScreen({ navigation }) {
         setEmailText(value);
       } else if (type === 'password') {
         setPasswordText(value);
+      } else if (type === 'both') {
+        setPasswordText(value);
+        setBothRed(true);
       }
     }
 
@@ -97,7 +103,7 @@ const SignInScreen = function SignInScreen({ navigation }) {
 
       <View style={stylesMain.banner}>
         <Text style={[stylesMain.text, styles.titleText]}>Welcome!</Text>
-        <LogoSvg width={160} height={160} value="logo_name_below" />
+        <LogoNameBelowImage width={160} height={160} />
       </View>
 
       <View style={styles.loginContainer}>
@@ -106,6 +112,7 @@ const SignInScreen = function SignInScreen({ navigation }) {
           placeholder="Email"
           autoComplete="email"
           keyboardType="email-address"
+          textContentType="emailAddress"
           value={email}
           onChangeText={(emailValue) => {
             setEmail(emailValue);
@@ -121,11 +128,17 @@ const SignInScreen = function SignInScreen({ navigation }) {
           style={setRed('password')}
           placeholder="Password"
           autoComplete="password"
+          textContentType="password"
           secureTextEntry
           value={password}
           onChangeText={(passwordValue) => {
             setPassword(passwordValue);
             resetCheckLogin();
+          }}
+          onEndEditing={(event) => {
+            if (event.nativeEvent.text.length === 0) {
+              setPassword('');
+            }
           }}
         />
 
@@ -161,7 +174,10 @@ const SignInScreen = function SignInScreen({ navigation }) {
         <View style={stylesMain.flex}>
           <Text style={stylesMain.text}>Not registered yet? </Text>
           <TouchableOpacity
-            onPress={() => navigation.push('SignUp')}
+            onPress={() => {
+              resetCheckLogin();
+              navigation.push('SignUp');
+            }}
           >
             <Text style={stylesMain.link}>Create Account</Text>
           </TouchableOpacity>
@@ -173,7 +189,7 @@ const SignInScreen = function SignInScreen({ navigation }) {
 
 SignInScreen.propTypes = {
   navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired,
+    replace: PropTypes.func.isRequired,
     push: PropTypes.func.isRequired,
   }).isRequired,
 };

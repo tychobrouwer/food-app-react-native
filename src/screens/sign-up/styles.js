@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
     fontSize: '36px',
     fontWeight: 'bold',
     marginTop: '30%',
+    marginBottom: '5%',
   },
 
   loginContainer: {

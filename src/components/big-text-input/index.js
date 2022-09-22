@@ -6,7 +6,14 @@ import styles from './styles';
 
 const BigTextInput = function BigTextInput(
   {
-    style, placeholder, autoComplete, keyboardType, secureTextEntry, onChangeText, value,
+    style,
+    value,
+    placeholder,
+    autoComplete,
+    keyboardType,
+    secureTextEntry,
+    onChangeText,
+    onEndEditing,
   },
 ) {
   return (
@@ -21,28 +28,36 @@ const BigTextInput = function BigTextInput(
         secureTextEntry={secureTextEntry}
         importantForAutofill="yes"
         onChangeText={onChangeText}
+        onEndEditing={onEndEditing}
       />
     </View>
   );
 };
 
+const styleProp = PropTypes.objectOf(PropTypes.oneOfType([
+  PropTypes.string,
+  PropTypes.number,
+]));
+
 BigTextInput.propTypes = {
-  style: PropTypes.objectOf(PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ])),
+  style: PropTypes.oneOfType([
+    styleProp,
+    PropTypes.arrayOf(styleProp),
+  ]),
   value: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
   autoComplete: PropTypes.string.isRequired,
   keyboardType: PropTypes.string,
   secureTextEntry: PropTypes.bool,
   onChangeText: PropTypes.func.isRequired,
+  onEndEditing: PropTypes.func,
 };
 
 BigTextInput.defaultProps = {
   style: {},
   secureTextEntry: false,
   keyboardType: 'default',
+  onEndEditing: () => {},
 };
 
 export default BigTextInput;

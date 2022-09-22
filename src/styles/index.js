@@ -6,6 +6,8 @@ const stylesMain = StyleSheet.create({
   container: {
     alignItems: 'center',
     height: ScreenHeight,
+    display: 'flex',
+    flexDirection: 'column',
   },
 
   text: {
@@ -37,15 +39,14 @@ const stylesMain = StyleSheet.create({
     fontSize: 18,
     color: '#c98fe9',
     fontWeight: 'bold',
-    padding: 5,
-    margin: -5,
+    padding: 8,
+    margin: -8,
   },
 
   checkbox: {
     padding: 5,
     margin: 5,
     borderColor: '#fff',
-    // backgroundColor: '#fff',
   },
 
   hidden: {

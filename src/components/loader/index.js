@@ -15,11 +15,16 @@ const Loader = function Loader({ style }) {
   );
 };
 
+const styleProp = PropTypes.objectOf(PropTypes.oneOfType([
+  PropTypes.string,
+  PropTypes.number,
+]));
+
 Loader.propTypes = {
-  style: PropTypes.objectOf(PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ])),
+  style: PropTypes.oneOfType([
+    styleProp,
+    PropTypes.arrayOf(styleProp),
+  ]),
 };
 
 Loader.defaultProps = {

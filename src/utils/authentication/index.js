@@ -1,6 +1,6 @@
-import * as Crypto from 'expo-crypto';
-
 import validateEmail from '../validate-email';
+
+const bcrypt = require('bcryptjs');
 
 export const getClientSalt = async (email) => {
   const response = await fetch('http://192.168.178.142:3000/get-client-salt', {
@@ -36,7 +36,7 @@ export const newClientSalt = async (email) => {
   return salt;
 };
 
-export const authSignIn = async (email, passwordHash) => {
+export const authSignIn = async (email, passwordHash, salt) => {
   let message = { type: 'login', value: 'Login successful.' };
 
   const emailEmptyCheck = email !== '';
@@ -47,11 +47,7 @@ export const authSignIn = async (email, passwordHash) => {
 
   if (emailEmptyCheck && emailValidCheck) {
     try {
-      const salt = await getClientSalt(email);
-      const emptyHash = await Crypto.digestStringAsync(
-        Crypto.CryptoDigestAlgorithm.SHA256,
-        salt,
-      );
+      const emptyHash = bcrypt.hashSync('', salt);
 
       passwordEmptyCheck = passwordHash !== emptyHash;
 
@@ -81,10 +77,10 @@ export const authSignIn = async (email, passwordHash) => {
     message = { type: 'email', value: 'Enter an email.' };
   } else if (!emailValidCheck) {
     message = { type: 'email', value: 'Enter a valid email.' };
-  } else if (!passwordValidCheck) {
-    message = { type: 'password', value: 'Incorrect email or password.' };
   } else if (!passwordEmptyCheck) {
     message = { type: 'password', value: 'Enter a password.' };
+  } else if (!passwordValidCheck) {
+    message = { type: 'both', value: 'Incorrect email or password.' };
   }
 
   const result = emailEmptyCheck && emailValidCheck && passwordEmptyCheck && passwordValidCheck;
@@ -104,10 +100,7 @@ export const authSignUp = async (email, passwordHash, passwordHash1, salt) => {
 
   if (emailEmptyCheck && emailValidCheck && passwordNotSameCheck) {
     try {
-      const emptyHash = await Crypto.digestStringAsync(
-        Crypto.CryptoDigestAlgorithm.SHA256,
-        salt,
-      );
+      const emptyHash = bcrypt.hashSync('', salt);
 
       passwordEmptyCheck = passwordHash !== emptyHash;
 
@@ -139,10 +132,10 @@ export const authSignUp = async (email, passwordHash, passwordHash1, salt) => {
     message = { type: 'email', value: 'Enter a valid email.' };
   } else if (!passwordNotSameCheck) {
     message = { type: 'password', value: 'Passwords do not match.' };
-  } else if (!passwordValidCheck) {
-    message = { type: 'email', value: 'Email already has an account.' };
   } else if (!passwordEmptyCheck) {
     message = { type: 'password', value: 'Enter a password.' };
+  } else if (!passwordValidCheck) {
+    message = { type: 'email', value: 'Email already has an account.' };
   }
 
   const result = emailEmptyCheck

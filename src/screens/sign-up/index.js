@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
-import * as Crypto from 'expo-crypto';
 
 import BigBtn from '../../components/big-btn';
 import BigTextInput from '../../components/big-text-input';
@@ -11,6 +10,8 @@ import Loader from '../../components/loader';
 import stylesMain from '../../styles';
 import styles from './styles';
 import { authSignUp, newClientSalt } from '../../utils/authentication';
+
+const bcrypt = require('bcryptjs');
 
 const SignUpScreen = function SignUpScreen({ navigation }) {
   const [email, setEmail] = useState('');
@@ -33,19 +34,25 @@ const SignUpScreen = function SignUpScreen({ navigation }) {
     setPassword1('');
   };
 
+  const setRed = (field) => {
+    let returnStyle = {};
+
+    if (field === 'email' && emailText !== '') {
+      returnStyle = { borderColor: 'red' };
+    } else if (field === 'password' && passwordText !== '') {
+      returnStyle = { borderColor: 'red' };
+    }
+
+    return returnStyle;
+  };
+
   const handleSignUp = async () => {
     setLoading(true);
 
     const salt = await newClientSalt(email);
 
-    const passwordHash = await Crypto.digestStringAsync(
-      Crypto.CryptoDigestAlgorithm.SHA256,
-      `${password}${salt}`,
-    );
-    const passwordHash1 = await Crypto.digestStringAsync(
-      Crypto.CryptoDigestAlgorithm.SHA256,
-      `${password1}${salt}`,
-    );
+    const passwordHash = bcrypt.hashSync(password, salt);
+    const passwordHash1 = bcrypt.hashSync(password1, salt);
 
     const authResult = await authSignUp(email, passwordHash, passwordHash1, salt);
 
@@ -76,9 +83,11 @@ const SignUpScreen = function SignUpScreen({ navigation }) {
 
       <View style={styles.loginContainer}>
         <BigTextInput
+          style={setRed('email')}
           placeholder="Email"
           autoComplete="email"
           keyboardType="email-address"
+          textContentType="emailAddress"
           value={email}
           onChangeText={(emailValue) => {
             setEmail(emailValue);
@@ -91,25 +100,40 @@ const SignUpScreen = function SignUpScreen({ navigation }) {
         </View>
 
         <BigTextInput
-          style={{ marginBottom: 25 }}
+          style={[setRed('password'), { marginBottom: 25 }]}
           placeholder="Password"
           autoComplete="password"
+          textContentType="newPassword"
           secureTextEntry
           value={password}
           onChangeText={(passwordValue) => {
             setPassword(passwordValue);
             resetCheckSignUp();
           }}
+          onEndEditing={(event) => {
+            if (event.nativeEvent.text.length === 0) {
+              setPassword('');
+              setPassword1('');
+            }
+          }}
         />
 
         <BigTextInput
+          style={setRed('password')}
           placeholder="Password"
           autoComplete="password"
+          textContentType="newPassword"
           secureTextEntry
           value={password1}
           onChangeText={(passwordValue) => {
             setPassword1(passwordValue);
             resetCheckSignUp();
+          }}
+          onEndEditing={(event) => {
+            if (event.nativeEvent.text.length === 0) {
+              setPassword('');
+              setPassword1('');
+            }
           }}
         />
 

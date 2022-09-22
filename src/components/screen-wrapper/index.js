@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  ScrollView,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   View,
   Keyboard,
   Platform,
+  ScrollView,
 } from 'react-native';
 
 import stylesMain from '../../styles';
@@ -16,8 +16,9 @@ const ScreenDefault = function ScreenDefault({ children }) {
     <KeyboardAvoidingView
       style={{ flex: 1, backgroundColor: '#60c9cd' }}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      // keyboardVerticalOffset={40}
     >
-      <ScrollView>
+      <ScrollView bounces={false} decelerationRate="fast" keyboardShouldPersistTaps="handled">
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={stylesMain.container}>
             { children }
