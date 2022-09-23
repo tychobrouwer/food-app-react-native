@@ -22,7 +22,7 @@ export default function App() {
     <GlobalState initialState={state} dispatch={dispatch}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Splash"
+          initialRouteName="Home"
           screenOptions={{
             headerShown: false,
             animation: 'none',

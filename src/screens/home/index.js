@@ -10,9 +10,12 @@ import ScreenDefault from '../../components/screen-wrapper';
 
 import SettingsImage from '../../../assets/settings-image';
 import RecipesImage from '../../../assets/recipes-image';
-import GroupImage from '../../../assets/group-image';
+// import GroupImage from '../../../assets/group-image';
 import ShoppingListImage from '../../../assets/shopping-list-image';
-import AddProductImage from '../../../assets/add-product-image';
+import HomeImage from '../../../assets/home-image';
+import BackArrowImage from '../../../assets/back-arrow-image';
+import PlusImage from '../../../assets/plus-image';
+// import AddProductImage from '../../../assets/add-product-image';
 
 import styles from './styles';
 
@@ -23,11 +26,11 @@ const HomeScreen = function HomeScreen() {
     <ScreenDefault>
       <View style={styles.topNav}>
         <TouchableOpacity>
-          <SettingsImage style={styles.navLink} width={70} height={70} />
+          <BackArrowImage style={styles.navLink} width={35} height={35} />
         </TouchableOpacity>
-        <TouchableOpacity>
+        {/* <TouchableOpacity>
           <GroupImage style={styles.navLink} width={70} height={70} />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
       <View style={styles.content}>
         <TouchableOpacity style={styles.contentHeader}>
@@ -67,14 +70,24 @@ const HomeScreen = function HomeScreen() {
         </View>
       </View>
       <View style={styles.bottomNav}>
-        <TouchableOpacity>
-          <ShoppingListImage style={styles.navLink} width={70} height={70} />
+        <TouchableOpacity style={styles.navItem}>
+          <HomeImage style={styles.navLink} width={40} height={40} />
         </TouchableOpacity>
-        <TouchableOpacity>
-          <AddProductImage style={styles.navLink} width={110} height={110} />
+        <TouchableOpacity style={styles.navItem}>
+          <ShoppingListImage style={styles.navLink} width={40} height={40} />
+          {/* <ShoppingListImage style={styles.navLink} width={70} height={70} /> */}
         </TouchableOpacity>
-        <TouchableOpacity>
-          <RecipesImage style={styles.navLink} width={70} height={70} />
+        <View style={styles.navItem} />
+        <TouchableOpacity style={styles.navItem}>
+          {/* <AddProductImage style={styles.navLink} width={110} height={110} /> */}
+          <RecipesImage style={styles.navLink} width={40} height={40} />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.navItem}>
+          <SettingsImage style={styles.navLink} width={40} height={40} />
+          {/* <RecipesImage style={styles.navLink} width={70} height={70} /> */}
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.navItem, styles.bigNavItem]}>
+          <PlusImage style={styles.navLink} width={90} height={90} />
         </TouchableOpacity>
       </View>
       {/* <Text style={{ marginTop: '40%' }}>
