@@ -27,7 +27,7 @@ This is a project for the course Engineering Design - group 172. Instructions on
 12. Run ```git pull origin main```.
 13. Run ```npm install``` to install the necessary packages.
 14. In your text editor in ```node_modules/expo/AppEntry.js``` change the App import to ```'../../src/App'```.
-15. In the ```src/api/constants.js``` file set the serverIP to the supplied value (ask me).
+15. In the ```src/api/constants.js``` file set the **serverIP** to the supplied value (ask me).
 16. Run ```npm start``` to start the Expo server.
 17. Scan the QR code from the console with your phone (for IOS with the camera app).
 
@@ -62,11 +62,12 @@ Expo Go is used to run the project on your own device, without having to submit 
 
 ### TO DO's (and thoughts)
 
-- Make REST API (express js?) with database (SQLite?).
-- Make authentication via REST API.
-- Program sign up logic.
+- Make additional pages (settings, add product, grocery list, recipe list).
+- Make user data table.
 - Reset password logic.
 - Change password logic.
+- Make household table.
+- Make recipe database.
 - Link user database to household database.
 
 ### Folder Explanation
