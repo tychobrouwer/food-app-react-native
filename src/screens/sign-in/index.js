@@ -12,7 +12,7 @@ import BigTextInput from '../../components/big-text-input';
 import ScreenDefault from '../../components/screen-wrapper';
 import Loader from '../../components/loader';
 import { secureStoreSet } from '../../utils/secure-store';
-import { authSignIn, getClientSalt } from '../../utils/authentication';
+import { authSignIn, getClientSalt } from '../../api/authentication';
 
 // import logo image
 import LogoNameBelowImage from '../../../assets/logo/logo-name-below-image';
@@ -81,7 +81,8 @@ const SignInScreen = function SignInScreen({ navigation }) {
     const salt = await getClientSalt(email);
 
     // hash the password with the salt
-    const passwordHash = bcrypt.hashSync(password, salt);
+    // const passwordHash = bcrypt.hashSync(password, salt);
+    const passwordHash = await bcrypt.hash(password, salt);
 
     // get the sign in result
     const authResult = await authSignIn(email, passwordHash, salt);

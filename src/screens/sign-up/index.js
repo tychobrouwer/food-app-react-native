@@ -7,7 +7,7 @@ import BigBtn from '../../components/big-btn';
 import BigTextInput from '../../components/big-text-input';
 import ScreenDefault from '../../components/screen-wrapper';
 import Loader from '../../components/loader';
-import { authSignUp, newClientSalt } from '../../utils/authentication';
+import { authSignUp, newClientSalt } from '../../api/authentication';
 
 // import styles
 import stylesMain from '../../styles';
@@ -66,8 +66,12 @@ const SignUpScreen = function SignUpScreen({ navigation }) {
     const salt = await newClientSalt(email);
 
     // hash the passwords with the salt
-    const passwordHash = bcrypt.hashSync(password, salt);
-    const passwordHash1 = bcrypt.hashSync(password1, salt);
+    // const passwordHash = bcrypt.hashSync(password, salt);
+    // const passwordHash1 = bcrypt.hashSync(password1, salt);
+    const [passwordHash, passwordHash1] = await Promise.all([
+      bcrypt.hash(password, salt),
+      bcrypt.hash(password1, salt),
+    ]);
 
     // get the sign up result
     const authResult = await authSignUp(email, passwordHash, passwordHash1, salt);

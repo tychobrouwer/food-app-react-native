@@ -1,5 +1,8 @@
 // import valid email function
-import validateEmail from '../validate-email';
+import validateEmail from '../../utils/validate-email';
+
+// import api constants
+import constants from '../constants';
 
 // require bcrypt package
 const bcrypt = require('bcryptjs');
@@ -7,12 +10,9 @@ const bcrypt = require('bcryptjs');
 // function for getting the client salt from the server
 export const getClientSalt = async (email) => {
   // fetch request for getting the salt
-  const response = await fetch('http://192.168.178.142:3000/get-client-salt', {
+  const response = await fetch(constants.endpoint('get-client-salt'), {
     method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
+    headers: constants.headers,
     body: JSON.stringify({
       email,
     }),
@@ -27,12 +27,9 @@ export const getClientSalt = async (email) => {
 // function for getting a new client salt from the server
 export const newClientSalt = async (email) => {
   // fetch request for getting the salt
-  const response = await fetch('http://192.168.178.142:3000/new-client-salt', {
+  const response = await fetch(constants.endpoint('new-client-salt'), {
     method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
+    headers: constants.headers,
     body: JSON.stringify({
       email,
     }),
@@ -56,18 +53,16 @@ export const authSignIn = async (email, passwordHash, salt) => {
   if (emailEmptyCheck && emailValidCheck) {
     try {
       // hashing empty string for checking empty password
-      const emptyHash = bcrypt.hashSync('', salt);
+      // const emptyHash = bcrypt.hashSync('', salt);
+      const emptyHash = await bcrypt.hash('', salt);
 
       // checking for empty password
       passwordEmptyCheck = passwordHash !== emptyHash;
 
       // fetch request for authorizing the sign in
-      const response = await fetch('http://192.168.178.142:3000/sign-in', {
+      const response = await fetch(constants.endpoint('sign-in'), {
         method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
+        headers: constants.headers,
         body: JSON.stringify({
           email,
           password: passwordHash,
@@ -120,18 +115,16 @@ export const authSignUp = async (email, passwordHash, passwordHash1, salt) => {
   if (emailEmptyCheck && emailValidCheck && passwordNotSameCheck) {
     try {
       // hashing empty string for checking empty password
-      const emptyHash = bcrypt.hashSync('', salt);
+      // const emptyHash = bcrypt.hashSync('', salt);
+      const emptyHash = await bcrypt.hash('', salt);
 
       // checking for empty password
       passwordEmptyCheck = passwordHash !== emptyHash;
 
       // fetch request for authorizing the sign up
-      const response = await fetch('http://192.168.178.142:3000/sign-up', {
+      const response = await fetch(constants.endpoint('sign-up'), {
         method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
+        headers: constants.headers,
         body: JSON.stringify({
           email,
           password: passwordHash,

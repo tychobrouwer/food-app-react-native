@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 // import components and utils
 import { secureStoreGet } from '../../utils/secure-store';
 import { GlobalDispatchContext, SET_CREDENTIALS } from '../../components/global-state';
-import { authSignIn, getClientSalt } from '../../utils/authentication';
+import { authSignIn, getClientSalt } from '../../api/authentication';
 import Loader from '../../components/loader';
 
 // loading screen function
