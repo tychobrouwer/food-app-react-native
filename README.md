@@ -27,8 +27,9 @@ This is a project for the course Engineering Design - group 172. Instructions on
 12. Run ```git pull origin main```.
 13. Run ```npm install``` to install the necessary packages.
 14. In your text editor in ```node_modules/expo/AppEntry.js``` change the App import to ```'../../src/App'```.
-15. Run ```npm start``` to start the Expo server.
-16. Scan the QR code from the console with your phone (for IOS with the camera app).
+15. In the ```src/api/constants.js``` file set the serverIP to the supplied value (ask me).
+16. Run ```npm start``` to start the Expo server.
+17. Scan the QR code from the console with your phone (for IOS with the camera app).
 
 ### To push updates to your fork repository
 
@@ -70,7 +71,7 @@ Expo Go is used to run the project on your own device, without having to submit 
 
 ### Folder Explanation
 
-The **assets** folder is designated for images or fonts used in the app like the icon of the app in different sizes. The **src** folder contains the main part of the code. The **App.js** file is the entry file, here the app starts, it contains the part of the code that switches between the screens. Within the **src** folder there are multiple folders, the most important of which is the **screens** folder. This folder contains the different screens (or pages) of the app. Furthermore the components folder contains, as the name implies, React components. The most important reason for separating these components is so they can be easily reused in multiple places and pages. The **utils** folder contains smaller parts of the code that have one function to perform, such as the **validate-email**, which validates if the inputted string is a valid email. Finally the styles folder contains more general style sheets for the app. The **app.json** file in the root directory contains information about the app for the operating system, such as its name, version, and icon. The remaining files in the root directory are supporting files for building and running.
+The **assets** folder is designated for images or fonts used in the app like the icon of the app in different sizes. The **src** folder contains the main part of the code. The **App.js** file is the entry file, here the app starts, it contains the part of the code that switches between the screens. Within the **src** folder there are multiple folders, the most important of which is the **screens** folder. This folder contains the different screens (or pages) of the app. Furthermore the components folder contains, as the name implies, React components. The most important reason for separating these components is so they can be easily reused in multiple places and pages. The **utils** folder contains smaller parts of the code that have one function to perform, such as the **validate-email**, which validates if the inputted string is a valid email. The **api** folder includes files that communicate to the server, this includes the authentication functions. Finally the styles folder contains more general style sheets for the app. The **app.json** file in the root directory contains information about the app for the operating system, such as its name, version, and icon. The remaining files in the root directory are supporting files for building and running.
 
 ### Project Structure
 
@@ -81,6 +82,9 @@ The **assets** folder is designated for images or fonts used in the app like the
 |    |-- icon.png
 |    |-- splash.png
 |-- src
+|    |-- api
+|    |    |-- authentication
+|    |    |-- constants
 |    |-- components
 |    |    |-- big-btn
 |    |    |-- big-text-input
@@ -93,8 +97,8 @@ The **assets** folder is designated for images or fonts used in the app like the
 |    |    |-- sign-up
 |    |    |-- splash
 |    |-- styles
+|    |    |-- config
 |    |-- utils
-|    |    |-- authentication
 |    |    |-- capitalize
 |    |    |-- secure-store
 |    |    |-- validate-email
