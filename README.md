@@ -63,6 +63,7 @@ Expo Go is used to run the project on your own device, without having to submit 
 ### TO DO's (and thoughts)
 
 - Make additional pages (settings, add product, grocery list, recipe list).
+- Implement access and refresh tokens into the authorization server.
 - Make user data table.
 - Reset password logic.
 - Change password logic.
