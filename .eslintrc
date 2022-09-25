@@ -8,7 +8,6 @@
     }
   },
   "rules": {
-    "no-console": 0,
     "linebreak-style": 0,
     "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }] // only return an error if JSX syntax is used on files other than those with .js or .jsx file extension
   }
