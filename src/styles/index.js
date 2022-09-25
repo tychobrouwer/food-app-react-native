@@ -1,7 +1,10 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
+// screen height of the machine running the app
 const ScreenHeight = Dimensions.get('window').height;
 
+// main styles for the application
+// which will be used on multiple screens
 const stylesMain = StyleSheet.create({
   container: {
     alignItems: 'center',
@@ -37,7 +40,7 @@ const stylesMain = StyleSheet.create({
 
   link: {
     fontSize: 18,
-    color: '#c98fe9',
+    color: '#986FAF',
     fontWeight: 'bold',
     padding: 8,
     margin: -8,

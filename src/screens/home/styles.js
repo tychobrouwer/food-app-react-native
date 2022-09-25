@@ -1,13 +1,10 @@
 import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
-  // topNav: {
-  //   width: '85%',
-  //   flexDirection: 'row',
-  //   justifyContent: 'space-between',
-  //   marginTop: '12%',
-  // },
+// import the style config
+import config from '../../styles/config';
 
+// styles for the home screen
+const styles = StyleSheet.create({
   topNav: {
     width: '85%',
     flexDirection: 'row',
@@ -15,20 +12,18 @@ const styles = StyleSheet.create({
     marginTop: '15%',
   },
 
-  // bottomNav: {
-  //   width: '85%',
-  //   flexDirection: 'row',
-  //   justifyContent: 'space-between',
-  //   marginBottom: '8%',
-  // },
-
   bottomNav: {
-    width: '102%',
-    flexDirection: 'row',
-    backgroundColor: 'white',
+    width: '103%',
+    backgroundColor: config.tertiaryColor,
     paddingBottom: 20,
     paddingTop: 10,
     borderRadius: 30,
+    alignItems: 'center',
+  },
+
+  bottomNavWrapper: {
+    flexDirection: 'row',
+    width: '94%',
   },
 
   navItem: {
@@ -40,23 +35,15 @@ const styles = StyleSheet.create({
   },
 
   bigNavItem: {
-    backgroundColor: 'red',
     position: 'absolute',
     marginLeft: '50%',
     marginRight: '50%',
-    // padding: 10,
+    paddingBottom: 20,
   },
-
-  // content: {
-  //   width: '80%',
-  //   marginTop: '5%',
-  //   marginBottom: '5%',
-  //   flexGrow: 1,
-  // },
 
   content: {
     width: '80%',
-    marginTop: '5%',
+    marginTop: '10%',
     marginBottom: '5%',
     flexGrow: 1,
   },
@@ -69,7 +56,7 @@ const styles = StyleSheet.create({
   contentHeader: {
     width: '100%',
     height: 50,
-    backgroundColor: '#fff',
+    backgroundColor: config.tertiaryColor,
     alignItems: 'center',
     borderRadius: 5,
   },
@@ -79,12 +66,13 @@ const styles = StyleSheet.create({
     marginTop: 'auto',
     marginBottom: 'auto',
     fontWeight: 'bold',
+    color: config.primaryTextColor,
   },
 
   contentItem: {
     width: '100%',
     height: 80,
-    backgroundColor: '#fff',
+    backgroundColor: config.tertiaryColor,
     alignItems: 'center',
     borderRadius: 5,
     marginTop: 10,

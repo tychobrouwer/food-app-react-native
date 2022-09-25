@@ -5,51 +5,62 @@ import {
 import Checkbox from 'expo-checkbox';
 import PropTypes from 'prop-types';
 
+// import components and utils
 import { GlobalDispatchContext, SET_CREDENTIALS } from '../../components/global-state';
-
-import stylesMain from '../../styles';
-import styles from './styles';
-
 import BigBtn from '../../components/big-btn';
 import BigTextInput from '../../components/big-text-input';
 import ScreenDefault from '../../components/screen-wrapper';
 import Loader from '../../components/loader';
-
-import LogoNameBelowImage from '../../../assets/logo/logo-name-below-image';
-
+import { secureStoreSet } from '../../utils/secure-store';
 import { authSignIn, getClientSalt } from '../../utils/authentication';
 
-import { secureStoreSet } from '../../utils/secure-store';
+// import logo image
+import LogoNameBelowImage from '../../../assets/logo/logo-name-below-image';
 
+// import styles
+import stylesMain from '../../styles';
+import styles from './styles';
+
+// import bcrypt package
 const bcrypt = require('bcryptjs');
 
+// sign in screen function
 const SignInScreen = function SignInScreen({ navigation }) {
+  // set the dispatch to set the local values
   const dispatch = useContext(GlobalDispatchContext);
 
+  // function variables for the user input
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [staySignedIn, setStaySignedIn] = useState(false);
   const [emailText, setEmailText] = useState('');
   const [passwordText, setPasswordText] = useState('');
 
+  // function variable boolean for loading
   const [loading, setLoading] = useState(false);
+
+  // function variables for setting both fields to red
   const [bothRed, setBothRed] = useState(false);
 
+  // function to reset the error texts
   const resetCheckLogin = () => {
     setPasswordText('');
     setEmailText('');
     setBothRed(false);
   };
 
+  // function to reset the user input values
   const resetLogin = () => {
     setEmail('');
     setPassword('');
     setStaySignedIn(false);
   };
 
+  // function to set element style to red
   const setRed = (field) => {
     let returnStyle;
 
+    // return style only if applicable
     if (field === 'email' && emailText !== '') {
       returnStyle = { borderColor: 'red' };
     } else if (field === 'password' && passwordText !== '') {
@@ -61,29 +72,40 @@ const SignInScreen = function SignInScreen({ navigation }) {
     return returnStyle;
   };
 
+  // function to handle the sign in
   const handleSignIn = async () => {
+    // set loading to true
     setLoading(true);
 
+    // get client salt from the server
     const salt = await getClientSalt(email);
 
+    // hash the password with the salt
     const passwordHash = bcrypt.hashSync(password, salt);
 
+    // get the sign in result
     const authResult = await authSignIn(email, passwordHash, salt);
 
     if (authResult.result) {
+      // set local variables to the credentials
       dispatch({ type: SET_CREDENTIALS, payload: { email, token: passwordHash } });
 
+      // if stay signed in store credentials in secure store
       if (staySignedIn) {
         secureStoreSet('email', email);
         secureStoreSet('token', passwordHash);
       }
 
+      // reset values if valid
       resetLogin();
 
+      // navigate to home screen if valid
       navigation.replace('Home');
     } else {
+      // get the message type and value
       const { type, value } = authResult.message;
 
+      // set the correct error text accordingly
       if (type === 'email') {
         setEmailText(value);
       } else if (type === 'password') {
@@ -94,9 +116,11 @@ const SignInScreen = function SignInScreen({ navigation }) {
       }
     }
 
+    // set loading to false
     setLoading(false);
   };
 
+  // return the sign in screen component
   return (
     <ScreenDefault>
       <Loader style={!loading ? stylesMain.hidden : {}} />

@@ -2,41 +2,52 @@ import React, { useState } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 
+// import components and utils
 import BigBtn from '../../components/big-btn';
 import BigTextInput from '../../components/big-text-input';
 import ScreenDefault from '../../components/screen-wrapper';
 import Loader from '../../components/loader';
-
-import stylesMain from '../../styles';
-import styles from './styles';
 import { authSignUp, newClientSalt } from '../../utils/authentication';
 
+// import styles
+import stylesMain from '../../styles';
+import styles from './styles';
+
+// import bcrypt package
 const bcrypt = require('bcryptjs');
 
+// sign up screen function
 const SignUpScreen = function SignUpScreen({ navigation }) {
+  // function variables for the user input
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [password1, setPassword1] = useState('');
 
+  // function variables for error messages
   const [emailText, setEmailText] = useState('');
   const [passwordText, setPasswordText] = useState('');
 
+  // function variable boolean for loading
   const [loading, setLoading] = useState(false);
 
+  // function to reset the error texts
   const resetCheckSignUp = () => {
     setPasswordText('');
     setEmailText('');
   };
 
+  // function to reset the user input values
   const resetSignUp = () => {
     setEmail('');
     setPassword('');
     setPassword1('');
   };
 
+  // function to set element style to red
   const setRed = (field) => {
     let returnStyle = {};
 
+    // return style only if applicable
     if (field === 'email' && emailText !== '') {
       returnStyle = { borderColor: 'red' };
     } else if (field === 'password' && passwordText !== '') {
@@ -46,23 +57,32 @@ const SignUpScreen = function SignUpScreen({ navigation }) {
     return returnStyle;
   };
 
+  // function to handle the sign up
   const handleSignUp = async () => {
+    // set loading to true
     setLoading(true);
 
+    // get the client salt from the server
     const salt = await newClientSalt(email);
 
+    // hash the passwords with the salt
     const passwordHash = bcrypt.hashSync(password, salt);
     const passwordHash1 = bcrypt.hashSync(password1, salt);
 
+    // get the sign up result
     const authResult = await authSignUp(email, passwordHash, passwordHash1, salt);
 
     if (authResult.result) {
+      // reset values if valid
       resetSignUp();
 
+      // navigate back to the sign in if valid
       navigation.pop(1);
     } else {
+      // get the message type and value
       const { type, value } = authResult.message;
 
+      // set the correct error text accordingly
       if (type === 'email') {
         setEmailText(value);
       } else if (type === 'password') {
@@ -70,9 +90,11 @@ const SignUpScreen = function SignUpScreen({ navigation }) {
       }
     }
 
+    // set loading to false
     setLoading(false);
   };
 
+  // return the sign up screen component
   return (
     <ScreenDefault>
       <Loader style={!loading ? stylesMain.hidden : {}} />

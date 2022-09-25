@@ -2,8 +2,10 @@ import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 
+// import styles
 import styles from './styles';
 
+// return the big button component
 const BigBtn = function BigBtn({ onPress, title }) {
   return (
     <TouchableOpacity

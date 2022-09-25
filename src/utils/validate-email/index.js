@@ -1,4 +1,6 @@
+// function for validating email
 const validateEmail = (email) => {
+  // regex match for valid email
   const check = String(email)
     .toLowerCase()
     .match(
@@ -7,9 +9,11 @@ const validateEmail = (email) => {
     );
 
   if (check) {
+    // return email if valid
     return check[0];
   }
 
+  // return null if not valid
   return null;
 };
 

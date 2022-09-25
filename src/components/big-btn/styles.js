@@ -1,5 +1,9 @@
 import { StyleSheet } from 'react-native';
 
+// import the style config
+import config from '../../styles/config';
+
+// styles for the big button component
 const styles = StyleSheet.create({
   bigBtn: {
     width: '80%',
@@ -7,8 +11,8 @@ const styles = StyleSheet.create({
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#fff',
-    color: '#60c9cd',
+    backgroundColor: config.tertiaryColor,
+    color: config.primaryColor,
     marginBottom: 20,
   },
 

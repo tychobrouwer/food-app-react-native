@@ -1,8 +1,12 @@
+// import valid email function
 import validateEmail from '../validate-email';
 
+// require bcrypt package
 const bcrypt = require('bcryptjs');
 
+// function for getting the client salt from the server
 export const getClientSalt = async (email) => {
+  // fetch request for getting the salt
   const response = await fetch('http://192.168.178.142:3000/get-client-salt', {
     method: 'POST',
     headers: {
@@ -14,12 +18,15 @@ export const getClientSalt = async (email) => {
     }),
   });
 
+  // await the json response of the server
   const salt = await response.json();
 
   return salt;
 };
 
+// function for getting a new client salt from the server
 export const newClientSalt = async (email) => {
+  // fetch request for getting the salt
   const response = await fetch('http://192.168.178.142:3000/new-client-salt', {
     method: 'POST',
     headers: {
@@ -31,14 +38,15 @@ export const newClientSalt = async (email) => {
     }),
   });
 
+  // await the json response of the server
   const salt = await response.json();
 
   return salt;
 };
 
+// function for authorizing an email password pair for sign in
 export const authSignIn = async (email, passwordHash, salt) => {
-  let message = { type: 'login', value: 'Login successful.' };
-
+  // check email for validity
   const emailEmptyCheck = email !== '';
   const emailValidCheck = validateEmail(email) !== null;
 
@@ -47,10 +55,13 @@ export const authSignIn = async (email, passwordHash, salt) => {
 
   if (emailEmptyCheck && emailValidCheck) {
     try {
+      // hashing empty string for checking empty password
       const emptyHash = bcrypt.hashSync('', salt);
 
+      // checking for empty password
       passwordEmptyCheck = passwordHash !== emptyHash;
 
+      // fetch request for authorizing the sign in
       const response = await fetch('http://192.168.178.142:3000/sign-in', {
         method: 'POST',
         headers: {
@@ -63,15 +74,21 @@ export const authSignIn = async (email, passwordHash, salt) => {
         }),
       });
 
+      // await the json response of the server
       const result = await response.json();
 
       if (result.result) {
+        // set the password valid if sign in result is true
         passwordValidCheck = true;
       }
     } catch (error) {
-      //
+      // do nothing if error
+      // this may happen if email password pair is invalid
     }
   }
+
+  // set the response message and result
+  let message = { type: 'login', value: 'Login successful.' };
 
   if (!emailEmptyCheck) {
     message = { type: 'email', value: 'Enter an email.' };
@@ -88,11 +105,13 @@ export const authSignIn = async (email, passwordHash, salt) => {
   return { result, message };
 };
 
+// function for authorizing an email password pair for sign up
 export const authSignUp = async (email, passwordHash, passwordHash1, salt) => {
-  let message = { type: 'login', value: 'Login successful.' };
-
+  // check email for validity
   const emailEmptyCheck = email !== '';
   const emailValidCheck = validateEmail(email) !== null;
+
+  // checking for matching passwords
   const passwordNotSameCheck = passwordHash === passwordHash1;
 
   let passwordEmptyCheck = false;
@@ -100,10 +119,13 @@ export const authSignUp = async (email, passwordHash, passwordHash1, salt) => {
 
   if (emailEmptyCheck && emailValidCheck && passwordNotSameCheck) {
     try {
+      // hashing empty string for checking empty password
       const emptyHash = bcrypt.hashSync('', salt);
 
+      // checking for empty password
       passwordEmptyCheck = passwordHash !== emptyHash;
 
+      // fetch request for authorizing the sign up
       const response = await fetch('http://192.168.178.142:3000/sign-up', {
         method: 'POST',
         headers: {
@@ -116,15 +138,21 @@ export const authSignUp = async (email, passwordHash, passwordHash1, salt) => {
         }),
       });
 
+      // await the json response of the server
       const result = await response.json();
 
       if (result.result) {
+        // set the password valid if sign in result is true
         passwordValidCheck = true;
       }
     } catch (error) {
-      //
+      // do nothing if error
+      // this may happen if email is already used
     }
   }
+
+  // set the response message and result
+  let message = { type: 'login', value: 'Login successful.' };
 
   if (!emailEmptyCheck) {
     message = { type: 'email', value: 'Enter an email.' };

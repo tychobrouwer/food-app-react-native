@@ -2,8 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View, TextInput } from 'react-native';
 
+// import styles
 import styles from './styles';
 
+// return the big text input component
 const BigTextInput = function BigTextInput(
   {
     style,

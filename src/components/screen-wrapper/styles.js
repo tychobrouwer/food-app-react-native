@@ -3,15 +3,10 @@ import { StyleSheet } from 'react-native';
 // import the style config
 import config from '../../styles/config';
 
-// styles for the loader component
+// styles for the screen wrapper component
 const styles = StyleSheet.create({
-  loader: {
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    justifyContent: 'center',
+  wrapper: {
+    flex: 1,
     backgroundColor: config.primaryColor,
   },
 });

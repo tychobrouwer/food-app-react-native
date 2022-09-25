@@ -9,12 +9,15 @@ import {
   ScrollView,
 } from 'react-native';
 
+// import styles
 import stylesMain from '../../styles';
+import styles from './styles';
 
+// return the default screen wrapper
 const ScreenDefault = function ScreenDefault({ children }) {
   return (
     <KeyboardAvoidingView
-      style={{ flex: 1, backgroundColor: '#60c9cd' }}
+      style={styles.wrapper}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       // keyboardVerticalOffset={40}
     >

@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 
+// styles for the sign up screen
 const styles = StyleSheet.create({
   titleText: {
     fontSize: '36px',

@@ -1,8 +1,12 @@
 import { StyleSheet } from 'react-native';
 
+// import the style config
+import config from '../../styles/config';
+
+// styles for the bif text input component
 const styles = StyleSheet.create({
   inputView: {
-    borderColor: '#fff',
+    borderColor: config.tertiaryColor,
     borderWidth: 2,
     borderStyle: 'solid',
     borderRadius: 5,

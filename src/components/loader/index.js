@@ -2,8 +2,10 @@ import React from 'react';
 import { View, ActivityIndicator } from 'react-native';
 import PropTypes from 'prop-types';
 
+// import styles
 import styles from './styles';
 
+// return the loader component
 const Loader = function Loader({ style }) {
   return (
     <View style={[styles.loader, style]}>
