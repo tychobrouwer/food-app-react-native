@@ -1,5 +1,5 @@
 const constants = {
-  serverIP: '',
+  serverIP: '***.***.***.**',
   serverPort: 3000,
   endpoint: (page) => `http://${constants.serverIP}:${constants.serverPort}/${page}`,
   headers: {
