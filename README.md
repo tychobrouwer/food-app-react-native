@@ -95,7 +95,11 @@ The **assets** folder is designated for images or fonts used in the app like the
 |    |    |-- loader
 |    |    |-- screen-wrapper
 |    |-- screens
+|    |    |-- add-product
+|    |    |-- grocery-list
 |    |    |-- home
+|    |    |-- recipes
+|    |    |-- settings
 |    |    |-- sign-in
 |    |    |-- sign-up
 |    |    |-- splash
