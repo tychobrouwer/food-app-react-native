@@ -27,9 +27,10 @@ This is a project for the course Engineering Design - group 172. Instructions on
 12. Run ```git pull origin main```.
 13. Run ```npm install``` to install the necessary packages.
 14. In your text editor in ```node_modules/expo/AppEntry.js``` change the App import to ```'../../src/App'```.
-15. In the ```src/api/constants.template.js``` file set the **serverIP** and remove **template** from the filename.
-16. Run ```npm start``` to start the Expo server.
-17. Scan the QR code from the console with your phone (for IOS with the camera app).
+15. Duplicate the ```src/api/constants.template.js``` file and remove **template** from the filename.
+16. Set the **serverIP** in the ```src/api/constants.js``` file.
+17. Run ```npm start``` to start the Expo server.
+18. Scan the QR code from the console with your phone (for IOS with the camera app).
 
 ### To push updates to your fork repository
 
