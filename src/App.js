@@ -32,6 +32,8 @@ export default function App() {
     <GlobalState initialState={state} dispatch={dispatch}>
       <NavigationContainer>
         <Stack.Navigator
+          // change 'initialRouteName' to change the starting screen
+          // for final app this should be 'Splash'
           initialRouteName="Home"
           screenOptions={{
             headerShown: false,
