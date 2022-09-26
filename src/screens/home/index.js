@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Text, View, TouchableOpacity,
 } from 'react-native';
+import PropTypes from 'prop-types';
 
 // import components and utils
 import ScreenDefault from '../../components/screen-wrapper';
@@ -9,7 +10,7 @@ import ScreenDefault from '../../components/screen-wrapper';
 // import images used
 import SettingsImage from '../../../assets/settings-image';
 import RecipesImage from '../../../assets/recipes-image';
-import ShoppingListImage from '../../../assets/shopping-list-image';
+import GroceryListImage from '../../../assets/grocery-list-image';
 import HomeImage from '../../../assets/home-image';
 import BackArrowImage from '../../../assets/back-arrow-image';
 import PlusImage from '../../../assets/plus-image';
@@ -18,7 +19,7 @@ import PlusImage from '../../../assets/plus-image';
 import styles from './styles';
 
 // return the home screen component
-const HomeScreen = function HomeScreen() {
+const HomeScreen = function HomeScreen({ navigation }) {
   return (
     <ScreenDefault>
       <View style={styles.topNav}>
@@ -65,26 +66,57 @@ const HomeScreen = function HomeScreen() {
       </View>
       <View style={styles.bottomNav}>
         <View style={styles.bottomNavWrapper}>
-          <TouchableOpacity style={styles.navItem}>
+          <TouchableOpacity
+            style={styles.navItem}
+            onPress={() => {
+              navigation.push('Home');
+            }}
+          >
             <HomeImage style={styles.navLink} width={40} height={40} />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.navItem}>
-            <ShoppingListImage style={styles.navLink} width={40} height={40} />
+          <TouchableOpacity
+            style={styles.navItem}
+            onPress={() => {
+              navigation.push('GroceryList');
+            }}
+          >
+            <GroceryListImage style={styles.navLink} width={40} height={40} />
           </TouchableOpacity>
           <View style={styles.navItem} />
-          <TouchableOpacity style={styles.navItem}>
+          <TouchableOpacity
+            style={styles.navItem}
+            onPress={() => {
+              navigation.push('Recipes');
+            }}
+          >
             <RecipesImage style={styles.navLink} width={40} height={40} />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.navItem}>
+          <TouchableOpacity
+            style={styles.navItem}
+            onPress={() => {
+              navigation.push('Settings');
+            }}
+          >
             <SettingsImage style={styles.navLink} width={40} height={40} />
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.navItem, styles.bigNavItem]}>
+          <TouchableOpacity
+            style={[styles.navItem, styles.bigNavItem]}
+            onPress={() => {
+              navigation.push('AddProduct');
+            }}
+          >
             <PlusImage style={styles.navLink} width={90} height={90} />
           </TouchableOpacity>
         </View>
       </View>
     </ScreenDefault>
   );
+};
+
+HomeScreen.propTypes = {
+  navigation: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default HomeScreen;
