@@ -20,6 +20,22 @@ const styles = StyleSheet.create({
   scanner: {
     width: '80%',
     aspectRatio: 1,
+    borderRadius: 5,
+  },
+
+  cameraTextContainer: {
+    position: 'absolute',
+    top: '5%',
+    padding: 10,
+    borderRadius: 10,
+    backgroundColor: config.tertiaryColor,
+    alignItems: 'center',
+  },
+
+  cameraText: {
+    fontWeight: 'bold',
+    fontSize: 26,
+    color: config.errorColor,
   },
 
   cameraButton: {

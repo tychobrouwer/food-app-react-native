@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
-  View, Text, TouchableOpacity, TouchableWithoutFeedback,
+  View, TouchableOpacity, TouchableWithoutFeedback, Text,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { BarCodeScanner } from 'expo-barcode-scanner';
@@ -25,14 +25,17 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
 
   const [ingredient, setIngredient] = useState('');
 
-  useEffect(() => {
-    const getBarCodeScannerPermissions = async () => {
-      const { status } = await BarCodeScanner.requestPermissionsAsync();
-      setHasPermission(status === 'granted');
-    };
+  const handlePermissions = async () => {
+    const { status } = await BarCodeScanner.requestPermissionsAsync();
 
-    getBarCodeScannerPermissions();
-  }, []);
+    setHasPermission(status === 'granted');
+
+    if (status !== 'granted') {
+      setTimeout(() => {
+        setScanner(false);
+      }, 1000);
+    }
+  };
 
   const handleBarCodeScanned = ({ type, data }) => {
     // if (type is ean 13, ean 8) {
@@ -46,20 +49,16 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
     // }
   };
 
-  // if (hasPermission === null) {
-  //   return <Text>Requesting for camera permission</Text>;
-  // }
-  // if (hasPermission === false) {
-  //   return <Text>No access to camera</Text>;
-  // }
-
   return (
     <ScreenDefault>
       <TopNavigator navigation={navigation} />
       <View style={stylesMain.content}>
         <TouchableOpacity
           style={styles.cameraButton}
-          onPress={() => setScanner(true)}
+          onPress={() => {
+            handlePermissions();
+            setScanner(true);
+          }}
         >
           <CameraImage width="70%" height="70%" />
         </TouchableOpacity>
@@ -74,10 +73,22 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
       <BottomNavigator navigation={navigation} />
       <TouchableWithoutFeedback onPress={() => setScanner(false)}>
         <View style={[styles.scannerContainer, !scanner ? { display: 'none' } : {}]}>
-          <BarCodeScanner
-            onBarCodeScanned={scanner ? handleBarCodeScanned : undefined}
-            style={styles.scanner}
-          />
+          {
+            hasPermission === true && (
+              <BarCodeScanner
+                onBarCodeScanned={scanner ? handleBarCodeScanned : undefined}
+                style={styles.scanner}
+              />
+            )
+          }
+          {
+            hasPermission === false && (
+              <View style={styles.cameraTextContainer}>
+                <Text style={styles.cameraText}>Change permissions</Text>
+                <Text style={styles.cameraText}>to access the camera.</Text>
+              </View>
+            )
+          }
         </View>
       </TouchableWithoutFeedback>
     </ScreenDefault>
