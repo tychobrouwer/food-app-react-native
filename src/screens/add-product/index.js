@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 
 // import components and utils
 import ScreenDefault from '../../components/screen-wrapper';
+import TopNavigator from '../../components/top-navigator';
+import BottomNavigator from '../../components/bottom-navigator';
 
 // import styles
 import styles from './styles';
@@ -14,7 +16,11 @@ import styles from './styles';
 const AddProductScreen = function AddProductScreen({ navigation }) {
   return (
     <ScreenDefault>
-      <View />
+      <TopNavigator navigation={navigation} />
+      <View style={styles.content}>
+        {/* CONTENT */}
+      </View>
+      <BottomNavigator navigation={navigation} />
     </ScreenDefault>
   );
 };

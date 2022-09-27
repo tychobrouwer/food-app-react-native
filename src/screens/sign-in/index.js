@@ -20,6 +20,7 @@ import LogoNameBelowImage from '../../../assets/logo/logo-name-below-image';
 // import styles
 import stylesMain from '../../styles';
 import styles from './styles';
+import config from '../../styles/config';
 
 // import bcrypt package
 const bcrypt = require('bcryptjs');
@@ -62,11 +63,11 @@ const SignInScreen = function SignInScreen({ navigation }) {
 
     // return style only if applicable
     if (field === 'email' && emailText !== '') {
-      returnStyle = { borderColor: 'red' };
+      returnStyle = { borderColor: config.errorColor };
     } else if (field === 'password' && passwordText !== '') {
-      returnStyle = { borderColor: 'red' };
+      returnStyle = { borderColor: config.errorColor };
     } else if (bothRed) {
-      returnStyle = { borderColor: 'red' };
+      returnStyle = { borderColor: config.errorColor };
     }
 
     return returnStyle;
