@@ -32,6 +32,13 @@ const stylesMain = StyleSheet.create({
     marginLeft: 20,
   },
 
+  content: {
+    width: '80%',
+    marginTop: '10%',
+    marginBottom: '5%',
+    flexGrow: 1,
+  },
+
   notificationText: {
     color: config.errorColor,
   },

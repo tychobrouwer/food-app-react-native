@@ -11,13 +11,14 @@ import BottomNavigator from '../../components/bottom-navigator';
 
 // import styles
 import styles from './styles';
+import stylesMain from '../../styles';
 
 // return the home screen component
 const HomeScreen = function HomeScreen({ navigation }) {
   return (
     <ScreenDefault>
       <TopNavigator navigation={navigation} />
-      <View style={styles.content}>
+      <View style={stylesMain.content}>
         <TouchableOpacity style={styles.contentHeader}>
           <Text style={styles.contentHeaderText}>
             CALENDAR

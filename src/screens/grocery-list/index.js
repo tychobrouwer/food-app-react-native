@@ -10,14 +10,15 @@ import TopNavigator from '../../components/top-navigator';
 import BottomNavigator from '../../components/bottom-navigator';
 
 // import styles
-import styles from './styles';
+// import styles from './styles';
+import stylesMain from '../../styles';
 
 // return the home screen component
 const GroceryListScreen = function GroceryListScreen({ navigation }) {
   return (
     <ScreenDefault>
       <TopNavigator navigation={navigation} />
-      <View style={styles.content}>
+      <View style={stylesMain.content}>
         {/* CONTENT */}
       </View>
       <BottomNavigator navigation={navigation} />

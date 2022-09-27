@@ -12,13 +12,6 @@ const styles = StyleSheet.create({
     marginTop: '15%',
   },
 
-  content: {
-    width: '80%',
-    marginTop: '10%',
-    marginBottom: '5%',
-    flexGrow: 1,
-  },
-
   contentHeader: {
     width: '100%',
     height: 50,
