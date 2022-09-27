@@ -1,5 +1,8 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
+// import styles
+import config from './config';
+
 // screen height of the machine running the app
 const ScreenHeight = Dimensions.get('window').height;
 
@@ -40,7 +43,7 @@ const stylesMain = StyleSheet.create({
 
   link: {
     fontSize: 18,
-    color: '#986FAF',
+    color: config.secondaryColor,
     fontWeight: 'bold',
     padding: 8,
     margin: -8,
