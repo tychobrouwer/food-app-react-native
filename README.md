@@ -32,7 +32,7 @@ This is a project for the course Engineering Design - group 172. Instructions on
 17. Run ```npm start``` to start the Expo server.
 18. Scan the QR code from the console with your phone (for IOS with the camera app).
 
-### To push updates to your fork repository
+### To push updates to your repository
 
 1. Run ```cd path/project/directory``` to navigate to your project folder.
 2. Run ```npm run lint-fix``` to fix any styling issues.
@@ -47,13 +47,12 @@ This is a project for the course Engineering Design - group 172. Instructions on
 
 ### To push updates to the original repository
 
-1. First push updates to your fork repository.
-2. Go to ```https://github.com/"Your GitHub username"/Food_App_React_Native.git```.
+1. First push updates to your repository.
+2. Go to ```https://github.com/"Your GitHub username"/Food_App_React_Native``` in your web browser.
 3. Navigate to **Pull requests**.
 4. Press on **New pull request**.
 5. You can leave the default settings and press **Create pull request**.
 6. Give the request a title and maybe a comment and press **Create pull request**.
-7. You will have to wait for me to accept the request for it to be added to the repository.
 
 ## App
 
