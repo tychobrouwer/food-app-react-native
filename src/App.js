@@ -10,10 +10,10 @@ import LoadingScreen from './screens/splash';
 import SignInScreen from './screens/sign-in';
 import SignUpScreen from './screens/sign-up';
 import HomeScreen from './screens/home';
-// import RecipesScreen from './screens/recipes';
-// import SettingsScreen from './screens/settings';
-// import GroceryListScreen from './screens/grocery-list';
-// import AddProductScreen from './screens/add-product';
+import RecipesScreen from './screens/recipes';
+import SettingsScreen from './screens/settings';
+import GroceryListScreen from './screens/grocery-list';
+import AddProductScreen from './screens/add-product';
 
 // initial values for locally stored values
 const initialState = {
@@ -56,7 +56,7 @@ export default function App() {
             name="Home"
             component={HomeScreen}
           />
-          {/* <Stack.Screen
+          <Stack.Screen
             name="GroceryList"
             component={GroceryListScreen}
           />
@@ -71,7 +71,7 @@ export default function App() {
           <Stack.Screen
             name="Settings"
             component={SettingsScreen}
-          /> */}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </GlobalState>

@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 
   bigBtnText: {
     fontWeight: 'bold',
-    color: '#c98fe9',
+    color: config.secondaryColor,
     fontSize: 21,
   },
 });
