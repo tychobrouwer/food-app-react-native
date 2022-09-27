@@ -7,7 +7,7 @@ import SettingsImage from '../../../assets/settings-image';
 import RecipesImage from '../../../assets/recipes-image';
 import GroceryListImage from '../../../assets/grocery-list-image';
 import HomeImage from '../../../assets/home-image';
-import PlusImage from '../../../assets/plus-image';
+import AddProductImage from '../../../assets/add-product-image';
 
 // import styles
 import styles from './styles';
@@ -50,14 +50,16 @@ const BottomNavigator = function BottomNavigator({ navigation }) {
         >
           <SettingsImage style={styles.navLink} width={40} height={40} />
         </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.navItem, styles.bigNavItem]}
-          onPress={() => {
-            navigation.push('AddProduct');
-          }}
-        >
-          <PlusImage style={styles.navLink} width={90} height={90} />
-        </TouchableOpacity>
+        <View style={[styles.navItem, styles.bigNavItem]}>
+          <AddProductImage
+            style={styles.navLink}
+            width={90}
+            height={90}
+            onPress={() => {
+              navigation.push('AddProduct');
+            }}
+          />
+        </View>
       </View>
     </View>
   );
