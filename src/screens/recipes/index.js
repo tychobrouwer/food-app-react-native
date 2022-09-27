@@ -19,7 +19,7 @@ const RecipesScreen = function RecipesScreen({ navigation }) {
     <ScreenDefault>
       <TopNavigator navigation={navigation} />
       <View style={stylesMain.content}>
-        {/* CONTENT */}
+        {/* INSERT PAGE CONTENT HERE */}
       </View>
       <BottomNavigator navigation={navigation} />
     </ScreenDefault>

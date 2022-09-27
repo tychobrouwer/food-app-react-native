@@ -19,7 +19,7 @@ const SettingsScreen = function SettingsScreen({ navigation }) {
     <ScreenDefault>
       <TopNavigator navigation={navigation} />
       <View style={stylesMain.content}>
-        {/* CONTENT */}
+        {/* INSERT PAGE CONTENT HERE */}
       </View>
       <BottomNavigator navigation={navigation} />
     </ScreenDefault>
