@@ -14,4 +14,3 @@ web-build/
 .DS_Store
 
 src/api/constants.js
-git_update.bat
