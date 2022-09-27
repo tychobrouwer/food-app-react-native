@@ -4,13 +4,14 @@ import PropTypes from 'prop-types';
 
 // import styles
 import styles from './styles';
+import config from '../../styles/config';
 
 // return the loader component
 const Loader = function Loader({ style }) {
   return (
     <View style={[styles.loader, style]}>
       <ActivityIndicator
-        color="#c98fe9"
+        color={config.secondaryColor}
         size="large"
       />
     </View>
