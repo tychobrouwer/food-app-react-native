@@ -17,7 +17,7 @@ const stylesMain = StyleSheet.create({
   },
 
   text: {
-    color: '#fff',
+    color: config.tertiaryColor,
     fontSize: 18,
   },
 
@@ -33,7 +33,7 @@ const stylesMain = StyleSheet.create({
   },
 
   notificationText: {
-    color: 'red',
+    color: config.errorColor,
   },
 
   banner: {
@@ -52,7 +52,7 @@ const stylesMain = StyleSheet.create({
   checkbox: {
     padding: 5,
     margin: 5,
-    borderColor: '#fff',
+    borderColor: config.tertiaryColor,
   },
 
   hidden: {
