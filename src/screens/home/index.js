@@ -26,32 +26,32 @@ const HomeScreen = function HomeScreen({ navigation }) {
         </TouchableOpacity>
         <View style={styles.contentItem}>
           <View style={styles.contentItemText}>
-            <Text>FOOD: chicken</Text>
-            <Text>EXPIRATION DATE: 10/10/2022</Text>
+            <Text style={stylesMain.text}>FOOD: chicken</Text>
+            <Text style={stylesMain.text}>EXPIRATION DATE: 10/10/2022</Text>
           </View>
         </View>
         <View style={styles.contentItem}>
           <View style={styles.contentItemText}>
-            <Text>FOOD: chicken</Text>
-            <Text>EXPIRATION DATE: 10/10/2022</Text>
+            <Text style={stylesMain.text}>FOOD: chicken</Text>
+            <Text style={stylesMain.text}>EXPIRATION DATE: 10/10/2022</Text>
           </View>
         </View>
         <View style={styles.contentItem}>
           <View style={styles.contentItemText}>
-            <Text>FOOD: chicken</Text>
-            <Text>EXPIRATION DATE: 10/10/2022</Text>
+            <Text style={stylesMain.text}>FOOD: chicken</Text>
+            <Text style={stylesMain.text}>EXPIRATION DATE: 10/10/2022</Text>
           </View>
         </View>
         <View style={styles.contentItem}>
           <View style={styles.contentItemText}>
-            <Text>FOOD: chicken</Text>
-            <Text>EXPIRATION DATE: 10/10/2022</Text>
+            <Text style={stylesMain.text}>FOOD: chicken</Text>
+            <Text style={stylesMain.text}>EXPIRATION DATE: 10/10/2022</Text>
           </View>
         </View>
         <View style={styles.contentItem}>
           <View style={styles.contentItemText}>
-            <Text>FOOD: chicken</Text>
-            <Text>EXPIRATION DATE: 10/10/2022</Text>
+            <Text style={stylesMain.text}>FOOD: chicken</Text>
+            <Text style={stylesMain.text}>EXPIRATION DATE: 10/10/2022</Text>
           </View>
         </View>
       </View>

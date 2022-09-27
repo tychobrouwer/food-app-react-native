@@ -128,7 +128,7 @@ const SignInScreen = function SignInScreen({ navigation }) {
       <Loader style={!loading ? stylesMain.hidden : {}} />
 
       <View style={stylesMain.banner}>
-        <Text style={[stylesMain.text, styles.titleText]}>Welcome!</Text>
+        <Text style={[styles.text, styles.titleText]}>Welcome!</Text>
         <LogoNameBelowImage width={160} height={160} />
       </View>
 
@@ -184,7 +184,7 @@ const SignInScreen = function SignInScreen({ navigation }) {
               onValueChange={setStaySignedIn}
             />
 
-            <Text style={stylesMain.text}>Remember me</Text>
+            <Text style={styles.text}>Remember me</Text>
           </TouchableOpacity>
 
           <TouchableOpacity>
@@ -198,7 +198,7 @@ const SignInScreen = function SignInScreen({ navigation }) {
         />
 
         <View style={stylesMain.flex}>
-          <Text style={stylesMain.text}>Not registered yet? </Text>
+          <Text style={styles.text}>Not registered yet? </Text>
           <TouchableOpacity
             onPress={() => {
               resetCheckLogin();

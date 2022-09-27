@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 50,
     backgroundColor: config.tertiaryColor,
+    color: config.primaryTextColor,
     alignItems: 'center',
     borderRadius: 5,
   },

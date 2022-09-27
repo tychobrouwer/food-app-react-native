@@ -17,8 +17,7 @@ const stylesMain = StyleSheet.create({
   },
 
   text: {
-    color: config.tertiaryColor,
-    fontSize: 18,
+    color: config.primaryTextColor,
   },
 
   flex: {

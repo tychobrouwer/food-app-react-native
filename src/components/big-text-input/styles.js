@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
     marginRight: 'auto',
     fontSize: 18,
     fontWeight: 'bold',
+    color: config.primaryTextColor,
   },
 });
 

@@ -105,7 +105,7 @@ const SignUpScreen = function SignUpScreen({ navigation }) {
       <Loader style={!loading ? stylesMain.hidden : {}} />
 
       <View style={stylesMain.banner}>
-        <Text style={[stylesMain.text, styles.titleText]}>Create Account</Text>
+        <Text style={[styles.text, styles.titleText]}>Create Account</Text>
       </View>
 
       <View style={styles.loginContainer}>
@@ -176,7 +176,7 @@ const SignUpScreen = function SignUpScreen({ navigation }) {
         />
 
         <View style={stylesMain.flex}>
-          <Text style={stylesMain.text}>Already a user? </Text>
+          <Text style={styles.text}>Already a user? </Text>
           <TouchableOpacity
             onPress={() => navigation.pop(1)}
           >
