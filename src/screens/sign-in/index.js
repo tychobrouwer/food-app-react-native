@@ -180,7 +180,7 @@ const SignInScreen = function SignInScreen({ navigation }) {
             <Checkbox
               value={staySignedIn}
               style={stylesMain.checkbox}
-              color={staySignedIn ? '#c98fe9' : undefined}
+              color={staySignedIn ? config.secondaryColor : undefined}
               onValueChange={setStaySignedIn}
             />
 
