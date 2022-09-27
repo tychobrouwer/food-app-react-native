@@ -49,7 +49,7 @@ BigTextInput.propTypes = {
   ]),
   value: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
-  autoComplete: PropTypes.string.isRequired,
+  autoComplete: PropTypes.string,
   keyboardType: PropTypes.string,
   secureTextEntry: PropTypes.bool,
   onChangeText: PropTypes.func.isRequired,
@@ -58,6 +58,7 @@ BigTextInput.propTypes = {
 
 BigTextInput.defaultProps = {
   style: {},
+  autoComplete: undefined,
   secureTextEntry: false,
   keyboardType: 'default',
   onEndEditing: () => {},

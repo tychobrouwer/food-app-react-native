@@ -22,8 +22,14 @@ GroupImage.propTypes = {
     styleProp,
     PropTypes.arrayOf(styleProp),
   ]),
-  width: PropTypes.number.isRequired,
-  height: PropTypes.number.isRequired,
+  width: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]).isRequired,
+  height: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]).isRequired,
 };
 
 GroupImage.defaultProps = {
