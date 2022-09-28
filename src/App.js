@@ -10,10 +10,10 @@ import LoadingScreen from './screens/splash';
 import SignInScreen from './screens/sign-in';
 import SignUpScreen from './screens/sign-up';
 import HomeScreen from './screens/home';
-// import RecipesScreen from './screens/recipes';
+import RecipesScreen from './screens/recipes';
 import SettingsScreen from './screens/settings';
-// import GroceryListScreen from './screens/grocery-list';
-// import AddProductScreen from './screens/add-product';
+import GroceryListScreen from './screens/grocery-list';
+import AddProductScreen from './screens/add-product';
 
 // initial values for locally stored values
 const initialState = {
@@ -34,7 +34,7 @@ export default function App() {
         <Stack.Navigator
           // change 'initialRouteName' to change the starting screen
           // for final app this should be 'Splash'
-          initialRouteName="Home"
+          initialRouteName="AddProduct"
           screenOptions={{
             headerShown: false,
             animation: 'none',
@@ -55,7 +55,7 @@ export default function App() {
           <Stack.Screen
             name="Home"
             component={HomeScreen}
-          /*/>
+          />
           <Stack.Screen
             name="GroceryList"
             component={GroceryListScreen}

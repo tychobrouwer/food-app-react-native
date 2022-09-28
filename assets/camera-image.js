@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 
 import config from '../src/styles/config';
 
-const BackArrowImage = function BackArrowImage({ width, height, style }) {
+const CameraImage = function CameraImage({ width, height, style }) {
   return (
-    <Svg xmlns="http://www.w3.org/2000/svg" style={style} width={width} height={height} viewBox="0 0 448 512">
-      <Path fill={config.tertiaryColor} d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H109.3l105.3-105.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
+    <Svg xmlns="http://www.w3.org/2000/svg" style={style} width={width} height={height} viewBox="0 0 512 512">
+      <Path fill={config.primaryTextColor} d="M149.1 64.8 138.7 96H64c-35.3 0-64 28.7-64 64v256c0 35.3 28.7 64 64 64h384c35.3 0 64-28.7 64-64V160c0-35.3-28.7-64-64-64h-74.7l-10.4-31.2C356.4 45.2 338.1 32 317.4 32H194.6c-20.7 0-39 13.2-45.5 32.8zM256 384c-53 0-96-43-96-96s43-96 96-96 96 43 96 96-43 96-96 96z" />
     </Svg>
   );
 };
@@ -17,7 +17,7 @@ const styleProp = PropTypes.objectOf(PropTypes.oneOfType([
   PropTypes.number,
 ]));
 
-BackArrowImage.propTypes = {
+CameraImage.propTypes = {
   style: PropTypes.oneOfType([
     styleProp,
     PropTypes.arrayOf(styleProp),
@@ -32,8 +32,8 @@ BackArrowImage.propTypes = {
   ]).isRequired,
 };
 
-BackArrowImage.defaultProps = {
+CameraImage.defaultProps = {
   style: {},
 };
 
-export default BackArrowImage;
+export default CameraImage;

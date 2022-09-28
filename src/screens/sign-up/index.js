@@ -12,6 +12,7 @@ import { authSignUp, newClientSalt } from '../../api/authentication';
 // import styles
 import stylesMain from '../../styles';
 import styles from './styles';
+import config from '../../styles/config';
 
 // import bcrypt package
 const bcrypt = require('bcryptjs');
@@ -49,9 +50,9 @@ const SignUpScreen = function SignUpScreen({ navigation }) {
 
     // return style only if applicable
     if (field === 'email' && emailText !== '') {
-      returnStyle = { borderColor: 'red' };
+      returnStyle = { borderColor: config.errorColor };
     } else if (field === 'password' && passwordText !== '') {
-      returnStyle = { borderColor: 'red' };
+      returnStyle = { borderColor: config.errorColor };
     }
 
     return returnStyle;
@@ -104,7 +105,7 @@ const SignUpScreen = function SignUpScreen({ navigation }) {
       <Loader style={!loading ? stylesMain.hidden : {}} />
 
       <View style={stylesMain.banner}>
-        <Text style={[stylesMain.text, styles.titleText]}>Create Account</Text>
+        <Text style={[styles.text, styles.titleText]}>Create Account</Text>
       </View>
 
       <View style={styles.loginContainer}>
@@ -175,7 +176,7 @@ const SignUpScreen = function SignUpScreen({ navigation }) {
         />
 
         <View style={stylesMain.flex}>
-          <Text style={stylesMain.text}>Already a user? </Text>
+          <Text style={styles.text}>Already a user? </Text>
           <TouchableOpacity
             onPress={() => navigation.pop(1)}
           >

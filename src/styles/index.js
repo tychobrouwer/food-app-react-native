@@ -1,5 +1,8 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
+// import styles
+import config from './config';
+
 // screen height of the machine running the app
 const ScreenHeight = Dimensions.get('window').height;
 
@@ -14,8 +17,7 @@ const stylesMain = StyleSheet.create({
   },
 
   text: {
-    color: '#fff',
-    fontSize: 18,
+    color: config.primaryTextColor,
   },
 
   flex: {
@@ -29,8 +31,15 @@ const stylesMain = StyleSheet.create({
     marginLeft: 20,
   },
 
+  content: {
+    width: '80%',
+    marginTop: '10%',
+    marginBottom: '5%',
+    flexGrow: 1,
+  },
+
   notificationText: {
-    color: 'red',
+    color: config.errorColor,
   },
 
   banner: {
@@ -40,7 +49,7 @@ const stylesMain = StyleSheet.create({
 
   link: {
     fontSize: 18,
-    color: '#986FAF',
+    color: config.secondaryColor,
     fontWeight: 'bold',
     padding: 8,
     margin: -8,
@@ -49,7 +58,7 @@ const stylesMain = StyleSheet.create({
   checkbox: {
     padding: 5,
     margin: 5,
-    borderColor: '#fff',
+    borderColor: config.tertiaryColor,
   },
 
   hidden: {

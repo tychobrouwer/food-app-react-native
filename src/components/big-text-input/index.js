@@ -4,6 +4,7 @@ import { View, TextInput } from 'react-native';
 
 // import styles
 import styles from './styles';
+import config from '../../styles/config';
 
 // return the big text input component
 const BigTextInput = function BigTextInput(
@@ -24,7 +25,7 @@ const BigTextInput = function BigTextInput(
         style={styles.TextInput}
         value={value}
         placeholder={placeholder}
-        placeholderTextColor="grey"
+        placeholderTextColor={config.secondaryTextColor}
         autoComplete={autoComplete}
         keyboardType={keyboardType}
         secureTextEntry={secureTextEntry}
@@ -48,7 +49,7 @@ BigTextInput.propTypes = {
   ]),
   value: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
-  autoComplete: PropTypes.string.isRequired,
+  autoComplete: PropTypes.string,
   keyboardType: PropTypes.string,
   secureTextEntry: PropTypes.bool,
   onChangeText: PropTypes.func.isRequired,
@@ -57,6 +58,7 @@ BigTextInput.propTypes = {
 
 BigTextInput.defaultProps = {
   style: {},
+  autoComplete: undefined,
   secureTextEntry: false,
   keyboardType: 'default',
   onEndEditing: () => {},

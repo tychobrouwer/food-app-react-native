@@ -12,51 +12,11 @@ const styles = StyleSheet.create({
     marginTop: '15%',
   },
 
-  bottomNav: {
-    width: '103%',
-    backgroundColor: config.tertiaryColor,
-    paddingBottom: 20,
-    paddingTop: 10,
-    borderRadius: 30,
-    alignItems: 'center',
-  },
-
-  bottomNavWrapper: {
-    flexDirection: 'row',
-    width: '94%',
-  },
-
-  navItem: {
-    flex: 1,
-    alignItems: 'center',
-    height: 90,
-    marginBottom: -20,
-    marginTop: -20,
-  },
-
-  bigNavItem: {
-    position: 'absolute',
-    marginLeft: '50%',
-    marginRight: '50%',
-    paddingBottom: 20,
-  },
-
-  content: {
-    width: '80%',
-    marginTop: '10%',
-    marginBottom: '5%',
-    flexGrow: 1,
-  },
-
-  navLink: {
-    marginTop: 'auto',
-    marginBottom: 'auto',
-  },
-
   contentHeader: {
     width: '100%',
     height: 50,
     backgroundColor: config.tertiaryColor,
+    color: config.primaryTextColor,
     alignItems: 'center',
     borderRadius: 5,
   },

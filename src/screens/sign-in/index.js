@@ -20,6 +20,7 @@ import LogoNameBelowImage from '../../../assets/logo/logo-name-below-image';
 // import styles
 import stylesMain from '../../styles';
 import styles from './styles';
+import config from '../../styles/config';
 
 // import bcrypt package
 const bcrypt = require('bcryptjs');
@@ -62,11 +63,11 @@ const SignInScreen = function SignInScreen({ navigation }) {
 
     // return style only if applicable
     if (field === 'email' && emailText !== '') {
-      returnStyle = { borderColor: 'red' };
+      returnStyle = { borderColor: config.errorColor };
     } else if (field === 'password' && passwordText !== '') {
-      returnStyle = { borderColor: 'red' };
+      returnStyle = { borderColor: config.errorColor };
     } else if (bothRed) {
-      returnStyle = { borderColor: 'red' };
+      returnStyle = { borderColor: config.errorColor };
     }
 
     return returnStyle;
@@ -127,7 +128,7 @@ const SignInScreen = function SignInScreen({ navigation }) {
       <Loader style={!loading ? stylesMain.hidden : {}} />
 
       <View style={stylesMain.banner}>
-        <Text style={[stylesMain.text, styles.titleText]}>Welcome!</Text>
+        <Text style={[styles.text, styles.titleText]}>Welcome!</Text>
         <LogoNameBelowImage width={160} height={160} />
       </View>
 
@@ -179,11 +180,11 @@ const SignInScreen = function SignInScreen({ navigation }) {
             <Checkbox
               value={staySignedIn}
               style={stylesMain.checkbox}
-              color={staySignedIn ? '#c98fe9' : undefined}
+              color={staySignedIn ? config.secondaryColor : undefined}
               onValueChange={setStaySignedIn}
             />
 
-            <Text style={stylesMain.text}>Remember me</Text>
+            <Text style={styles.text}>Remember me</Text>
           </TouchableOpacity>
 
           <TouchableOpacity>
@@ -197,7 +198,7 @@ const SignInScreen = function SignInScreen({ navigation }) {
         />
 
         <View style={stylesMain.flex}>
-          <Text style={stylesMain.text}>Not registered yet? </Text>
+          <Text style={styles.text}>Not registered yet? </Text>
           <TouchableOpacity
             onPress={() => {
               resetCheckLogin();
