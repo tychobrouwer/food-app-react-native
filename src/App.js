@@ -11,7 +11,7 @@ import SignInScreen from './screens/sign-in';
 import SignUpScreen from './screens/sign-up';
 import HomeScreen from './screens/home';
 // import RecipesScreen from './screens/recipes';
-// import SettingsScreen from './screens/settings';
+import SettingsScreen from './screens/settings';
 // import GroceryListScreen from './screens/grocery-list';
 // import AddProductScreen from './screens/add-product';
 
@@ -34,7 +34,7 @@ export default function App() {
         <Stack.Navigator
           // change 'initialRouteName' to change the starting screen
           // for final app this should be 'Splash'
-          initialRouteName="Splash"
+          initialRouteName="Home"
           screenOptions={{
             headerShown: false,
             animation: 'none',
@@ -55,8 +55,8 @@ export default function App() {
           <Stack.Screen
             name="Home"
             component={HomeScreen}
-          />
-          {/* <Stack.Screen
+          /*/>
+          <Stack.Screen
             name="GroceryList"
             component={GroceryListScreen}
           />
@@ -66,12 +66,12 @@ export default function App() {
           />
           <Stack.Screen
             name="AddProduct"
-            component={AddProductScreen}
+            component={AddProductScreen}*/
           />
           <Stack.Screen
             name="Settings"
             component={SettingsScreen}
-          /> */}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </GlobalState>
