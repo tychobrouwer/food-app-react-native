@@ -16,6 +16,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
+  inputView: {
+    // flexGrow: 1,
+    width: 'auto',
+    justifyContent: 'center',
+  },
+
   textInput: {
     padding: 10,
     fontSize: 18,

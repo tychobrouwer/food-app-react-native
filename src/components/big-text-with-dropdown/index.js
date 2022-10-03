@@ -17,12 +17,15 @@ const BigTextWithDropdown = function BigTextWithDropdown(
     secureTextEntry,
     onChangeText,
     onEndEditing,
+    options,
+    defaultValue,
+    onChangeOption,
   },
 ) {
   return (
     <View style={styles.container}>
       <View style={{ width: '90%', flexDirection: 'row' }}>
-        <View style={{ flexGrow: 1 }}>
+        <View style={styles.inputView}>
           <TextInput
             style={styles.textInput}
             value={value}
@@ -38,17 +41,12 @@ const BigTextWithDropdown = function BigTextWithDropdown(
         </View>
         <ModalDropdown
           style={styles.dropdownStyle}
-          defaultValue="units"
-          textStyle={[styles.dropdownText, {
-            paddingLeft: 5, paddingRight: 5, paddingBottom: 12, paddingTop: 12,
-          }]}
+          defaultValue={defaultValue}
+          onSelect={onChangeOption}
+          textStyle={[styles.dropdownText, { padding: 12 }]}
           dropdownTextStyle={styles.dropdownText}
           dropdownStyle={styles.dropdown}
-          options={[
-            'units',
-            'grams',
-            'milliliters',
-          ]}
+          options={options}
         />
       </View>
     </View>
@@ -63,6 +61,9 @@ BigTextWithDropdown.propTypes = {
   secureTextEntry: PropTypes.bool,
   onChangeText: PropTypes.func.isRequired,
   onEndEditing: PropTypes.func,
+  defaultValue: PropTypes.string.isRequired,
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onChangeOption: PropTypes.func.isRequired,
 };
 
 BigTextWithDropdown.defaultProps = {

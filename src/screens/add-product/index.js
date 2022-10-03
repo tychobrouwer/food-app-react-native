@@ -21,11 +21,18 @@ import stylesMain from '../../styles';
 
 // return the home screen component
 const AddProductScreen = function AddProductScreen({ navigation }) {
+  const quantityTypes = [
+    'units',
+    'grams',
+    'milliliters',
+  ];
+
   const [hasPermission, setHasPermission] = useState(null);
   const [scanner, setScanner] = useState(false);
 
   const [ingredient, setIngredient] = useState('');
   const [quantity, setQuantity] = useState('');
+  const [quantityType, setQuantityType] = useState('units');
 
   const handlePermissions = async () => {
     const { status } = await BarCodeScanner.requestPermissionsAsync();
@@ -79,6 +86,11 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
           onChangeText={(quantityValue) => {
             setQuantity(quantityValue);
           }}
+          onChangeOption={(quantityIndex) => {
+            setQuantityType(quantityTypes[quantityIndex]);
+          }}
+          defaultValue={quantityTypes[0]}
+          options={quantityTypes}
         />
       </View>
       <BottomNavigator navigation={navigation} />
