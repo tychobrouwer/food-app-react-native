@@ -49,6 +49,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 25,
   },
+
+  inputStyle: {
+    marginBottom: '8%',
+  },
+
+  addButton: {
+    alignSelf: 'center',
+  },
 });
 
 export default styles;

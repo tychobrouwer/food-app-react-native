@@ -10,10 +10,12 @@ import CameraImage from '../../../assets/camera-image';
 
 // import components and utils
 import ScreenDefault from '../../components/screen-wrapper';
+import Loader from '../../components/loader';
 import TopNavigator from '../../components/top-navigator';
 import BottomNavigator from '../../components/bottom-navigator';
 import BigTextInput from '../../components/big-text-input';
 import BigTextWithDropdown from '../../components/big-text-with-dropdown';
+import BigBtn from '../../components/big-btn';
 
 // import styles
 import styles from './styles';
@@ -21,19 +23,26 @@ import stylesMain from '../../styles';
 
 // return the home screen component
 const AddProductScreen = function AddProductScreen({ navigation }) {
+  // available units to choose from
   const quantityTypes = [
     'units',
     'grams',
     'milliliters',
   ];
 
+  // bar code scanner variables
   const [hasPermission, setHasPermission] = useState(null);
   const [scanner, setScanner] = useState(false);
 
+  // variables to store the inputs
   const [ingredient, setIngredient] = useState('');
   const [quantity, setQuantity] = useState('');
   const [quantityType, setQuantityType] = useState('units');
 
+  // function variable boolean for loading
+  const [loading, setLoading] = useState(false);
+
+  // function for handling camera permissions
   const handlePermissions = async () => {
     const { status } = await BarCodeScanner.requestPermissionsAsync();
 
@@ -46,6 +55,7 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
     }
   };
 
+  // function handling bar code scanned
   const handleBarCodeScanned = ({ type, data }) => {
     // if (type is ean 13, ean 8) {
     setScanner(false);
@@ -58,8 +68,20 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
     // }
   };
 
+  // function handling adding product
+  const handleAddProduct = () => {
+    setLoading(true);
+
+    // send product to database to add it to the household
+
+    console.log(`product ${ingredient}, ${quantity} ${quantityType}`);
+  };
+
+  // return the add product screen component
   return (
     <ScreenDefault>
+      <Loader style={!loading ? stylesMain.hidden : {}} />
+
       <TopNavigator navigation={navigation} />
       <View style={stylesMain.content}>
         <TouchableOpacity
@@ -73,7 +95,7 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
           <CameraImage width="70%" height="70%" />
         </TouchableOpacity>
         <BigTextInput
-          style={{ marginBottom: '5%' }}
+          style={styles.inputStyle}
           placeholder="Ingredient"
           value={ingredient}
           onChangeText={(ingredientValue) => {
@@ -81,6 +103,8 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
           }}
         />
         <BigTextWithDropdown
+          style={styles.inputStyle}
+          keyboardType="numeric"
           placeholder="Quantity"
           value={quantity}
           onChangeText={(quantityValue) => {
@@ -91,6 +115,11 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
           }}
           defaultValue={quantityTypes[0]}
           options={quantityTypes}
+        />
+        <BigBtn
+          style={styles.addButton}
+          title="ADD PRODUCT"
+          onPress={() => handleAddProduct()}
         />
       </View>
       <BottomNavigator navigation={navigation} />

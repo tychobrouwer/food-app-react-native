@@ -7,9 +7,10 @@ import ModalDropdown from 'react-native-modal-dropdown';
 import styles from './styles';
 import config from '../../styles/config';
 
-// return the big text input component
+// return the big text input with dropdown component
 const BigTextWithDropdown = function BigTextWithDropdown(
   {
+    style,
     value,
     placeholder,
     autoComplete,
@@ -23,7 +24,7 @@ const BigTextWithDropdown = function BigTextWithDropdown(
   },
 ) {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <View style={{ width: '90%', flexDirection: 'row' }}>
         <View style={styles.inputView}>
           <TextInput
@@ -43,7 +44,7 @@ const BigTextWithDropdown = function BigTextWithDropdown(
           style={styles.dropdownStyle}
           defaultValue={defaultValue}
           onSelect={onChangeOption}
-          textStyle={[styles.dropdownText, { padding: 12 }]}
+          textStyle={[styles.dropdownText, styles.dropdownBtn]}
           dropdownTextStyle={styles.dropdownText}
           dropdownStyle={styles.dropdown}
           options={options}
@@ -53,7 +54,16 @@ const BigTextWithDropdown = function BigTextWithDropdown(
   );
 };
 
+const styleProp = PropTypes.objectOf(PropTypes.oneOfType([
+  PropTypes.string,
+  PropTypes.number,
+]));
+
 BigTextWithDropdown.propTypes = {
+  style: PropTypes.oneOfType([
+    styleProp,
+    PropTypes.arrayOf(styleProp),
+  ]),
   value: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
   autoComplete: PropTypes.string,
@@ -67,6 +77,7 @@ BigTextWithDropdown.propTypes = {
 };
 
 BigTextWithDropdown.defaultProps = {
+  style: {},
   autoComplete: undefined,
   secureTextEntry: false,
   keyboardType: 'default',

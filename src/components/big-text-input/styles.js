@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderStyle: 'solid',
     borderRadius: 5,
-    width: '100%',
     height: 45,
     marginBottom: 5,
     alignItems: 'center',
@@ -18,10 +17,8 @@ const styles = StyleSheet.create({
 
   TextInput: {
     width: '90%',
-    flex: 1,
-    padding: 10,
-    marginLeft: 'auto',
-    marginRight: 'auto',
+    paddingHorizontal: 10,
+    paddingVertical: 12,
     fontSize: 18,
     fontWeight: 'bold',
     color: config.primaryTextColor,

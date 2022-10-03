@@ -8,7 +8,8 @@ const styles = StyleSheet.create({
   bottomNav: {
     width: '103%',
     backgroundColor: config.tertiaryColor,
-    paddingBottom: 20,
+    paddingBottom: 40,
+    marginBottom: -20,
     paddingTop: 10,
     borderRadius: 30,
     alignItems: 'center',
