@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  View, TouchableOpacity, TouchableWithoutFeedback, Text,
+  View, TouchableOpacity, TouchableWithoutFeedback, Text, Keyboard,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { BarCodeScanner } from 'expo-barcode-scanner';
@@ -13,6 +13,7 @@ import ScreenDefault from '../../components/screen-wrapper';
 import TopNavigator from '../../components/top-navigator';
 import BottomNavigator from '../../components/bottom-navigator';
 import BigTextInput from '../../components/big-text-input';
+import BigTextWithDropdown from '../../components/big-text-with-dropdown';
 
 // import styles
 import styles from './styles';
@@ -24,6 +25,7 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
   const [scanner, setScanner] = useState(false);
 
   const [ingredient, setIngredient] = useState('');
+  const [quantity, setQuantity] = useState('');
 
   const handlePermissions = async () => {
     const { status } = await BarCodeScanner.requestPermissionsAsync();
@@ -33,7 +35,7 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
     if (status !== 'granted') {
       setTimeout(() => {
         setScanner(false);
-      }, 1000);
+      }, 1500);
     }
   };
 
@@ -58,15 +60,24 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
           onPress={() => {
             handlePermissions();
             setScanner(true);
+            Keyboard.dismiss();
           }}
         >
           <CameraImage width="70%" height="70%" />
         </TouchableOpacity>
         <BigTextInput
+          style={{ marginBottom: '5%' }}
           placeholder="Ingredient"
           value={ingredient}
           onChangeText={(ingredientValue) => {
             setIngredient(ingredientValue);
+          }}
+        />
+        <BigTextWithDropdown
+          placeholder="Quantity"
+          value={quantity}
+          onChangeText={(quantityValue) => {
+            setQuantity(quantityValue);
           }}
         />
       </View>
@@ -77,6 +88,12 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
             hasPermission === true && (
               <BarCodeScanner
                 onBarCodeScanned={scanner ? handleBarCodeScanned : undefined}
+                barCodeTypes={[
+                  BarCodeScanner.Constants.BarCodeType.ean13,
+                  BarCodeScanner.Constants.BarCodeType.ean8,
+                  BarCodeScanner.Constants.BarCodeType.upc_a,
+                  BarCodeScanner.Constants.BarCodeType.upc_e,
+                ]}
                 style={styles.scanner}
               />
             )

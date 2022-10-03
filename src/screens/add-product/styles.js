@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   },
 
   scanner: {
-    width: '80%',
+    width: '85%',
     aspectRatio: 1,
     borderRadius: 5,
   },
