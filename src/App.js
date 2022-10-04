@@ -34,7 +34,7 @@ export default function App() {
         <Stack.Navigator
           // change 'initialRouteName' to change the starting screen
           // for final app this should be 'Splash'
-          initialRouteName="AddProduct"
+          initialRouteName="Splash"
           screenOptions={{
             headerShown: false,
             animation: 'none',

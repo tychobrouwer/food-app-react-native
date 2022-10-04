@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     height: 45,
     marginBottom: 5,
     alignItems: 'center',
+    width: '100%',
   },
 
   TextInput: {
