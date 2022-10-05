@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  View,
+  Text, View, TouchableOpacity,
 } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -19,7 +19,36 @@ const SettingsScreen = function SettingsScreen({ navigation }) {
     <ScreenDefault>
       <TopNavigator navigation={navigation} />
       <View style={stylesMain.content}>
-        {/* INSERT PAGE CONTENT HERE */}
+        <TouchableOpacity style={styles.contentHeader}>
+          <Text style={styles.contentHeaderText}>
+            SETTINGS
+          </Text>
+        </TouchableOpacity>
+        <View style={styles.contentItem}>
+          <View style={styles.contentItemText}>
+            <Text style={stylesMain.text}>USER PROFILE IMAGE HERE</Text>
+          </View>
+        </View>
+        <View style={styles.contentItem}>
+          <View style={styles.contentItemText}>
+            <Text style={stylesMain.text}>ACCOUNT SETTINGS</Text>
+          </View>
+        </View>
+        <View style={styles.contentItem}>
+          <View style={styles.contentItemText}>
+            <Text style={stylesMain.text}>NOTIFICATION SETTINGS</Text>
+          </View>
+        </View>
+        <View style={styles.contentItem}>
+          <View style={styles.contentItemText}>
+            <Text style={stylesMain.text}>APP SETTINGS</Text>
+          </View>
+        </View>
+        <View style={styles.contentItem}>
+          <View style={styles.contentItemText}>
+            <Text style={stylesMain.text}>PRIVACY POLICY</Text>
+          </View>
+        </View>
       </View>
       <BottomNavigator navigation={navigation} />
     </ScreenDefault>
