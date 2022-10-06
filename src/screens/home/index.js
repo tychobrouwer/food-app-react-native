@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import ScreenDefault from '../../components/screen-wrapper';
 import TopNavigator from '../../components/top-navigator';
 import BottomNavigator from '../../components/bottom-navigator';
+import FoodListItem from '../../components/food-list-item';
 
 // import styles
 import styles from './styles';
@@ -24,36 +25,10 @@ const HomeScreen = function HomeScreen({ navigation }) {
             CALENDAR
           </Text>
         </TouchableOpacity>
-        <View style={styles.contentItem}>
-          <View style={styles.contentItemText}>
-            <Text style={stylesMain.text}>FOOD: chicken</Text>
-            <Text style={stylesMain.text}>EXPIRATION DATE: 10/10/2022</Text>
-          </View>
-        </View>
-        <View style={styles.contentItem}>
-          <View style={styles.contentItemText}>
-            <Text style={stylesMain.text}>FOOD: chicken</Text>
-            <Text style={stylesMain.text}>EXPIRATION DATE: 10/10/2022</Text>
-          </View>
-        </View>
-        <View style={styles.contentItem}>
-          <View style={styles.contentItemText}>
-            <Text style={stylesMain.text}>FOOD: chicken</Text>
-            <Text style={stylesMain.text}>EXPIRATION DATE: 10/10/2022</Text>
-          </View>
-        </View>
-        <View style={styles.contentItem}>
-          <View style={styles.contentItemText}>
-            <Text style={stylesMain.text}>FOOD: chicken</Text>
-            <Text style={stylesMain.text}>EXPIRATION DATE: 10/10/2022</Text>
-          </View>
-        </View>
-        <View style={styles.contentItem}>
-          <View style={styles.contentItemText}>
-            <Text style={stylesMain.text}>FOOD: chicken</Text>
-            <Text style={stylesMain.text}>EXPIRATION DATE: 10/10/2022</Text>
-          </View>
-        </View>
+        <FoodListItem food="flower" date={new Date(2022, 10, 17)} quantity={100} quantityType="grams" />
+        <FoodListItem food="pears" date={new Date(2022, 10, 5)} quantity={4} quantityType="" />
+        <FoodListItem food="orange juice" date={new Date(2022, 10, 1)} quantity={400} quantityType="milliliter" />
+        <FoodListItem food="strawberries" date={new Date(2022, 9, 17)} quantity={2} quantityType="" />
       </View>
       <BottomNavigator navigation={navigation} />
     </ScreenDefault>

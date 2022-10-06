@@ -19,10 +19,10 @@ const LoadingScreen = function LoadingScreen({ navigation }) {
         const email = await secureStoreGet('email');
         const passwordHash = await secureStoreGet('token');
 
-        // getting client salt from server
+        // // getting client salt from server
         const salt = await getClientSalt(email);
 
-        // authorize automatic sign in with the server
+        // // authorize automatic sign in with the server
         const authResult = await authSignIn(email, passwordHash, salt);
 
         if (authResult.result) {
@@ -31,9 +31,11 @@ const LoadingScreen = function LoadingScreen({ navigation }) {
 
           // navigate to home screen
           navigation.replace('Home');
+        } else {
+          navigation.replace('SignIn');
         }
-      } finally {
-        // if no valid credientials stored go to sign in
+      } catch {
+        // if no valid credentials stored go to sign in
         navigation.replace('SignIn');
       }
     };

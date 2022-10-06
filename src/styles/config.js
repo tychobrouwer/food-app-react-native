@@ -4,7 +4,7 @@ const config = {
   secondaryColor: '#B336F7',
   tertiaryColor: '#FFF',
   primaryTextColor: '#222',
-  secondaryTextColor: '#777',
+  secondaryTextColor: '#999',
   errorColor: '#F00',
 };
 
