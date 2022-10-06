@@ -61,7 +61,7 @@ const BigTextWithDropdown = function BigTextWithDropdown(
           <ChevronImage
             width={25}
             height={25}
-            style={(status) ? { transform: [{ rotate: '180deg' }] } : {}}
+            style={(!status) ? { transform: [{ rotate: '180deg' }] } : {}}
           />
         </View>
       </View>
