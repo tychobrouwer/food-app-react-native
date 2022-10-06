@@ -5,9 +5,10 @@ import {
 } from 'react-native';
 import DatePicker, { getFormatedDate } from 'react-native-modern-datepicker';
 
+import config from '../../config';
+
 // import styles
 import styles from './styles';
-import config from '../../styles/config';
 import formatDate from '../../utils/format-date';
 
 // return the big text input with dropdown component
@@ -67,15 +68,10 @@ const DateSelector = function DateSelector(
   );
 };
 
-const styleProp = PropTypes.objectOf(PropTypes.oneOfType([
-  PropTypes.string,
-  PropTypes.number,
-]));
-
 DateSelector.propTypes = {
   style: PropTypes.oneOfType([
-    styleProp,
-    PropTypes.arrayOf(styleProp),
+    config.styleProp,
+    PropTypes.arrayOf(config.styleProp),
   ]),
   date: PropTypes.instanceOf(Date).isRequired,
   onDateChange: PropTypes.func.isRequired,

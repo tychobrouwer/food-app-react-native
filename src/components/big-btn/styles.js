@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 // import the style config
-import config from '../../styles/config';
+import config from '../../config';
 
 // styles for the big button component
 const styles = StyleSheet.create({

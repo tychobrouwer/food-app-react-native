@@ -2,6 +2,8 @@ import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 
+import config from '../../config';
+
 // import styles
 import styles from './styles';
 
@@ -17,15 +19,10 @@ const BigBtn = function BigBtn({ onPress, title, style }) {
   );
 };
 
-const styleProp = PropTypes.objectOf(PropTypes.oneOfType([
-  PropTypes.string,
-  PropTypes.number,
-]));
-
 BigBtn.propTypes = {
   style: PropTypes.oneOfType([
-    styleProp,
-    PropTypes.arrayOf(styleProp),
+    config.styleProp,
+    PropTypes.arrayOf(config.styleProp),
   ]),
   onPress: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,

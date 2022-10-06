@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 // import styles
 import styles from './styles';
-import config from '../../styles/config';
+import config from '../../config';
 
 // return the loader component
 const Loader = function Loader({ style }) {
@@ -18,15 +18,10 @@ const Loader = function Loader({ style }) {
   );
 };
 
-const styleProp = PropTypes.objectOf(PropTypes.oneOfType([
-  PropTypes.string,
-  PropTypes.number,
-]));
-
 Loader.propTypes = {
   style: PropTypes.oneOfType([
-    styleProp,
-    PropTypes.arrayOf(styleProp),
+    config.styleProp,
+    PropTypes.arrayOf(config.styleProp),
   ]),
 };
 

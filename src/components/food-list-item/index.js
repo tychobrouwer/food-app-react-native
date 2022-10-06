@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 
+import config from '../../config';
 import capitalize from '../../utils/capitalize';
 
 // import styles
@@ -34,15 +35,10 @@ const FoodListItem = function FoodListItem({
   );
 };
 
-const styleProp = PropTypes.objectOf(PropTypes.oneOfType([
-  PropTypes.string,
-  PropTypes.number,
-]));
-
 FoodListItem.propTypes = {
   style: PropTypes.oneOfType([
-    styleProp,
-    PropTypes.arrayOf(styleProp),
+    config.styleProp,
+    PropTypes.arrayOf(config.styleProp),
   ]),
   food: PropTypes.string.isRequired,
   quantity: PropTypes.number.isRequired,

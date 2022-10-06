@@ -2,7 +2,7 @@ import * as React from 'react';
 import Svg, { Path } from 'react-native-svg';
 import PropTypes from 'prop-types';
 
-import config from '../src/styles/config';
+import config from '../src/config';
 
 const CameraImage = function CameraImage({ width, height, style }) {
   return (
@@ -12,15 +12,10 @@ const CameraImage = function CameraImage({ width, height, style }) {
   );
 };
 
-const styleProp = PropTypes.objectOf(PropTypes.oneOfType([
-  PropTypes.string,
-  PropTypes.number,
-]));
-
 CameraImage.propTypes = {
   style: PropTypes.oneOfType([
-    styleProp,
-    PropTypes.arrayOf(styleProp),
+    config.styleProp,
+    PropTypes.arrayOf(config.styleProp),
   ]),
   width: PropTypes.oneOfType([
     PropTypes.number,

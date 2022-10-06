@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { View, TextInput } from 'react-native';
 import ModalDropdown from 'react-native-modal-dropdown';
 
+import config from '../../config';
 import ChevronImage from '../../../assets/chevron-image';
 
 // import styles
 import styles from './styles';
-import config from '../../styles/config';
 
 // return the big text input with dropdown component
 const BigTextWithDropdown = function BigTextWithDropdown(
@@ -68,15 +68,10 @@ const BigTextWithDropdown = function BigTextWithDropdown(
   );
 };
 
-const styleProp = PropTypes.objectOf(PropTypes.oneOfType([
-  PropTypes.string,
-  PropTypes.number,
-]));
-
 BigTextWithDropdown.propTypes = {
   style: PropTypes.oneOfType([
-    styleProp,
-    PropTypes.arrayOf(styleProp),
+    config.styleProp,
+    PropTypes.arrayOf(config.styleProp),
   ]),
   value: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
