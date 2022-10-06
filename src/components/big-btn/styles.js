@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-// import the style config
+// import the config
 import config from '../../config';
 
 // styles for the big button component

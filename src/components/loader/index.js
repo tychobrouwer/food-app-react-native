@@ -2,9 +2,10 @@ import React from 'react';
 import { View, ActivityIndicator } from 'react-native';
 import PropTypes from 'prop-types';
 
+import config from '../../config';
+
 // import styles
 import styles from './styles';
-import config from '../../config';
 
 // return the loader component
 const Loader = function Loader({ style }) {
