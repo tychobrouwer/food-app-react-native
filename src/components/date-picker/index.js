@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
-  View, TouchableOpacity, Text, TouchableWithoutFeedback, Keyboard,
+  View, TouchableOpacity, Text, Keyboard,
 } from 'react-native';
 import DatePicker, { getFormatedDate } from 'react-native-modern-datepicker';
 
@@ -41,27 +41,25 @@ const DateSelector = function DateSelector(
       {
         visibility
         && (
-          <TouchableWithoutFeedback onPress={console.log('tets')}>
-            <View style={styles.datePickerContainer}>
-              <DatePicker
-                style={styles.datePicker}
-                mode="calendar"
-                minimumDate={getFormatedDate(new Date(), 'YYYY/MM/DD')}
-                selected={getFormatedDate(date, 'YYYY/MM/DD')}
-                onDateChange={(selectedString) => {
-                  setVisibility(false);
-                  onDateChange(selectedString);
-                }}
-                options={{
-                  mainColor: config.secondaryColor,
-                  textDefaultColor: config.primaryTextColor,
-                  textSecondaryColor: config.secondaryTextColor,
-                  selectedTextColor: config.tertiaryColor,
-                  textHeaderColor: config.primaryTextColor,
-                }}
-              />
-            </View>
-          </TouchableWithoutFeedback>
+          <View style={styles.datePickerContainer}>
+            <DatePicker
+              style={styles.datePicker}
+              mode="calendar"
+              minimumDate={getFormatedDate(new Date(), 'YYYY/MM/DD')}
+              selected={getFormatedDate(date, 'YYYY/MM/DD')}
+              onDateChange={(selectedString) => {
+                setVisibility(false);
+                onDateChange(selectedString);
+              }}
+              options={{
+                mainColor: config.secondaryColor,
+                textDefaultColor: config.primaryTextColor,
+                textSecondaryColor: config.secondaryTextColor,
+                selectedTextColor: config.tertiaryColor,
+                textHeaderColor: config.primaryTextColor,
+              }}
+            />
+          </View>
         )
       }
     </View>

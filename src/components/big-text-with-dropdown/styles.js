@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
   },
 
   dropdownStyle: {
-    width: 90,
     fontSize: 18,
     fontWeight: 'bold',
     color: config.primaryTextColor,

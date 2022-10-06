@@ -4,6 +4,7 @@ import { View, TextInput } from 'react-native';
 import ModalDropdown from 'react-native-modal-dropdown';
 
 import config from '../../config';
+
 import ChevronImage from '../../../assets/chevron-image';
 
 // import styles
@@ -60,7 +61,7 @@ const BigTextWithDropdown = function BigTextWithDropdown(
           <ChevronImage
             width={25}
             height={25}
-            style={!status && { transform: [{ rotate: '180deg' }] }}
+            style={(status) ? { transform: [{ rotate: '180deg' }] } : {}}
           />
         </View>
       </View>

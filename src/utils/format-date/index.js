@@ -2,7 +2,8 @@
 const formatDate = (input) => new Intl.DateTimeFormat('en-GB', {
   year: 'numeric',
   month: 'short',
-  day: '2-digit',
+  day: 'numeric',
+  weekday: 'long',
 }).format(input);
 
 export default formatDate;
