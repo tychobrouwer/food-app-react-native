@@ -5,7 +5,7 @@ import config from '../../styles/config';
 
 // styles for the bif text input component
 const styles = StyleSheet.create({
-  container: {
+  inputView: {
     borderColor: config.tertiaryColor,
     borderWidth: 2,
     borderStyle: 'solid',
@@ -13,49 +13,36 @@ const styles = StyleSheet.create({
     height: 45,
     marginBottom: 5,
     alignItems: 'center',
+    width: '100%',
+    zIndex: 5,
   },
 
-  inputView: {
-    flexGrow: 1,
-  },
-
-  textInput: {
+  TextInputWrapper: {
+    width: '90%',
     paddingHorizontal: 10,
     paddingVertical: 12,
+  },
+
+  TextInput: {
     fontSize: 18,
     fontWeight: 'bold',
     color: config.primaryTextColor,
   },
 
-  dropdownBtn: {
-    paddingLeft: 10,
-    paddingVertical: 12,
-    width: 90,
+  datePickerContainer: {
+    zIndex: 10,
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
-  dropdownStyle: {
-    width: 90,
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: config.primaryTextColor,
-  },
-
-  dropdownChevron: {
-    paddingRight: 5,
-    paddingTop: 8,
-  },
-
-  dropdown: {
-    height: 'auto',
-    paddingLeft: 5,
-  },
-
-  dropdownText: {
-    textAlign: 'right',
-    paddingRight: 10,
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: config.primaryTextColor,
+  datePicker: {
+    borderRadius: 15,
+    width: '102%',
   },
 });
 

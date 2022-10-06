@@ -16,6 +16,7 @@ import BottomNavigator from '../../components/bottom-navigator';
 import BigTextInput from '../../components/big-text-input';
 import BigTextWithDropdown from '../../components/big-text-with-dropdown';
 import BigBtn from '../../components/big-btn';
+import DateSelector from '../../components/date-picker';
 
 // import styles
 import styles from './styles';
@@ -38,6 +39,7 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
   const [ingredient, setIngredient] = useState('');
   const [quantity, setQuantity] = useState('');
   const [quantityType, setQuantityType] = useState('units');
+  const [date, setDate] = useState(new Date());
 
   // function variable boolean for loading
   const [loading, setLoading] = useState(false);
@@ -115,6 +117,11 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
           }}
           defaultValue={quantityTypes[0]}
           options={quantityTypes}
+        />
+        <DateSelector
+          style={styles.inputStyle}
+          date={date}
+          onDateChange={(selectedDate) => setDate(new Date(selectedDate))}
         />
         <BigBtn
           style={styles.addButton}

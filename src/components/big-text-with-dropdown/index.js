@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { View, TextInput } from 'react-native';
 import ModalDropdown from 'react-native-modal-dropdown';
+
+import ChevronImage from '../../../assets/chevron-image';
 
 // import styles
 import styles from './styles';
@@ -23,6 +25,8 @@ const BigTextWithDropdown = function BigTextWithDropdown(
     onChangeOption,
   },
 ) {
+  const [status, setStatus] = useState(false);
+
   return (
     <View style={[styles.container, style]}>
       <View style={{ width: '90%', flexDirection: 'row' }}>
@@ -48,7 +52,17 @@ const BigTextWithDropdown = function BigTextWithDropdown(
           dropdownTextStyle={styles.dropdownText}
           dropdownStyle={styles.dropdown}
           options={options}
+          animated={false}
+          onDropdownWillShow={() => setStatus(true)}
+          onDropdownWillHide={() => setStatus(false)}
         />
+        <View style={styles.dropdownChevron}>
+          <ChevronImage
+            width={25}
+            height={25}
+            style={!status && { transform: [{ rotate: '180deg' }] }}
+          />
+        </View>
       </View>
     </View>
   );
