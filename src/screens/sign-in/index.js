@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 
 // import components and utils
 import config from '../../config';
-import { GlobalDispatchContext, SET_CREDENTIALS } from '../../components/global-state';
+import { GlobalDispatchContext, SET_CREDENTIALS, SET_GROUP } from '../../components/global-state';
 import BigBtn from '../../components/big-btn';
 import BigTextInput from '../../components/big-text-input';
 import ScreenDefault from '../../components/screen-wrapper';
@@ -44,7 +44,7 @@ const SignInScreen = function SignInScreen({ navigation }) {
   const [bothRed, setBothRed] = useState(false);
 
   // function to reset the error texts
-  const resetCheckLogin = () => {
+  const resetLoginCheck = () => {
     setPasswordText('');
     setEmailText('');
     setBothRed(false);
@@ -89,8 +89,11 @@ const SignInScreen = function SignInScreen({ navigation }) {
     const authResult = await authSignIn(email, passwordHash, salt);
 
     if (authResult.result) {
+      const group = 1;
+
       // set local variables to the credentials
       dispatch({ type: SET_CREDENTIALS, payload: { email, token: passwordHash } });
+      dispatch({ type: SET_GROUP, payload: { group } });
 
       // if stay signed in store credentials in secure store
       if (staySignedIn) {
@@ -142,7 +145,7 @@ const SignInScreen = function SignInScreen({ navigation }) {
           value={email}
           onChangeText={(emailValue) => {
             setEmail(emailValue);
-            resetCheckLogin();
+            resetLoginCheck();
           }}
         />
 
@@ -159,7 +162,7 @@ const SignInScreen = function SignInScreen({ navigation }) {
           value={password}
           onChangeText={(passwordValue) => {
             setPassword(passwordValue);
-            resetCheckLogin();
+            resetLoginCheck();
           }}
           onEndEditing={(event) => {
             if (event.nativeEvent.text.length === 0) {
@@ -201,7 +204,7 @@ const SignInScreen = function SignInScreen({ navigation }) {
           <Text style={styles.text}>Not registered yet? </Text>
           <TouchableOpacity
             onPress={() => {
-              resetCheckLogin();
+              resetLoginCheck();
               navigation.push('SignUp');
             }}
           >

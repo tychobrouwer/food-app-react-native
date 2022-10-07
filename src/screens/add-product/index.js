@@ -21,6 +21,7 @@ import DateSelector from '../../components/date-picker';
 // import styles
 import styles from './styles';
 import stylesMain from '../../styles';
+import formatDate from '../../utils/format-date';
 
 // return the home screen component
 const AddProductScreen = function AddProductScreen({ navigation }) {
@@ -76,7 +77,7 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
 
     // send product to database to add it to the household
 
-    console.log(`product ${ingredient}, ${quantity} ${quantityType}`);
+    console.log(`product ${ingredient}, ${quantity} ${quantityType}, ${formatDate(date)}`);
   };
 
   // return the add product screen component
