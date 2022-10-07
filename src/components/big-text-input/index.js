@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View, TextInput } from 'react-native';
 
+import config from '../../config';
+
 // import styles
 import styles from './styles';
-import config from '../../styles/config';
 
 // return the big text input component
 const BigTextInput = function BigTextInput(
@@ -37,15 +38,10 @@ const BigTextInput = function BigTextInput(
   );
 };
 
-const styleProp = PropTypes.objectOf(PropTypes.oneOfType([
-  PropTypes.string,
-  PropTypes.number,
-]));
-
 BigTextInput.propTypes = {
   style: PropTypes.oneOfType([
-    styleProp,
-    PropTypes.arrayOf(styleProp),
+    config.styleProp,
+    PropTypes.arrayOf(config.styleProp),
   ]),
   value: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,

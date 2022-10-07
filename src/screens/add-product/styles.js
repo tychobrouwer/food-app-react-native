@@ -1,8 +1,7 @@
 import { StyleSheet } from 'react-native';
-import config from '../../styles/config';
 
-// import the style config
-// import config from '../../styles/config';
+// import the config
+import config from '../../config';
 
 // styles for the add product screen
 const styles = StyleSheet.create({
@@ -18,7 +17,7 @@ const styles = StyleSheet.create({
   },
 
   scanner: {
-    width: '80%',
+    width: '85%',
     aspectRatio: 1,
     borderRadius: 5,
   },
@@ -48,6 +47,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 25,
+  },
+
+  inputStyle: {
+    marginBottom: '8%',
+  },
+
+  addButton: {
+    alignSelf: 'center',
   },
 });
 

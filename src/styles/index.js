@@ -1,7 +1,7 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
 // import styles
-import config from './config';
+import config from '../config';
 
 // screen height of the machine running the app
 const ScreenHeight = Dimensions.get('window').height;

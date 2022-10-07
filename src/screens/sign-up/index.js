@@ -3,6 +3,7 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 
 // import components and utils
+import config from '../../config';
 import BigBtn from '../../components/big-btn';
 import BigTextInput from '../../components/big-text-input';
 import ScreenDefault from '../../components/screen-wrapper';
@@ -12,7 +13,6 @@ import { authSignUp, newClientSalt } from '../../api/authentication';
 // import styles
 import stylesMain from '../../styles';
 import styles from './styles';
-import config from '../../styles/config';
 
 // import bcrypt package
 const bcrypt = require('bcryptjs');

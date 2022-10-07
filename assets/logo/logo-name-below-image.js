@@ -11,7 +11,7 @@ import Svg, {
 } from 'react-native-svg';
 import PropTypes from 'prop-types';
 
-import config from '../../src/styles/config';
+import config from '../../src/config';
 
 const LogoNameBelowImage = function LogoNameBelowImage({ width, height, style }) {
   return (
@@ -195,15 +195,10 @@ const LogoNameBelowImage = function LogoNameBelowImage({ width, height, style })
   );
 };
 
-const styleProp = PropTypes.objectOf(PropTypes.oneOfType([
-  PropTypes.string,
-  PropTypes.number,
-]));
-
 LogoNameBelowImage.propTypes = {
   style: PropTypes.oneOfType([
-    styleProp,
-    PropTypes.arrayOf(styleProp),
+    config.styleProp,
+    PropTypes.arrayOf(config.styleProp),
   ]),
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,

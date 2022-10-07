@@ -1,14 +1,15 @@
 import { StyleSheet } from 'react-native';
 
-// import the style config
-import config from '../../styles/config';
+// import the config
+import config from '../../config';
 
 // styles for the bif text input component
 const styles = StyleSheet.create({
   bottomNav: {
     width: '103%',
     backgroundColor: config.tertiaryColor,
-    paddingBottom: 20,
+    paddingBottom: 40,
+    marginBottom: -20,
     paddingTop: 10,
     borderRadius: 30,
     alignItems: 'center',

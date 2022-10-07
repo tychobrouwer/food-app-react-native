@@ -53,7 +53,6 @@ export const authSignIn = async (email, passwordHash, salt) => {
   if (emailEmptyCheck && emailValidCheck) {
     try {
       // hashing empty string for checking empty password
-      // const emptyHash = bcrypt.hashSync('', salt);
       const emptyHash = await bcrypt.hash('', salt);
 
       // checking for empty password
