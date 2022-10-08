@@ -9,6 +9,7 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 import CameraImage from '../../../assets/camera-image';
 
 // import components and utils
+import { GlobalStateContext } from '../../components/global-state';
 import ScreenDefault from '../../components/screen-wrapper';
 import Loader from '../../components/loader';
 import TopNavigator from '../../components/top-navigator';
@@ -22,14 +23,18 @@ import DateSelector from '../../components/date-picker';
 import styles from './styles';
 import stylesMain from '../../styles';
 import formatDate from '../../utils/format-date';
+import { addToInventory, getUserGroups } from '../../api/inventory';
 
 // return the home screen component
 const AddProductScreen = function AddProductScreen({ navigation }) {
+  const { credentials, group } = React.useContext(GlobalStateContext);
+
   // available units to choose from
   const quantityTypes = [
     'units',
     'grams',
     'milliliters',
+    'liters',
   ];
 
   // bar code scanner variables
@@ -74,6 +79,21 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
   // function handling adding product
   const handleAddProduct = () => {
     setLoading(true);
+
+    const groups = getUserGroups(credentials.userID, credentials.passwordHash);
+
+    if (group && groups.includes(group)) {
+      addToInventory(
+        credentials.userID,
+        credentials.passwordHash,
+        group,
+        {
+          name: ingredient, date: date.getTime(), quantity, type: quantityType,
+        },
+      );
+    } else {
+      //
+    }
 
     // send product to database to add it to the household
 

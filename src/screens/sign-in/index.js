@@ -21,6 +21,7 @@ import LogoNameBelowImage from '../../../assets/logo/logo-name-below-image';
 // import styles
 import stylesMain from '../../styles';
 import styles from './styles';
+import { getUserGroups } from '../../api/inventory';
 
 // import bcrypt package
 const bcrypt = require('bcryptjs');
@@ -89,10 +90,17 @@ const SignInScreen = function SignInScreen({ navigation }) {
     const authResult = await authSignIn(email, passwordHash, salt);
 
     if (authResult.result) {
-      const group = 1;
+      const group = getUserGroups(authResult.userID, passwordHash);
+
+      console.log(authResult);
 
       // set local variables to the credentials
-      dispatch({ type: SET_CREDENTIALS, payload: { email, token: passwordHash } });
+      dispatch({
+        type: SET_CREDENTIALS,
+        payload: {
+          userID: authResult.data.userID, email, passwordHash,
+        },
+      });
       dispatch({ type: SET_GROUP, payload: { group } });
 
       // if stay signed in store credentials in secure store
