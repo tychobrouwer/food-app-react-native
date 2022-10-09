@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
-  View, TouchableOpacity, TouchableWithoutFeedback, Text, Keyboard,
+  View, TouchableOpacity, TouchableWithoutFeedback, Keyboard,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { BarCodeScanner } from 'expo-barcode-scanner';
@@ -18,12 +18,13 @@ import BigTextInput from '../../components/big-text-input';
 import BigTextWithDropdown from '../../components/big-text-with-dropdown';
 import BigBtn from '../../components/big-btn';
 import DateSelector from '../../components/date-picker';
+import MessageBox from '../../components/message-box';
+import formatDate from '../../utils/format-date';
+import { addToInventory, getUserGroups } from '../../api/inventory';
 
 // import styles
 import styles from './styles';
 import stylesMain from '../../styles';
-import formatDate from '../../utils/format-date';
-import { addToInventory, getUserGroups } from '../../api/inventory';
 
 // return the home screen component
 const AddProductScreen = function AddProductScreen({ navigation }) {
@@ -40,6 +41,7 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
   // bar code scanner variables
   const [hasPermission, setHasPermission] = useState(null);
   const [scanner, setScanner] = useState(false);
+  const messageBoxRef = useRef();
 
   // variables to store the inputs
   const [ingredient, setIngredient] = useState('');
@@ -50,6 +52,12 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
   // function variable boolean for loading
   const [loading, setLoading] = useState(false);
 
+  const clearFields = () => {
+    setIngredient('');
+    setQuantity('');
+    setDate(new Date());
+  };
+
   // function for handling camera permissions
   const handlePermissions = async () => {
     const { status } = await BarCodeScanner.requestPermissionsAsync();
@@ -57,15 +65,14 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
     setHasPermission(status === 'granted');
 
     if (status !== 'granted') {
-      setTimeout(() => {
-        setScanner(false);
-      }, 1500);
+      setScanner(false);
+
+      messageBoxRef.current.createMessage('error', 'Change permissions to access the camera');
     }
   };
 
   // function handling bar code scanned
   const handleBarCodeScanned = ({ type, data }) => {
-    // if (type is ean 13, ean 8) {
     setScanner(false);
 
     // send data of barcode to the server to see if code is already known
@@ -73,29 +80,49 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
     setIngredient(data);
 
     console.log(`barcode type: ${type}, with data ${data}`);
-    // }
   };
 
   // function handling adding product
-  const handleAddProduct = () => {
+  const handleAddProduct = async () => {
     setLoading(true);
 
-    const groups = getUserGroups(credentials.userID, credentials.passwordHash);
+    const groups = await getUserGroups(credentials.userID, credentials.passwordHash);
 
-    if (group && groups.includes(group)) {
-      addToInventory(
+    console.log('group: ' + group);
+
+    if (group) {
+      if (groups.includes(group)) {
+        const result = await addToInventory(
+          credentials.userID,
+          credentials.passwordHash,
+          group,
+          {
+            name: ingredient, date: date.getTime(), quantity, type: quantityType,
+          },
+        );
+        console.log(result);
+
+        messageBoxRef.current.createMessage('success', `${ingredient} successfully added`);
+        clearFields();
+      }
+    } else {
+      const result = await addToInventory(
         credentials.userID,
         credentials.passwordHash,
-        group,
         {
           name: ingredient, date: date.getTime(), quantity, type: quantityType,
         },
       );
-    } else {
-      //
+
+      console.log(result);
+
+      messageBoxRef.current.createMessage('success', `${ingredient} successfully added`);
+      clearFields();
     }
 
     // send product to database to add it to the household
+
+    setLoading(false);
 
     console.log(`product ${ingredient}, ${quantity} ${quantityType}, ${formatDate(date)}`);
   };
@@ -104,6 +131,7 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
   return (
     <ScreenDefault>
       <Loader style={!loading ? stylesMain.hidden : {}} />
+      <MessageBox ref={messageBoxRef} />
 
       <TopNavigator navigation={navigation} />
       <View style={stylesMain.content}>
@@ -147,7 +175,15 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
         <BigBtn
           style={styles.addButton}
           title="ADD PRODUCT"
-          onPress={() => handleAddProduct()}
+          onPress={() => {
+            Keyboard.dismiss();
+
+            if (ingredient !== '' && quantity !== '') {
+              handleAddProduct();
+            } else {
+              messageBoxRef.current.createMessage('message', 'Enter all product information');
+            }
+          }}
         />
       </View>
       <BottomNavigator navigation={navigation} />
@@ -165,14 +201,6 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
                 ]}
                 style={styles.scanner}
               />
-            )
-          }
-          {
-            hasPermission === false && (
-              <View style={styles.cameraTextContainer}>
-                <Text style={styles.cameraText}>Change permissions</Text>
-                <Text style={styles.cameraText}>to access the camera.</Text>
-              </View>
             )
           }
         </View>

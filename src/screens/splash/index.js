@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 
 // import components and utils
 import { secureStoreGet } from '../../utils/secure-store';
-import { GlobalDispatchContext, SET_CREDENTIALS } from '../../components/global-state';
+import { GlobalDispatchContext, SET_CREDENTIALS, SET_GROUP } from '../../components/global-state';
 import { authSignIn, getClientSalt } from '../../api/authentication';
 import Loader from '../../components/loader';
+import { getUserGroups } from '../../api/inventory';
 
 // loading screen function
 const LoadingScreen = function LoadingScreen({ navigation }) {
@@ -27,7 +28,16 @@ const LoadingScreen = function LoadingScreen({ navigation }) {
 
         if (authResult.result) {
           // set local variables with the credentials
-          dispatch({ type: SET_CREDENTIALS, payload: { email, passwordHash } });
+          const group = await getUserGroups(authResult.userID, passwordHash);
+
+          // set local variables to the credentials
+          dispatch({
+            type: SET_CREDENTIALS,
+            payload: {
+              userID: authResult.data.userID, email, passwordHash,
+            },
+          });
+          dispatch({ type: SET_GROUP, payload: { group } });
 
           // navigate to home screen
           navigation.replace('Home');

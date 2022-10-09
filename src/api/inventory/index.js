@@ -42,8 +42,36 @@ export const addToInventory = async (userID, passwordHash, groupID, itemData) =>
     // await the json response of the server
     const result = await response.json();
 
+    console.log(result);
+
     if (result.result) {
       return JSON.parse(result.newInventory);
+    }
+
+    return false;
+  } catch (error) {
+    return false;
+  }
+};
+
+export const getInventory = async (userID, passwordHash, groupID) => {
+  try {
+    // fetch request for adding an item to an inventory
+    const response = await fetch(constants.endpoint('get-inventory'), {
+      method: 'POST',
+      headers: constants.headers,
+      body: JSON.stringify({
+        userID,
+        password: passwordHash,
+        groupID,
+      }),
+    });
+
+    // await the json response of the server
+    const result = await response.json();
+
+    if (result.result) {
+      return JSON.parse(result.inventory);
     }
 
     return false;

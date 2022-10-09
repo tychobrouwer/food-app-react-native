@@ -8,6 +8,7 @@ const config = {
   primaryTextColor: '#222',
   secondaryTextColor: '#999',
   errorColor: '#F00',
+  successColor: '#0F0',
 
   styleProp: PropTypes.objectOf(PropTypes.oneOfType([
     PropTypes.string,

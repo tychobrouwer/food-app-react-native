@@ -92,8 +92,6 @@ const SignInScreen = function SignInScreen({ navigation }) {
     if (authResult.result) {
       const group = getUserGroups(authResult.userID, passwordHash);
 
-      console.log(authResult);
-
       // set local variables to the credentials
       dispatch({
         type: SET_CREDENTIALS,
