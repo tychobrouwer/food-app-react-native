@@ -19,7 +19,6 @@ import BigTextWithDropdown from '../../components/big-text-with-dropdown';
 import BigBtn from '../../components/big-btn';
 import DateSelector from '../../components/date-picker';
 import MessageBox from '../../components/message-box';
-import formatDate from '../../utils/format-date';
 import { addToInventory, getUserGroups } from '../../api/inventory';
 
 // import styles
@@ -88,43 +87,40 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
 
     const groups = await getUserGroups(credentials.userID, credentials.passwordHash);
 
-    console.log('group: ' + group);
+    let result;
 
-    if (group) {
-      if (groups.includes(group)) {
-        const result = await addToInventory(
+    if (group.group) {
+      if (groups.includes(group.group)) {
+        result = await addToInventory(
           credentials.userID,
           credentials.passwordHash,
-          group,
+          group.group,
           {
             name: ingredient, date: date.getTime(), quantity, type: quantityType,
           },
         );
-        console.log(result);
-
-        messageBoxRef.current.createMessage('success', `${ingredient} successfully added`);
-        clearFields();
+      } else {
+        messageBoxRef.current.createMessage('error', 'no permission to add to group');
       }
     } else {
-      const result = await addToInventory(
+      result = await addToInventory(
         credentials.userID,
         credentials.passwordHash,
+        undefined,
         {
           name: ingredient, date: date.getTime(), quantity, type: quantityType,
         },
       );
-
-      console.log(result);
-
-      messageBoxRef.current.createMessage('success', `${ingredient} successfully added`);
-      clearFields();
     }
 
-    // send product to database to add it to the household
+    if (result.result) {
+      messageBoxRef.current.createMessage('success', `${ingredient} successfully added`);
+    } else {
+      messageBoxRef.current.createMessage('error', `${ingredient} not added`);
+    }
 
+    clearFields();
     setLoading(false);
-
-    console.log(`product ${ingredient}, ${quantity} ${quantityType}, ${formatDate(date)}`);
   };
 
   // return the add product screen component

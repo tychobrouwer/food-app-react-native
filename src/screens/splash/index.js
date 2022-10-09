@@ -37,7 +37,7 @@ const LoadingScreen = function LoadingScreen({ navigation }) {
               userID: authResult.data.userID, email, passwordHash,
             },
           });
-          dispatch({ type: SET_GROUP, payload: { group } });
+          dispatch({ type: SET_GROUP, payload: { group: group[0] } });
 
           // navigate to home screen
           navigation.replace('Home');

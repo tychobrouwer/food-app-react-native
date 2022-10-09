@@ -7,7 +7,7 @@ import config from '../../config';
 // import styles
 import styles from './styles';
 
-// return the messgae box component
+// return the message box component
 const MessageBox = React.forwardRef(({ style }, ref) => {
   const offset = useRef(new Animated.Value(-50)).current;
 

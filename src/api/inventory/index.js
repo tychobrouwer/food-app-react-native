@@ -42,10 +42,8 @@ export const addToInventory = async (userID, passwordHash, groupID, itemData) =>
     // await the json response of the server
     const result = await response.json();
 
-    console.log(result);
-
     if (result.result) {
-      return JSON.parse(result.newInventory);
+      return result;
     }
 
     return false;

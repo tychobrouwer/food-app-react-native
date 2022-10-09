@@ -90,7 +90,7 @@ const SignInScreen = function SignInScreen({ navigation }) {
     const authResult = await authSignIn(email, passwordHash, salt);
 
     if (authResult.result) {
-      const group = getUserGroups(authResult.userID, passwordHash);
+      const group = await getUserGroups(authResult.userID, passwordHash);
 
       // set local variables to the credentials
       dispatch({
@@ -99,7 +99,7 @@ const SignInScreen = function SignInScreen({ navigation }) {
           userID: authResult.data.userID, email, passwordHash,
         },
       });
-      dispatch({ type: SET_GROUP, payload: { group } });
+      dispatch({ type: SET_GROUP, payload: { group: group[0] } });
 
       // if stay signed in store credentials in secure store
       if (staySignedIn) {
