@@ -19,36 +19,36 @@ import stylesMain from '../../styles';
 
 // return the home screen component
 const HomeScreen = function HomeScreen({ navigation }) {
-  const { credentials, group } = React.useContext(GlobalStateContext);
+  const { credentials, group, inventory } = React.useContext(GlobalStateContext);
 
   const messageBoxRef = useRef();
 
-  const [listItems, setListItems] = useState([]);
+  const [listItems, setListItems] = useState(inventory);
+
+  const updateInventory = async () => {
+    const groups = await getUserGroups(credentials.userID, credentials.passwordHash);
+
+    let result;
+
+    if (group) {
+      if (groups.includes(group)) {
+        result = await getInventory(credentials.userID, credentials.passwordHash, group);
+      } else {
+        messageBoxRef.current.createMessage('error', 'no permission to add to group');
+      }
+    } else {
+      result = await getInventory(credentials.userID, credentials.passwordHash, undefined);
+    }
+
+    if (result.result) {
+      setListItems(result.inventory);
+    } else {
+      messageBoxRef.current.createMessage('error', 'unable to get your inventory');
+    }
+  };
 
   useEffect(() => {
-    const loadInventory = async () => {
-      const groups = await getUserGroups(credentials.userID, credentials.passwordHash);
-
-      let result;
-
-      if (group) {
-        if (groups.includes(group)) {
-          result = await getInventory(credentials.userID, credentials.passwordHash, group);
-        } else {
-          messageBoxRef.current.createMessage('error', 'no permission to add to group');
-        }
-      } else {
-        result = await getInventory(credentials.userID, credentials.passwordHash, undefined);
-      }
-
-      if (result.result) {
-        setListItems(result.inventory);
-      } else {
-        messageBoxRef.current.createMessage('error', 'unable to get your inventory');
-      }
-    };
-
-    loadInventory();
+    updateInventory();
   }, []);
 
   return (
@@ -64,6 +64,7 @@ const HomeScreen = function HomeScreen({ navigation }) {
         {
           listItems.map((item) => (
             <FoodListItem
+              key={item.date}
               food={item.name}
               date={new Date(item.date)}
               quantity={item.quantity}

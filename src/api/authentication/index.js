@@ -1,4 +1,4 @@
-// import valid email function
+// import components and utils
 import validateEmail from '../../utils/validate-email';
 
 // import api constants

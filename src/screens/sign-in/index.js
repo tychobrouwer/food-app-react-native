@@ -7,7 +7,9 @@ import PropTypes from 'prop-types';
 
 // import components and utils
 import config from '../../config';
-import { GlobalDispatchContext, SET_CREDENTIALS, SET_GROUP } from '../../components/global-state';
+import {
+  GlobalDispatchContext, SET_CREDENTIALS, SET_GROUP, SET_INVENTORY,
+} from '../../components/global-state';
 import BigBtn from '../../components/big-btn';
 import BigTextInput from '../../components/big-text-input';
 import ScreenDefault from '../../components/screen-wrapper';
@@ -100,6 +102,7 @@ const SignInScreen = function SignInScreen({ navigation }) {
         },
       });
       dispatch({ type: SET_GROUP, payload: group[0] });
+      dispatch({ type: SET_INVENTORY, payload: authResult.data.inventory });
 
       // if stay signed in store credentials in secure store
       if (staySignedIn) {

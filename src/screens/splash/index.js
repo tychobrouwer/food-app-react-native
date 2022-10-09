@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 
 // import components and utils
 import { secureStoreGet } from '../../utils/secure-store';
-import { GlobalDispatchContext, SET_CREDENTIALS, SET_GROUP } from '../../components/global-state';
+import {
+  GlobalDispatchContext, SET_CREDENTIALS, SET_GROUP, SET_INVENTORY,
+} from '../../components/global-state';
 import { authSignIn, getClientSalt } from '../../api/authentication';
 import Loader from '../../components/loader';
 import { getUserGroups } from '../../api/inventory';
@@ -38,6 +40,7 @@ const LoadingScreen = function LoadingScreen({ navigation }) {
             },
           });
           dispatch({ type: SET_GROUP, payload: group[0] });
+          dispatch({ type: SET_INVENTORY, payload: authResult.data.inventory });
 
           // navigate to home screen
           navigation.replace('Home');
