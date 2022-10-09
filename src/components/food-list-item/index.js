@@ -41,7 +41,7 @@ FoodListItem.propTypes = {
     PropTypes.arrayOf(config.styleProp),
   ]),
   food: PropTypes.string.isRequired,
-  quantity: PropTypes.number.isRequired,
+  quantity: PropTypes.string.isRequired,
   quantityType: PropTypes.string.isRequired,
   date: PropTypes.instanceOf(Date).isRequired,
 };

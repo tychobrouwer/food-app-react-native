@@ -5,13 +5,6 @@ import config from '../../config';
 
 // styles for the home screen
 const styles = StyleSheet.create({
-  topNav: {
-    width: '85%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: '15%',
-  },
-
   contentHeader: {
     width: '100%',
     height: 50,

@@ -89,12 +89,12 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
 
     let result;
 
-    if (group.group) {
-      if (groups.includes(group.group)) {
+    if (group) {
+      if (groups.includes(group)) {
         result = await addToInventory(
           credentials.userID,
           credentials.passwordHash,
-          group.group,
+          group,
           {
             name: ingredient, date: date.getTime(), quantity, type: quantityType,
           },

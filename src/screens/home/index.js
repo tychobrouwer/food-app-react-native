@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import {
   Text, View, TouchableOpacity,
 } from 'react-native';
 import PropTypes from 'prop-types';
 
 // import components and utils
+import { GlobalStateContext } from '../../components/global-state';
 import ScreenDefault from '../../components/screen-wrapper';
 import TopNavigator from '../../components/top-navigator';
 import BottomNavigator from '../../components/bottom-navigator';
 import FoodListItem from '../../components/food-list-item';
+import { getInventory, getUserGroups } from '../../api/inventory';
+import MessageBox from '../../components/message-box';
 
 // import styles
 import styles from './styles';
@@ -16,8 +19,41 @@ import stylesMain from '../../styles';
 
 // return the home screen component
 const HomeScreen = function HomeScreen({ navigation }) {
+  const { credentials, group } = React.useContext(GlobalStateContext);
+
+  const messageBoxRef = useRef();
+
+  const [listItems, setListItems] = useState([]);
+
+  useEffect(() => {
+    const loadInventory = async () => {
+      const groups = await getUserGroups(credentials.userID, credentials.passwordHash);
+
+      let result;
+
+      if (group) {
+        if (groups.includes(group)) {
+          result = await getInventory(credentials.userID, credentials.passwordHash, group);
+        } else {
+          messageBoxRef.current.createMessage('error', 'no permission to add to group');
+        }
+      } else {
+        result = await getInventory(credentials.userID, credentials.passwordHash, undefined);
+      }
+
+      if (result.result) {
+        setListItems(result.inventory);
+      } else {
+        messageBoxRef.current.createMessage('error', 'unable to get your inventory');
+      }
+    };
+
+    loadInventory();
+  }, []);
+
   return (
     <ScreenDefault>
+      <MessageBox ref={messageBoxRef} />
       <TopNavigator navigation={navigation} />
       <View style={stylesMain.content}>
         <TouchableOpacity style={styles.contentHeader}>
@@ -25,10 +61,16 @@ const HomeScreen = function HomeScreen({ navigation }) {
             CALENDAR
           </Text>
         </TouchableOpacity>
-        <FoodListItem food="flower" date={new Date(2022, 10, 17)} quantity={100} quantityType="grams" />
-        <FoodListItem food="pears" date={new Date(2022, 10, 5)} quantity={4} quantityType="" />
-        <FoodListItem food="orange juice" date={new Date(2022, 10, 1)} quantity={400} quantityType="milliliter" />
-        <FoodListItem food="strawberries" date={new Date(2022, 9, 17)} quantity={2} quantityType="" />
+        {
+          listItems.map((item) => (
+            <FoodListItem
+              food={item.name}
+              date={new Date(item.date)}
+              quantity={item.quantity}
+              quantityType={item.type}
+            />
+          ))
+        }
       </View>
       <BottomNavigator navigation={navigation} />
     </ScreenDefault>

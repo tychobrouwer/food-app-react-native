@@ -49,7 +49,7 @@ const MessageBox = React.forwardRef(({ style }, ref) => {
 
     if (splitMessage) {
       for (let i = 0; i < splitMessage.length; i += 1) {
-        elements.push(<Text style={[styles.text, styles[type]]}>{splitMessage[i]}</Text>);
+        elements.push(<Text key={i} style={[styles.text, styles[type]]}>{splitMessage[i]}</Text>);
       }
     }
 

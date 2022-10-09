@@ -99,7 +99,7 @@ const SignInScreen = function SignInScreen({ navigation }) {
           userID: authResult.data.userID, email, passwordHash,
         },
       });
-      dispatch({ type: SET_GROUP, payload: { group: group[0] } });
+      dispatch({ type: SET_GROUP, payload: group[0] });
 
       // if stay signed in store credentials in secure store
       if (staySignedIn) {

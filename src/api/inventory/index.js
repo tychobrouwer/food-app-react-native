@@ -69,7 +69,7 @@ export const getInventory = async (userID, passwordHash, groupID) => {
     const result = await response.json();
 
     if (result.result) {
-      return JSON.parse(result.inventory);
+      return result;
     }
 
     return false;
