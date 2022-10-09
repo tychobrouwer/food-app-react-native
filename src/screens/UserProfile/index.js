@@ -21,7 +21,7 @@ const UserProfileScreen = function UserProfileScreen({ navigation }) {
       <View style={stylesMain.content}>
         <TouchableOpacity style={styles.contentHeader}>
           <Text style={styles.contentHeaderText}>
-            "Username"
+            "Username" 
           </Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.contentHeader}>

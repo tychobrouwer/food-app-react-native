@@ -21,7 +21,7 @@ const AccountSettingsScreen = function AccountSettingsScreen({ navigation }) {
       <View style={stylesMain.content}>
         <TouchableOpacity style={styles.contentHeader}>
           <Text style={styles.contentHeaderText}>
-            Change Username
+            Change Email
           </Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.contentHeader}>
