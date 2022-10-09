@@ -14,6 +14,12 @@ import RecipesScreen from './screens/recipes';
 import SettingsScreen from './screens/settings';
 import GroceryListScreen from './screens/grocery-list';
 import AddProductScreen from './screens/add-product';
+import PrivacyPolicyScreen from './screens/PrivacyPolicy';
+import UserProfileScreen from './screens/UserProfile';
+import AccountSettingsScreen from './screens/AccountSettings';
+//These last 2 are for the as of now unused settings screen buttons. Replace with actual screens when possible.
+//import TestScreen from './screens/TestScreen';
+//import PlaceHolderScreen from './screens/PlaceHolderScreen';
 
 // initial values for locally stored values
 const initialState = {
@@ -72,6 +78,27 @@ export default function App() {
             name="Settings"
             component={SettingsScreen}
           />
+          <Stack.Screen
+            name="PrivacyPolicy"
+            component={PrivacyPolicyScreen}
+          />
+          <Stack.Screen
+            name="AccountSettings"
+            component={AccountSettingsScreen}
+          />
+          <Stack.Screen
+            name="UserProfile"
+            component={UserProfileScreen}
+            // Again, these are as of now unused screens.
+        //  />
+        //  <Stack.Screen
+        //    name="Test"
+        //    component={TestScreen}
+        //  />
+        //  <Stack.Screen
+        //    name="Placeholder"
+        //    component={PlaceholderScreen}
+          /> 
         </Stack.Navigator>
       </NavigationContainer>
     </GlobalState>

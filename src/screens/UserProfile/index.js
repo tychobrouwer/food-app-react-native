@@ -13,44 +13,25 @@ import BottomNavigator from '../../components/bottom-navigator';
 import styles from './styles';
 import stylesMain from '../../styles';
 
-// return the home screen component
-const SettingsScreen = function SettingsScreen({ navigation }) {
+// return the accountsettings screen component
+const UserProfileScreen = function UserProfileScreen({ navigation }) {
   return (
     <ScreenDefault>
       <TopNavigator navigation={navigation} />
       <View style={stylesMain.content}>
-        <TouchableOpacity style={styles.contentHeader} 
-            onPress={() => {
-            navigation.push('UserProfile');
-          }}>
+        <TouchableOpacity style={styles.contentHeader}>
           <Text style={styles.contentHeaderText}>
-            USER PROFILE
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.contentHeader} 
-            onPress={() => {
-            navigation.push('AccountSettings');
-          }}>
-          <Text style={styles.contentHeaderText}>
-            ACCOUNT SETTINGS
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.contentHeader} 
-            onPress={() => {
-            navigation.push('PrivacyPolicy');
-          }}>
-          <Text style={styles.contentHeaderText}>
-            PRIVACY POLICY
+            "Username"
           </Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.contentHeader}>
           <Text style={styles.contentHeaderText}>
-            TEST
+            View current households
           </Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.contentHeader}>
           <Text style={styles.contentHeaderText}>
-            PLACEHOLDER
+            Placeholder
           </Text>
         </TouchableOpacity>
       </View>
@@ -59,10 +40,10 @@ const SettingsScreen = function SettingsScreen({ navigation }) {
   );
 };
 
-SettingsScreen.propTypes = {
+UserProfileScreen.propTypes = {
   navigation: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
 };
 
-export default SettingsScreen;
+export default UserProfileScreen;

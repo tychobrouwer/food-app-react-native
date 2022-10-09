@@ -22,11 +22,14 @@
     "prop-types": "^15.8.1",
     "react": "18.0.0",
     "react-native": "0.69.6",
+    "react-native-blob-util": "^0.16.2",
     "react-native-modal-dropdown": "^1.0.2",
     "react-native-modern-datepicker": "^1.0.0-beta.91",
+    "react-native-pdf": "^6.6.2",
     "react-native-safe-area-context": "4.3.1",
     "react-native-screens": "~3.15.0",
-    "react-native-svg": "12.3.0"
+    "react-native-svg": "12.3.0",
+    "react-native-webview": "^11.23.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

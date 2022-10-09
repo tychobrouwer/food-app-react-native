@@ -25,7 +25,7 @@ const HomeScreen = function HomeScreen({ navigation }) {
             CALENDAR
           </Text>
         </TouchableOpacity>
-        <FoodListItem food="flower" date={new Date(2022, 10, 17)} quantity={100} quantityType="grams" />
+        <FoodListItem food="flour" date={new Date(2022, 10, 17)} quantity={100} quantityType="grams" />
         <FoodListItem food="pears" date={new Date(2022, 10, 5)} quantity={4} quantityType="" />
         <FoodListItem food="orange juice" date={new Date(2022, 10, 1)} quantity={400} quantityType="milliliter" />
         <FoodListItem food="strawberries" date={new Date(2022, 9, 17)} quantity={2} quantityType="" />
