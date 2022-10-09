@@ -35,7 +35,7 @@ const stylesMain = StyleSheet.create({
     width: '80%',
     marginTop: '10%',
     marginBottom: '5%',
-    flexGrow: 1,
+    flex: 1,
   },
 
   notificationText: {

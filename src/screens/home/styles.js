@@ -21,6 +21,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: config.primaryTextColor,
   },
+
+  itemList: {
+    maxHeight: '88%',
+  },
 });
 
 export default styles;

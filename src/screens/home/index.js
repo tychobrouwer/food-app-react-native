@@ -1,11 +1,13 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, {
+  useRef, useEffect, useState, useContext,
+} from 'react';
 import {
-  Text, View, TouchableOpacity,
+  Text, View, TouchableOpacity, ScrollView,
 } from 'react-native';
 import PropTypes from 'prop-types';
 
 // import components and utils
-import { GlobalStateContext } from '../../components/global-state';
+import { GlobalDispatchContext, GlobalStateContext, SET_INVENTORY } from '../../components/global-state';
 import ScreenDefault from '../../components/screen-wrapper';
 import TopNavigator from '../../components/top-navigator';
 import BottomNavigator from '../../components/bottom-navigator';
@@ -19,10 +21,11 @@ import stylesMain from '../../styles';
 
 // return the home screen component
 const HomeScreen = function HomeScreen({ navigation }) {
-  const { credentials, group, inventory } = React.useContext(GlobalStateContext);
+  // set the dispatch to set the local values
+  const dispatch = useContext(GlobalDispatchContext);
 
   const messageBoxRef = useRef();
-
+  const { credentials, group, inventory } = React.useContext(GlobalStateContext);
   const [listItems, setListItems] = useState(inventory);
 
   const updateInventory = async () => {
@@ -42,6 +45,8 @@ const HomeScreen = function HomeScreen({ navigation }) {
 
     if (result.result) {
       setListItems(result.inventory);
+
+      dispatch({ type: SET_INVENTORY, payload: result.inventory });
     } else {
       messageBoxRef.current.createMessage('error', 'unable to get your inventory');
     }
@@ -61,17 +66,19 @@ const HomeScreen = function HomeScreen({ navigation }) {
             CALENDAR
           </Text>
         </TouchableOpacity>
-        {
-          listItems.map((item) => (
-            <FoodListItem
-              key={item.date}
-              food={item.name}
-              date={new Date(item.date)}
-              quantity={item.quantity}
-              quantityType={item.type}
-            />
-          ))
-        }
+        <ScrollView style={styles.itemList}>
+          {
+            listItems.map((item) => (
+              <FoodListItem
+                key={item.date}
+                food={item.name}
+                date={new Date(item.date)}
+                quantity={item.quantity}
+                quantityType={item.type}
+              />
+            ))
+          }
+        </ScrollView>
       </View>
       <BottomNavigator navigation={navigation} />
     </ScreenDefault>
