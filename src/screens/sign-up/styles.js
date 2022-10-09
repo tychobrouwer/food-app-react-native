@@ -6,7 +6,7 @@ import config from '../../config';
 // styles for the sign up screen
 const styles = StyleSheet.create({
   titleText: {
-    fontSize: '36px',
+    fontSize: 36,
     fontWeight: 'bold',
     marginTop: '30%',
     marginBottom: '5%',

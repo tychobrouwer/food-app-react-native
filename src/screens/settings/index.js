@@ -10,7 +10,7 @@ import TopNavigator from '../../components/top-navigator';
 import BottomNavigator from '../../components/bottom-navigator';
 
 // import styles
-// import styles from './styles';
+import styles from '../../styles';
 import stylesMain from '../../styles';
 
 // return the home screen component
@@ -21,34 +21,32 @@ const SettingsScreen = function SettingsScreen({ navigation }) {
       <View style={stylesMain.content}>
         <TouchableOpacity style={styles.contentHeader}>
           <Text style={styles.contentHeaderText}>
-            SETTINGS
+            USER PROFILE
           </Text>
         </TouchableOpacity>
-        <View style={styles.contentItem}>
-          <View style={styles.contentItemText}>
-            <Text style={stylesMain.text}>USER PROFILE IMAGE HERE</Text>
-          </View>
-        </View>
-        <View style={styles.contentItem}>
-          <View style={styles.contentItemText}>
-            <Text style={stylesMain.text}>ACCOUNT SETTINGS</Text>
-          </View>
-        </View>
-        <View style={styles.contentItem}>
-          <View style={styles.contentItemText}>
-            <Text style={stylesMain.text}>NOTIFICATION SETTINGS</Text>
-          </View>
-        </View>
-        <View style={styles.contentItem}>
-          <View style={styles.contentItemText}>
-            <Text style={stylesMain.text}>APP SETTINGS</Text>
-          </View>
-        </View>
-        <View style={styles.contentItem}>
-          <View style={styles.contentItemText}>
-            <Text style={stylesMain.text}>PRIVACY POLICY</Text>
-          </View>
-        </View>
+        <TouchableOpacity style={styles.contentHeader}>
+          <Text style={styles.contentHeaderText}>
+            ACCOUNT SETTINGS
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.contentHeader} 
+            onPress={() => {
+            navigation.push('Home');
+          }}>
+          <Text style={styles.contentHeaderText}>
+            PRIVACY POLICY
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.contentHeader}>
+          <Text style={styles.contentHeaderText}>
+            TEST
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.contentHeader}>
+          <Text style={styles.contentHeaderText}>
+            PLACEHOLDER
+          </Text>
+        </TouchableOpacity>
       </View>
       <BottomNavigator navigation={navigation} />
     </ScreenDefault>

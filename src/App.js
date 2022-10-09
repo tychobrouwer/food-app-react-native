@@ -34,7 +34,7 @@ export default function App() {
         <Stack.Navigator
           // change 'initialRouteName' to change the starting screen
           // for final app this should be 'Splash'
-          initialRouteName="Splash"
+          initialRouteName="Home"
           screenOptions={{
             headerShown: false,
             animation: 'none',
@@ -66,7 +66,7 @@ export default function App() {
           />
           <Stack.Screen
             name="AddProduct"
-            component={AddProductScreen}*/
+            component={AddProductScreen}
           />
           <Stack.Screen
             name="Settings"
