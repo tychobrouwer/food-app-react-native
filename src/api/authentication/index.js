@@ -43,6 +43,8 @@ export const newClientSalt = async (email) => {
 
 // function for authorizing an email password pair for sign in
 export const authSignIn = async (email, passwordHash, salt) => {
+  let data = {};
+
   // check email for validity
   const emailEmptyCheck = email !== '';
   const emailValidCheck = validateEmail(email) !== null;
@@ -74,6 +76,14 @@ export const authSignIn = async (email, passwordHash, salt) => {
       if (result.result) {
         // set the password valid if sign in result is true
         passwordValidCheck = true;
+
+        data = {
+          userID: result.userID,
+          email: result.email,
+          firstName: result.firstName,
+          lastName: result.lastName,
+          inventory: result.inventory,
+        };
       }
     } catch (error) {
       // do nothing if error
@@ -96,7 +106,7 @@ export const authSignIn = async (email, passwordHash, salt) => {
 
   const result = emailEmptyCheck && emailValidCheck && passwordEmptyCheck && passwordValidCheck;
 
-  return { result, message };
+  return { result, message, data };
 };
 
 // function for authorizing an email password pair for sign up
