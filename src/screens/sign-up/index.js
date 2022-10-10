@@ -101,7 +101,7 @@ const SignUpScreen = function SignUpScreen({ navigation }) {
 
   // return the sign up screen component
   return (
-    <ScreenDefault>
+    <ScreenDefault scrollEnabled>
       <Loader style={!loading ? stylesMain.hidden : {}} />
 
       <View style={stylesMain.banner}>

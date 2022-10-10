@@ -19,8 +19,7 @@ const FoodListItem = function FoodListItem({
     <View style={[styles.content, style]}>
       <View style={styles.itemTextBox}>
         <Text style={[stylesMain.text, styles.itemText]}>
-          <Text style={styles.propTitle}>FOOD: </Text>
-          <Text>{capitalize(food)}</Text>
+          <Text style={styles.title}>{capitalize(food)}</Text>
         </Text>
         <Text style={[stylesMain.text, styles.itemText]}>
           <Text style={styles.propTitle}>QUANTITY: </Text>

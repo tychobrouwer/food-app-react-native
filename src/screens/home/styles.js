@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
     color: config.primaryTextColor,
     alignItems: 'center',
     borderRadius: 5,
+    marginBottom: 10,
   },
 
   contentHeaderText: {
@@ -20,10 +21,6 @@ const styles = StyleSheet.create({
     marginBottom: 'auto',
     fontWeight: 'bold',
     color: config.primaryTextColor,
-  },
-
-  itemList: {
-    maxHeight: '88%',
   },
 });
 

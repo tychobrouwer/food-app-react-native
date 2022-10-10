@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     backgroundColor: config.tertiaryColor,
     alignItems: 'center',
     borderRadius: 5,
-    marginTop: 10,
+    marginBottom: 10,
   },
 
   itemTextBox: {
@@ -21,6 +21,10 @@ const styles = StyleSheet.create({
 
   itemText: {
     paddingVertical: 2,
+  },
+
+  title: {
+    fontSize: 21,
   },
 
   propTitle: {

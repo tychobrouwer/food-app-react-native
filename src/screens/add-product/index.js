@@ -125,7 +125,7 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
 
   // return the add product screen component
   return (
-    <ScreenDefault>
+    <ScreenDefault scrollEnabled>
       <Loader style={!loading ? stylesMain.hidden : {}} />
       <MessageBox ref={messageBoxRef} />
 

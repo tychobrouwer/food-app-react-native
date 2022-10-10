@@ -2,7 +2,7 @@ import React, {
   useRef, useEffect, useState, useContext,
 } from 'react';
 import {
-  Text, View, TouchableOpacity, ScrollView,
+  Text, View, FlatList,
 } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -56,29 +56,34 @@ const HomeScreen = function HomeScreen({ navigation }) {
     updateInventory();
   }, []);
 
+  const renderItem = ({ item }) => (
+    <FoodListItem
+      key={item.date}
+      food={item.name}
+      date={new Date(item.date)}
+      quantity={item.quantity}
+      quantityType={item.type}
+    />
+  );
+
   return (
-    <ScreenDefault>
+    <ScreenDefault scrollEnabled={false}>
       <MessageBox ref={messageBoxRef} />
       <TopNavigator navigation={navigation} />
       <View style={stylesMain.content}>
-        <TouchableOpacity style={styles.contentHeader}>
+        <View style={styles.contentHeader}>
           <Text style={styles.contentHeaderText}>
             CALENDAR
           </Text>
-        </TouchableOpacity>
-        <ScrollView style={styles.itemList}>
-          {
-            listItems.map((item) => (
-              <FoodListItem
-                key={item.date}
-                food={item.name}
-                date={new Date(item.date)}
-                quantity={item.quantity}
-                quantityType={item.type}
-              />
-            ))
-          }
-        </ScrollView>
+        </View>
+        <FlatList
+          style={{ borderRadius: 5, flex: 1, marginBottom: 20 }}
+          decelerationRate="fast"
+          showsVerticalScrollIndicator={false}
+          data={listItems}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.date}
+        />
       </View>
       <BottomNavigator navigation={navigation} />
     </ScreenDefault>
