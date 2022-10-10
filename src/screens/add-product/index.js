@@ -15,7 +15,7 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 import CameraImage from '../../../assets/camera-image';
 
 // import components and utils
-import { GlobalStateContext } from '../../components/global-state';
+import { GlobalDispatchContext, GlobalStateContext, SET_INVENTORY } from '../../components/global-state';
 import ScreenDefault from '../../components/screen-wrapper';
 import Loader from '../../components/loader';
 import TopNavigator from '../../components/top-navigator';
@@ -34,6 +34,9 @@ import stylesMain from '../../styles';
 // return the home screen component
 const AddProductScreen = function AddProductScreen({ navigation }) {
   const { credentials, group } = useContext(GlobalStateContext);
+
+  // set the dispatch to set the local values
+  const dispatch = useContext(GlobalDispatchContext);
 
   // available units to choose from
   const quantityTypes = [
@@ -142,9 +145,11 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
     }
 
     if (result.result) {
+      dispatch({ type: SET_INVENTORY, payload: result.newInventory });
+
       messageBoxRef.current.createMessage('success', `${ingredient} successfully added`);
     } else {
-      messageBoxRef.current.createMessage('error', `${ingredient} not added`);
+      messageBoxRef.current.createMessage('error', `failed to add ${ingredient}`);
     }
 
     clearFields();

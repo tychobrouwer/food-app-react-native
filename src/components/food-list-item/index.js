@@ -14,7 +14,7 @@ import styles from './styles';
 
 // return the big button component
 const FoodListItem = function FoodListItem({
-  food, date, quantity, quantityType, style, index, closeRow, deleteItem, innerRef,
+  food, date, quantity, quantityType, style, itemID, closeRow, deleteItem, innerRef,
 }) {
   const quantityString = (quantityType === 'units') ? '' : quantityType;
   const [visible, setVisible] = useState(false);
@@ -56,7 +56,7 @@ const FoodListItem = function FoodListItem({
     <Swipeable
       onSwipeableOpen={() => {
         setVisible(true);
-        closeRow(index);
+        closeRow(itemID);
       }}
       ref={innerRef}
       onSwipeableClose={() => setVisible(false)}
@@ -93,7 +93,7 @@ FoodListItem.propTypes = {
   quantity: PropTypes.string.isRequired,
   quantityType: PropTypes.string.isRequired,
   date: PropTypes.instanceOf(Date).isRequired,
-  index: PropTypes.number.isRequired,
+  itemID: PropTypes.number.isRequired,
   closeRow: PropTypes.func.isRequired,
   deleteItem: PropTypes.func.isRequired,
   innerRef: PropTypes.func.isRequired,

@@ -12,7 +12,7 @@ import ScreenDefault from '../../components/screen-wrapper';
 import TopNavigator from '../../components/top-navigator';
 import BottomNavigator from '../../components/bottom-navigator';
 import FoodListItem from '../../components/food-list-item';
-import { getInventory, getUserGroups } from '../../api/inventory';
+import { getInventory, getUserGroups, removeFromInventory } from '../../api/inventory';
 import MessageBox from '../../components/message-box';
 
 // import styles
@@ -60,13 +60,31 @@ const HomeScreen = function HomeScreen({ navigation }) {
     updateInventory();
   }, []);
 
-  const deleteItem = (item) => {
-    const a = listItems;
-    a.splice(item.index, 1);
-    setListItems([...a]);
+  const deleteItem = async ({ item }) => {
+    const oldInventory = listItems;
+    const newInventory = oldInventory.filter((item_) => item_.itemID !== item.itemID);
+    setListItems(newInventory);
+
+    const itemRemoveResult = await removeFromInventory(
+      credentials.userID,
+      credentials.passwordHash,
+      group,
+      item.itemID,
+    );
+
+    if (itemRemoveResult.result) {
+      setListItems(itemRemoveResult.newInventory);
+      dispatch({ type: SET_INVENTORY, payload: itemRemoveResult.newInventory });
+
+      messageBoxRef.current.createMessage('success', `removed ${item.name} from inventory`);
+    } else {
+      setListItems(oldInventory);
+
+      messageBoxRef.current.createMessage('error', `failed to remove ${item.name} from inventory`);
+    }
   };
 
-  const renderItem = ({ item, index }, onClick) => {
+  const renderItem = ({ item }, onClick) => {
     const closeRow = (indexToClose) => {
       if (prevSelectedItem && prevSelectedItem !== itemRow[indexToClose]) {
         prevSelectedItem.close();
@@ -76,14 +94,14 @@ const HomeScreen = function HomeScreen({ navigation }) {
 
     return (
       <FoodListItem
-        innerRef={(ref) => { itemRow[index] = ref; }}
-        key={item.date}
+        innerRef={(ref) => { itemRow[item.itemID] = ref; }}
+        key={item.itemID}
         food={item.name}
         date={new Date(item.date)}
         quantity={item.quantity}
         quantityType={item.type}
         closeRow={closeRow}
-        index={index}
+        itemID={item.itemID}
         deleteItem={onClick}
       />
     );
