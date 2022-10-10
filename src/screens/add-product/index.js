@@ -217,7 +217,7 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
             hasPermission === true && (
               <BarCodeScanner
                 style={styles.scanner}
-                onBarCodeScanned={scanner ? handleBarCodeScanned : undefined}
+                onBarCodeScanned={handleBarCodeScanned}
                 barCodeTypes={[
                   BarCodeScanner.Constants.BarCodeType.ean13,
                   BarCodeScanner.Constants.BarCodeType.ean8,
