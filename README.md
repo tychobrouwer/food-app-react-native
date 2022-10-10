@@ -62,7 +62,8 @@ Expo Go is used to run the project on your own device, without having to submit 
 
 ### TO DO's (and thoughts)
 
-- Make additional pages (settings, add product, grocery list, recipe list).
+- Make additional pages (settings, grocery list, recipe list).
+- Remove ingredient from database.
 - Reset password logic.
 - Change password logic.
 - Make recipe database.
@@ -82,13 +83,20 @@ The **assets** folder is designated for images or fonts used in the app like the
 |-- src
 |    |-- api
 |    |    |-- authentication
+|    |    |-- inventory
 |    |    |-- constants
 |    |-- components
 |    |    |-- big-btn
 |    |    |-- big-text-input
+|    |    |-- big-text-with-dropdown
+|    |    |-- bottom-navigator
+|    |    |-- date-picker
+|    |    |-- food-list-item
 |    |    |-- global-state
 |    |    |-- loader
+|    |    |-- message-box
 |    |    |-- screen-wrapper
+|    |    |-- top-navigator
 |    |-- screens
 |    |    |-- add-product
 |    |    |-- grocery-list
@@ -99,12 +107,13 @@ The **assets** folder is designated for images or fonts used in the app like the
 |    |    |-- sign-up
 |    |    |-- splash
 |    |-- styles
-|    |    |-- config
 |    |-- utils
 |    |    |-- capitalize
+|    |    |-- format-date
 |    |    |-- secure-store
 |    |    |-- validate-email
 |    |-- App.js
+|    |-- config.js
 |-- .eslintrc
 |-- .gitignore
 |-- app.json
