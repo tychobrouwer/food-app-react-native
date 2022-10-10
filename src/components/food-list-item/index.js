@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import React, { useState, useRef } from 'react';
+import {
+  Text, View, TouchableOpacity, Animated,
+} from 'react-native';
 import PropTypes from 'prop-types';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 
@@ -16,13 +18,30 @@ const FoodListItem = function FoodListItem({
 }) {
   const quantityString = (quantityType === 'units') ? '' : quantityType;
   const [visible, setVisible] = useState(false);
+  const itemHeight = useRef(new Animated.Value(80)).current;
+  const itemOpacity = useRef(new Animated.Value(1)).current;
+
+  const onRemoving = (callback) => {
+    Animated.parallel([
+      Animated.timing(itemOpacity, {
+        toValue: 0,
+        duration: 200,
+        useNativeDriver: false,
+      }),
+      Animated.timing(itemHeight, {
+        toValue: 0,
+        duration: 200,
+        useNativeDriver: false,
+      }),
+    ]).start(callback);
+  };
 
   const renderRightActions = () => (
     <View style={styles.deleteView}>
       <TouchableOpacity
         onPress={() => {
           if (visible) {
-            deleteItem();
+            onRemoving(() => deleteItem());
           }
         }}
       >
@@ -46,7 +65,7 @@ const FoodListItem = function FoodListItem({
       overshootRight={false}
       renderRightActions={renderRightActions}
     >
-      <View style={[styles.content, style]}>
+      <Animated.View style={[styles.content, { height: itemHeight, opacity: itemOpacity }, style]}>
         <View style={styles.itemTextBox}>
           <Text style={[stylesMain.text, styles.itemText]}>
             <Text style={styles.title}>{capitalize(food)}</Text>
@@ -60,7 +79,7 @@ const FoodListItem = function FoodListItem({
             <Text>{date.toLocaleDateString()}</Text>
           </Text>
         </View>
-      </View>
+      </Animated.View>
     </Swipeable>
   );
 };

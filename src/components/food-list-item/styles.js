@@ -7,14 +7,12 @@ import config from '../../config';
 const styles = StyleSheet.create({
   content: {
     width: '100%',
-    height: 80,
     backgroundColor: config.tertiaryColor,
     alignItems: 'center',
     borderRadius: 5,
   },
 
   swipeable: {
-    backgroundColor: config.errorColor,
     marginBottom: 10,
     borderRadius: 5,
   },
