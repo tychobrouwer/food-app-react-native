@@ -22,6 +22,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: config.primaryTextColor,
   },
+
+  flatList: {
+    borderRadius: 5,
+    flex: 1,
+    marginBottom: 20,
+  },
 });
 
 export default styles;

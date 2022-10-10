@@ -28,9 +28,12 @@ const ScreenDefault = function ScreenDefault({ children, scrollEnabled }) {
       <KeyboardAvoidingView
         style={styles.wrapper}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        // keyboardVerticalOffset={40}
       >
-        <ScrollView bounces={false} decelerationRate="fast" keyboardShouldPersistTaps="handled">
+        <ScrollView
+          bounces={false}
+          decelerationRate="fast"
+          keyboardShouldPersistTaps="handled"
+        >
           { content }
         </ScrollView>
       </KeyboardAvoidingView>

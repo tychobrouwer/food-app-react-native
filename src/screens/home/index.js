@@ -2,7 +2,7 @@ import React, {
   useRef, useEffect, useState, useContext,
 } from 'react';
 import {
-  Text, View, FlatList,
+  Text, View, FlatList, RefreshControl,
 } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -18,6 +18,7 @@ import MessageBox from '../../components/message-box';
 // import styles
 import styles from './styles';
 import stylesMain from '../../styles';
+import config from '../../config';
 
 // return the home screen component
 const HomeScreen = function HomeScreen({ navigation }) {
@@ -27,6 +28,7 @@ const HomeScreen = function HomeScreen({ navigation }) {
   const messageBoxRef = useRef();
   const { credentials, group, inventory } = useContext(GlobalStateContext);
   const [listItems, setListItems] = useState(inventory.sort((a, b) => b.date - a.date).reverse());
+  const [refreshing, setRefreshing] = useState(false);
 
   const itemRow = [];
   let prevSelectedItem;
@@ -118,8 +120,20 @@ const HomeScreen = function HomeScreen({ navigation }) {
           </Text>
         </View>
         <FlatList
-          style={{ borderRadius: 5, flex: 1, marginBottom: 20 }}
+          style={styles.flatList}
           decelerationRate="fast"
+          refreshControl={(
+            <RefreshControl
+              colors={config.secondaryColor}
+              tintColor={config.secondaryColor}
+              refreshing={refreshing}
+              onRefresh={async () => {
+                setRefreshing(true);
+                await updateInventory();
+                setRefreshing(false);
+              }}
+            />
+          )}
           showsVerticalScrollIndicator={false}
           data={listItems}
           extraData={listItems}
