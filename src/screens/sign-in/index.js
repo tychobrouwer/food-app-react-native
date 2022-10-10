@@ -7,7 +7,9 @@ import PropTypes from 'prop-types';
 
 // import components and utils
 import config from '../../config';
-import { GlobalDispatchContext, SET_CREDENTIALS, SET_GROUP } from '../../components/global-state';
+import {
+  GlobalDispatchContext, SET_CREDENTIALS, SET_GROUP, SET_INVENTORY,
+} from '../../components/global-state';
 import BigBtn from '../../components/big-btn';
 import BigTextInput from '../../components/big-text-input';
 import ScreenDefault from '../../components/screen-wrapper';
@@ -90,9 +92,7 @@ const SignInScreen = function SignInScreen({ navigation }) {
     const authResult = await authSignIn(email, passwordHash, salt);
 
     if (authResult.result) {
-      const group = getUserGroups(authResult.userID, passwordHash);
-
-      console.log(authResult);
+      const group = await getUserGroups(authResult.userID, passwordHash);
 
       // set local variables to the credentials
       dispatch({
@@ -101,7 +101,8 @@ const SignInScreen = function SignInScreen({ navigation }) {
           userID: authResult.data.userID, email, passwordHash,
         },
       });
-      dispatch({ type: SET_GROUP, payload: { group } });
+      dispatch({ type: SET_GROUP, payload: group[0] });
+      dispatch({ type: SET_INVENTORY, payload: authResult.data.inventory });
 
       // if stay signed in store credentials in secure store
       if (staySignedIn) {
@@ -135,7 +136,7 @@ const SignInScreen = function SignInScreen({ navigation }) {
 
   // return the sign in screen component
   return (
-    <ScreenDefault>
+    <ScreenDefault scrollEnabled>
       <Loader style={!loading ? stylesMain.hidden : {}} />
 
       <View style={stylesMain.banner}>

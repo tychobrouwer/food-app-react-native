@@ -5,13 +5,6 @@ import config from '../../config';
 
 // styles for the home screen
 const styles = StyleSheet.create({
-  topNav: {
-    width: '85%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: '15%',
-  },
-
   contentHeader: {
     width: '100%',
     height: 50,
@@ -19,6 +12,7 @@ const styles = StyleSheet.create({
     color: config.primaryTextColor,
     alignItems: 'center',
     borderRadius: 5,
+    marginBottom: 10,
   },
 
   contentHeaderText: {

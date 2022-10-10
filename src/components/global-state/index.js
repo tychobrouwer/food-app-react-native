@@ -8,6 +8,7 @@ export const GlobalDispatchContext = React.createContext();
 // context actions
 export const SET_CREDENTIALS = 'SET_CREDENTIALS';
 export const SET_GROUP = 'SET_GROUP';
+export const SET_INVENTORY = 'SET_INVENTORY';
 
 // reducer function for setting local variables
 export const reducer = (state, action) => {
@@ -24,6 +25,12 @@ export const reducer = (state, action) => {
       return {
         ...state,
         group: payload,
+      };
+    }
+    case SET_INVENTORY: {
+      return {
+        ...state,
+        inventory: payload,
       };
     }
 
