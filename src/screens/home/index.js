@@ -69,8 +69,6 @@ const HomeScreen = function HomeScreen({ navigation }) {
   const renderItem = ({ item, index }, onClick) => {
     const closeRow = (indexToClose) => {
       if (prevSelectedItem && prevSelectedItem !== itemRow[indexToClose]) {
-        console.log('test');
-
         prevSelectedItem.close();
       }
       prevSelectedItem = itemRow[indexToClose];

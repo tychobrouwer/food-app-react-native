@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     right: 0,
     justifyContent: 'center',
     backgroundColor: config.primaryColor,
+    zIndex: 20,
   },
 });
 

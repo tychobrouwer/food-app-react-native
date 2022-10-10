@@ -39,7 +39,7 @@ const FoodListItem = function FoodListItem({
         setVisible(true);
         closeRow(index);
       }}
-      innerRef={innerRef}
+      ref={innerRef}
       onSwipeableClose={() => setVisible(false)}
       friction={2}
       containerStyle={styles.swipeable}
