@@ -13,7 +13,7 @@ import BottomNavigator from '../../components/bottom-navigator';
 import styles from './styles';
 import stylesMain from '../../styles';
 
-// return the home screen component
+// return the settings screen component
 const SettingsScreen = function SettingsScreen({ navigation }) {
   return (
     <ScreenDefault>

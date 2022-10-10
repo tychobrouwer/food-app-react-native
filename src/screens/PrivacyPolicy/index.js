@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import {
-  Text, View, TouchableOpacity, StyleSheet, Dimensions
+  Text, View, TouchableOpacity, ScrollView, Dimensions
 } from 'react-native';
-import { WebView } from 'react-native-webview';
+//import { WebView } from 'react-native-webview';
 import PropTypes from 'prop-types';
-import { Constants } from "expo";
+//import { Constants } from "expo";
 
 // import components and utils
 import ScreenDefault from '../../components/screen-wrapper';
@@ -17,18 +17,141 @@ import stylesMain from '../../styles';
 
 // return the pdf
 // I have not been able to get this to work properly so far
-export default class PrivacyPolicyScreen extends Component {
-    render() {
-        return (
-            <View style={styles.container}>
-                <WebView
-                    bounces={false}
-                    scrollEnabled={false}
-                    source={{uri: "../../assets/PrivacyPolicy.pdf"}} />
-            </View>
-        );
-    }
-}
+const PrivacyPolicyScreen = function PrivacyPolicyScreen({ navigation }) {
+    return (
+      <ScreenDefault>
+        <TopNavigator navigation={navigation} />
+        <View style={stylesMain.content}>
+          <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+            <Text style={styles.contentHeaderText}>
+              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+            </Text>
+          </ScrollView>
+        </View>
+        <BottomNavigator navigation={navigation} />
+      </ScreenDefault>
+    );
+  };
 
 
 PrivacyPolicyScreen.propTypes = {
@@ -37,4 +160,4 @@ PrivacyPolicyScreen.propTypes = {
   }).isRequired,
 };
 
-//export default PrivacyPolicyScreen;
+export default PrivacyPolicyScreen;
