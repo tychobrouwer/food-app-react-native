@@ -56,14 +56,16 @@ const BigTextWithDropdown = function BigTextWithDropdown(
           animated={false}
           onDropdownWillShow={() => setStatus(true)}
           onDropdownWillHide={() => setStatus(false)}
+          renderRightComponent={() => (
+            <View style={styles.dropdownChevron}>
+              <ChevronImage
+                width={25}
+                height={25}
+                style={(!status) ? { transform: [{ rotate: '180deg' }] } : {}}
+              />
+            </View>
+          )}
         />
-        <View style={styles.dropdownChevron}>
-          <ChevronImage
-            width={25}
-            height={25}
-            style={(!status) ? { transform: [{ rotate: '180deg' }] } : {}}
-          />
-        </View>
       </View>
     </View>
   );

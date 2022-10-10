@@ -30,7 +30,6 @@ const styles = StyleSheet.create({
   dropdownBtn: {
     paddingLeft: 10,
     paddingVertical: 12,
-    width: 90,
   },
 
   dropdownStyle: {
@@ -41,12 +40,12 @@ const styles = StyleSheet.create({
 
   dropdownChevron: {
     paddingRight: 5,
-    paddingTop: 8,
   },
 
   dropdown: {
     height: 'auto',
     paddingLeft: 5,
+    marginRight: 30,
   },
 
   dropdownText: {
