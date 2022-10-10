@@ -54,7 +54,7 @@ const HomeScreen = function HomeScreen({ navigation }) {
 
       dispatch({ type: SET_INVENTORY, payload: newItems });
     } else {
-      messageBoxRef.current.createMessage('error', 'unable to get your inventory');
+      messageBoxRef.current.createMessage('error', 'unable to update your inventory');
     }
   };
 
