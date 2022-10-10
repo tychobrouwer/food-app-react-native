@@ -23,7 +23,7 @@ const MessageBox = forwardRef(({ style }, ref) => {
         duration: 500,
         useNativeDriver: true,
       }),
-      Animated.delay(600),
+      Animated.delay(800),
       Animated.spring(offset, {
         toValue: -50,
         duration: 500,
