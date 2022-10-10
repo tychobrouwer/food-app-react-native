@@ -26,7 +26,10 @@ const HomeScreen = function HomeScreen({ navigation }) {
 
   const messageBoxRef = useRef();
   const { credentials, group, inventory } = React.useContext(GlobalStateContext);
-  const [listItems, setListItems] = useState(inventory);
+  const [listItems, setListItems] = useState(inventory.sort((a, b) => b.date - a.date).reverse());
+
+  const itemRow = [];
+  let prevSelectedItem;
 
   const updateInventory = async () => {
     const groups = await getUserGroups(credentials.userID, credentials.passwordHash);
@@ -44,9 +47,10 @@ const HomeScreen = function HomeScreen({ navigation }) {
     }
 
     if (result.result) {
-      setListItems(result.inventory);
+      const newItems = result.inventory.sort((a, b) => b.date - a.date).reverse();
+      setListItems(newItems);
 
-      dispatch({ type: SET_INVENTORY, payload: result.inventory });
+      dispatch({ type: SET_INVENTORY, payload: newItems });
     } else {
       messageBoxRef.current.createMessage('error', 'unable to get your inventory');
     }
@@ -56,15 +60,36 @@ const HomeScreen = function HomeScreen({ navigation }) {
     updateInventory();
   }, []);
 
-  const renderItem = ({ item }) => (
-    <FoodListItem
-      key={item.date}
-      food={item.name}
-      date={new Date(item.date)}
-      quantity={item.quantity}
-      quantityType={item.type}
-    />
-  );
+  const deleteItem = (item) => {
+    const a = listItems;
+    a.splice(item.index, 1);
+    setListItems([...a]);
+  };
+
+  const renderItem = ({ item, index }, onClick) => {
+    const closeRow = (indexToClose) => {
+      if (prevSelectedItem && prevSelectedItem !== itemRow[indexToClose]) {
+        console.log('test');
+
+        prevSelectedItem.close();
+      }
+      prevSelectedItem = itemRow[indexToClose];
+    };
+
+    return (
+      <FoodListItem
+        innerRef={(ref) => { itemRow[index] = ref; }}
+        key={item.date}
+        food={item.name}
+        date={new Date(item.date)}
+        quantity={item.quantity}
+        quantityType={item.type}
+        closeRow={closeRow}
+        index={index}
+        deleteItem={onClick}
+      />
+    );
+  };
 
   return (
     <ScreenDefault scrollEnabled={false}>
@@ -81,7 +106,12 @@ const HomeScreen = function HomeScreen({ navigation }) {
           decelerationRate="fast"
           showsVerticalScrollIndicator={false}
           data={listItems}
-          renderItem={renderItem}
+          extraData={listItems}
+          renderItem={(v) => (
+            renderItem(v, () => {
+              deleteItem(v);
+            })
+          )}
           keyExtractor={(item) => item.date}
         />
       </View>

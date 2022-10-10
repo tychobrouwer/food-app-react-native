@@ -11,7 +11,12 @@ const styles = StyleSheet.create({
     backgroundColor: config.tertiaryColor,
     alignItems: 'center',
     borderRadius: 5,
+  },
+
+  swipeable: {
+    backgroundColor: config.errorColor,
     marginBottom: 10,
+    borderRadius: 5,
   },
 
   itemTextBox: {
@@ -29,6 +34,24 @@ const styles = StyleSheet.create({
 
   propTitle: {
     color: config.secondaryTextColor,
+  },
+
+  deleteView: {
+    backgroundColor: config.errorColor,
+    borderBottomRightRadius: 5,
+    borderTopRightRadius: 5,
+    width: '30%',
+  },
+
+  deleteTextView: {
+    height: '100%',
+    justifyContent: 'center',
+  },
+
+  deleteText: {
+    fontSize: 21,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
 
