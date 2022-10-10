@@ -54,7 +54,9 @@ const BigTextWithDropdown = function BigTextWithDropdown(
           dropdownStyle={styles.dropdown}
           options={options}
           animated={false}
-          onDropdownWillShow={() => setStatus(true)}
+          onDropdownWillShow={() => {
+            setStatus(true);
+          }}
           onDropdownWillHide={() => setStatus(false)}
           renderRightComponent={() => (
             <View style={styles.dropdownChevron}>

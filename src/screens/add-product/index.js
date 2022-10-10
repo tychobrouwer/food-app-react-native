@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import {
   View, TouchableOpacity, TouchableWithoutFeedback, Keyboard,
 } from 'react-native';
@@ -27,7 +27,7 @@ import stylesMain from '../../styles';
 
 // return the home screen component
 const AddProductScreen = function AddProductScreen({ navigation }) {
-  const { credentials, group } = React.useContext(GlobalStateContext);
+  const { credentials, group } = useContext(GlobalStateContext);
 
   // available units to choose from
   const quantityTypes = [
@@ -126,7 +126,7 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
   // return the add product screen component
   return (
     <ScreenDefault scrollEnabled>
-      <Loader style={!loading ? stylesMain.hidden : {}} />
+      <Loader style={!loading ? stylesMain.hidden : {}} background={false} />
       <MessageBox ref={messageBoxRef} />
 
       <TopNavigator navigation={navigation} />

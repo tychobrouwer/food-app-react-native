@@ -58,7 +58,7 @@ const LoadingScreen = function LoadingScreen({ navigation }) {
   }, []);
 
   // return loader screen component
-  return (<Loader />);
+  return (<Loader background />);
 };
 
 LoadingScreen.propTypes = {

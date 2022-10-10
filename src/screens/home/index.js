@@ -25,7 +25,7 @@ const HomeScreen = function HomeScreen({ navigation }) {
   const dispatch = useContext(GlobalDispatchContext);
 
   const messageBoxRef = useRef();
-  const { credentials, group, inventory } = React.useContext(GlobalStateContext);
+  const { credentials, group, inventory } = useContext(GlobalStateContext);
   const [listItems, setListItems] = useState(inventory.sort((a, b) => b.date - a.date).reverse());
 
   const itemRow = [];

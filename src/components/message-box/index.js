@@ -1,4 +1,6 @@
-import React, { useRef, useState, useImperativeHandle } from 'react';
+import React, {
+  useRef, useState, useImperativeHandle, forwardRef,
+} from 'react';
 import { Text, Animated } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -8,7 +10,7 @@ import config from '../../config';
 import styles from './styles';
 
 // return the message box component
-const MessageBox = React.forwardRef(({ style }, ref) => {
+const MessageBox = forwardRef(({ style }, ref) => {
   const offset = useRef(new Animated.Value(-50)).current;
 
   const [type, setType] = useState('');
@@ -57,7 +59,14 @@ const MessageBox = React.forwardRef(({ style }, ref) => {
   };
 
   return (
-    <Animated.View style={[style, styles.box, { transform: [{ translateY: offset }] }]}>
+    <Animated.View
+      style={[
+        style,
+        styles.box,
+        styles[type],
+        { transform: [{ translateY: offset }] },
+      ]}
+    >
       { messageConstructor() }
     </Animated.View>
   );

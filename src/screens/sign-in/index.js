@@ -137,7 +137,7 @@ const SignInScreen = function SignInScreen({ navigation }) {
   // return the sign in screen component
   return (
     <ScreenDefault scrollEnabled>
-      <Loader style={!loading ? stylesMain.hidden : {}} />
+      <Loader style={!loading ? stylesMain.hidden : {}} background={false} />
 
       <View style={stylesMain.banner}>
         <Text style={[styles.text, styles.titleText]}>Welcome!</Text>
