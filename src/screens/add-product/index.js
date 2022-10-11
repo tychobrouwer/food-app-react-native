@@ -217,7 +217,13 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
       </View>
       <BottomNavigator navigation={navigation} />
       <TouchableWithoutFeedback onPress={() => setScanner(false)}>
-        <Animated.View style={[styles.scannerContainer, !scannerVisible ? { display: 'none' } : {}, { opacity: scannerOpacity }]}>
+        <Animated.View
+          style={[
+            styles.scannerContainer,
+            !scannerVisible ? { zIndex: -10 } : {},
+            { opacity: scannerOpacity },
+          ]}
+        >
           {
             hasPermission === true && (
               <BarCodeScanner
