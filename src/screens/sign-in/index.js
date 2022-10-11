@@ -52,9 +52,12 @@ const SignInScreen = function SignInScreen({ route, navigation }) {
   const [bothRed, setBothRed] = useState(false);
 
   useEffect(() => {
-    const { error } = route.params;
-    if (error) {
-      messageBoxRef.current.createMessage('error', 'Unable to login using stored credentials');
+    if (route.params) {
+      const { error } = route.params;
+
+      if (error) {
+        messageBoxRef.current.createMessage('error', 'Unable to login using stored credentials');
+      }
     }
   }, []);
 
