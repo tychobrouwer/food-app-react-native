@@ -15,134 +15,20 @@ import BottomNavigator from '../../components/bottom-navigator';
 import styles from '../../styles';
 import stylesMain from '../../styles';
 
+// more imports
+import * as FileSystem from 'expo-file-system';
+import * as IntentLauncher from 'expo-intent-launcher';
+
 // return the pdf
 // I have not been able to get this to work properly so far
+
+// Scrollview renderer, this does not work.
 const PrivacyPolicyScreen = function PrivacyPolicyScreen({ navigation }) {
-    return (
+   return (
       <ScreenDefault>
         <TopNavigator navigation={navigation} />
         <View style={stylesMain.content}>
           <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
-            <Text style={styles.contentHeaderText}>
-              LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-            </Text>
             <Text style={styles.contentHeaderText}>
               LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
             </Text>
@@ -152,6 +38,7 @@ const PrivacyPolicyScreen = function PrivacyPolicyScreen({ navigation }) {
       </ScreenDefault>
     );
   };
+
 
 
 PrivacyPolicyScreen.propTypes = {
