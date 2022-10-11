@@ -14,6 +14,7 @@ import RecipesScreen from './screens/recipes';
 import SettingsScreen from './screens/settings';
 import GroceryListScreen from './screens/grocery-list';
 import AddProductScreen from './screens/add-product';
+import TestPage from './screens/test-page';
 
 // initial values for locally stored values
 const initialState = {
@@ -71,6 +72,10 @@ export default function App() {
           <Stack.Screen
             name="Settings"
             component={SettingsScreen}
+          />
+          <Stack.Screen
+            name="TestPage"
+            component={TestPage}
           />
         </Stack.Navigator>
       </NavigationContainer>

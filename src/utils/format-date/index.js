@@ -6,4 +6,12 @@ const formatDate = (input) => new Intl.DateTimeFormat('en-GB', {
   weekday: 'long',
 }).format(input);
 
-export default formatDate;
+const formatDateAlt = (input) => {
+  const year = input.toLocaleString('default', { year: 'numeric' });
+  const month = input.toLocaleString('default', { month: '2-digit' });
+  const day = input.toLocaleString('default', { day: '2-digit' });
+
+  return `${year}-${month}-${day}`;
+};
+
+export { formatDate, formatDateAlt };

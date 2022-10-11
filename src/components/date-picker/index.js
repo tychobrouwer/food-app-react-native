@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import {
   View, TouchableOpacity, Text, Keyboard,
 } from 'react-native';
-import DatePicker, { getFormatedDate } from 'react-native-modern-datepicker';
+import DatePicker from 'tbrouwer-react-native-modern-datepicker';
 
 import config from '../../config';
 
 // import styles
 import styles from './styles';
-import formatDate from '../../utils/format-date';
+import { formatDate, formatDateAlt } from '../../utils/format-date';
 
 // return the big text input with dropdown component
 const DateSelector = function DateSelector(
@@ -45,8 +45,8 @@ const DateSelector = function DateSelector(
             <DatePicker
               style={styles.datePicker}
               mode="calendar"
-              minimumDate={getFormatedDate(new Date(), 'YYYY/MM/DD')}
-              selected={getFormatedDate(date, 'YYYY/MM/DD')}
+              minimumDate={formatDateAlt(new Date())}
+              selected={formatDateAlt(date)}
               onDateChange={(selectedString) => {
                 setVisibility(false);
                 onDateChange(selectedString);
