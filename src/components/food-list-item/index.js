@@ -3,7 +3,7 @@ import {
   Text, View, TouchableOpacity, Animated,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import Swipeable from 'react-native-gesture-handler/Swipeable';
+import { Swipeable, GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import config from '../../config';
 import capitalize from '../../utils/capitalize';
@@ -53,34 +53,40 @@ const FoodListItem = function FoodListItem({
   );
 
   return (
-    <Swipeable
-      onSwipeableOpen={() => {
-        setVisible(true);
-        closeRow(itemID);
-      }}
-      ref={innerRef}
-      onSwipeableClose={() => setVisible(false)}
-      friction={2}
-      containerStyle={styles.swipeable}
-      overshootRight={false}
-      renderRightActions={renderRightActions}
-    >
-      <Animated.View style={[styles.content, { height: itemHeight, opacity: itemOpacity }, style]}>
-        <View style={styles.itemTextBox}>
-          <Text style={[stylesMain.text, styles.itemText]}>
-            <Text style={styles.title}>{capitalize(food)}</Text>
-          </Text>
-          <Text style={[stylesMain.text, styles.itemText]}>
-            <Text style={styles.propTitle}>QUANTITY: </Text>
-            <Text>{`${quantity} ${quantityString}`}</Text>
-          </Text>
-          <Text style={[stylesMain.text, styles.itemText]}>
-            <Text style={styles.propTitle}>EXPIRATION DATE: </Text>
-            <Text>{date.toLocaleDateString()}</Text>
-          </Text>
-        </View>
-      </Animated.View>
-    </Swipeable>
+    <GestureHandlerRootView>
+      <Swipeable
+        onSwipeableOpen={() => {
+          setVisible(true);
+          closeRow(itemID);
+        }}
+        ref={innerRef}
+        onSwipeableClose={() => setVisible(false)}
+        friction={2}
+        containerStyle={styles.swipeable}
+        overshootRight={false}
+        renderRightActions={renderRightActions}
+      >
+        <Animated.View
+          style={[
+            styles.content, { height: itemHeight, opacity: itemOpacity }, style,
+          ]}
+        >
+          <View style={styles.itemTextBox}>
+            <Text style={[stylesMain.text, styles.itemText]}>
+              <Text style={styles.title}>{capitalize(food)}</Text>
+            </Text>
+            <Text style={[stylesMain.text, styles.itemText]}>
+              <Text style={styles.propTitle}>QUANTITY: </Text>
+              <Text>{`${quantity} ${quantityString}`}</Text>
+            </Text>
+            <Text style={[stylesMain.text, styles.itemText]}>
+              <Text style={styles.propTitle}>EXPIRATION DATE: </Text>
+              <Text>{date.toLocaleDateString()}</Text>
+            </Text>
+          </View>
+        </Animated.View>
+      </Swipeable>
+    </GestureHandlerRootView>
   );
 };
 
