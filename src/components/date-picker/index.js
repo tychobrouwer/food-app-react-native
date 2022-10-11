@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import {
-  View, TouchableOpacity, Text, Keyboard,
+  View, TouchableOpacity, Text, Keyboard, Animated,
 } from 'react-native';
 import DatePicker from 'tbrouwer-react-native-modern-datepicker';
 
@@ -20,10 +20,19 @@ const DateSelector = function DateSelector(
   },
 ) {
   const [visibility, setVisibility] = useState(false);
+  const itemOpacity = useRef(new Animated.Value(0)).current;
 
   Keyboard.addListener('keyboardWillShow', () => {
     setVisibility(false);
   });
+
+  const onAction = (show, callback) => {
+    Animated.timing(itemOpacity, {
+      toValue: show ? 1 : 0,
+      duration: 100,
+      useNativeDriver: false,
+    }).start(callback);
+  };
 
   return (
     <View style={[styles.inputView, style]}>
@@ -31,6 +40,7 @@ const DateSelector = function DateSelector(
         style={styles.TextInputWrapper}
         onPress={() => {
           setVisibility(true);
+          onAction(true, () => {});
           Keyboard.dismiss();
         }}
       >
@@ -38,30 +48,31 @@ const DateSelector = function DateSelector(
           {formatDate(date)}
         </Text>
       </TouchableOpacity>
-      {
-        visibility
-        && (
-          <View style={styles.datePickerContainer}>
-            <DatePicker
-              style={styles.datePicker}
-              mode="calendar"
-              minimumDate={formatDateAlt(new Date())}
-              selected={formatDateAlt(date)}
-              onDateChange={(selectedString) => {
-                setVisibility(false);
-                onDateChange(selectedString);
-              }}
-              options={{
-                mainColor: config.secondaryColor,
-                textDefaultColor: config.primaryTextColor,
-                textSecondaryColor: config.secondaryTextColor,
-                selectedTextColor: config.tertiaryColor,
-                textHeaderColor: config.primaryTextColor,
-              }}
-            />
-          </View>
-        )
-      }
+      <Animated.View
+        style={[
+          styles.datePickerContainer,
+          { opacity: itemOpacity },
+          !visibility ? { zIndex: -10 } : {},
+        ]}
+      >
+        <DatePicker
+          style={styles.datePicker}
+          mode="calendar"
+          minimumDate={formatDateAlt(new Date())}
+          selected={formatDateAlt(date)}
+          onDateChange={(selectedString) => {
+            onAction(false, () => setVisibility(false));
+            onDateChange(selectedString);
+          }}
+          options={{
+            mainColor: config.secondaryColor,
+            textDefaultColor: config.primaryTextColor,
+            textSecondaryColor: config.secondaryTextColor,
+            selectedTextColor: config.tertiaryColor,
+            textHeaderColor: config.primaryTextColor,
+          }}
+        />
+      </Animated.View>
     </View>
   );
 };
