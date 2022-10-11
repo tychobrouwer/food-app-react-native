@@ -1,4 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, {
+  useContext, useState, useRef, useEffect,
+} from 'react';
 import {
   Text, View, TouchableOpacity,
 } from 'react-native';
@@ -16,6 +18,7 @@ import ScreenDefault from '../../components/screen-wrapper';
 import Loader from '../../components/loader';
 import { secureStoreSet } from '../../utils/secure-store';
 import { authSignIn, getClientSalt } from '../../api/authentication';
+import { getUserGroups } from '../../api/inventory';
 
 // import logo image
 import LogoNameBelowImage from '../../../assets/logo/logo-name-below-image';
@@ -23,15 +26,17 @@ import LogoNameBelowImage from '../../../assets/logo/logo-name-below-image';
 // import styles
 import stylesMain from '../../styles';
 import styles from './styles';
-import { getUserGroups } from '../../api/inventory';
+import MessageBox from '../../components/message-box';
 
 // import bcrypt package
 const bcrypt = require('bcryptjs');
 
 // sign in screen function
-const SignInScreen = function SignInScreen({ navigation }) {
+const SignInScreen = function SignInScreen({ route, navigation }) {
   // set the dispatch to set the local values
   const dispatch = useContext(GlobalDispatchContext);
+
+  const messageBoxRef = useRef();
 
   // function variables for the user input
   const [email, setEmail] = useState('');
@@ -45,6 +50,13 @@ const SignInScreen = function SignInScreen({ navigation }) {
 
   // function variables for setting both fields to red
   const [bothRed, setBothRed] = useState(false);
+
+  useEffect(() => {
+    const { error } = route.params;
+    if (error) {
+      messageBoxRef.current.createMessage('error', 'Unable to login using stored credentials');
+    }
+  }, []);
 
   // function to reset the error texts
   const resetLoginCheck = () => {
@@ -137,7 +149,8 @@ const SignInScreen = function SignInScreen({ navigation }) {
   // return the sign in screen component
   return (
     <ScreenDefault scrollEnabled>
-      <Loader style={!loading ? stylesMain.hidden : {}} />
+      <Loader style={!loading ? stylesMain.hidden : {}} background={false} />
+      <MessageBox ref={messageBoxRef} />
 
       <View style={stylesMain.banner}>
         <Text style={[styles.text, styles.titleText]}>Welcome!</Text>
@@ -230,6 +243,19 @@ SignInScreen.propTypes = {
     replace: PropTypes.func.isRequired,
     push: PropTypes.func.isRequired,
   }).isRequired,
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      error: PropTypes.bool.isRequired,
+    }),
+  }),
+};
+
+SignInScreen.defaultProps = {
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      error: false,
+    }),
+  }),
 };
 
 export default SignInScreen;

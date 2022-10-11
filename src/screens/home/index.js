@@ -2,7 +2,7 @@ import React, {
   useRef, useEffect, useState, useContext,
 } from 'react';
 import {
-  Text, View, FlatList,
+  Text, View, FlatList, RefreshControl,
 } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -12,12 +12,13 @@ import ScreenDefault from '../../components/screen-wrapper';
 import TopNavigator from '../../components/top-navigator';
 import BottomNavigator from '../../components/bottom-navigator';
 import FoodListItem from '../../components/food-list-item';
-import { getInventory, getUserGroups } from '../../api/inventory';
+import { getInventory, getUserGroups, removeFromInventory } from '../../api/inventory';
 import MessageBox from '../../components/message-box';
 
 // import styles
 import styles from './styles';
 import stylesMain from '../../styles';
+import config from '../../config';
 
 // return the home screen component
 const HomeScreen = function HomeScreen({ navigation }) {
@@ -25,8 +26,9 @@ const HomeScreen = function HomeScreen({ navigation }) {
   const dispatch = useContext(GlobalDispatchContext);
 
   const messageBoxRef = useRef();
-  const { credentials, group, inventory } = React.useContext(GlobalStateContext);
+  const { credentials, group, inventory } = useContext(GlobalStateContext);
   const [listItems, setListItems] = useState(inventory.sort((a, b) => b.date - a.date).reverse());
+  const [refreshing, setRefreshing] = useState(false);
 
   const itemRow = [];
   let prevSelectedItem;
@@ -52,7 +54,7 @@ const HomeScreen = function HomeScreen({ navigation }) {
 
       dispatch({ type: SET_INVENTORY, payload: newItems });
     } else {
-      messageBoxRef.current.createMessage('error', 'unable to get your inventory');
+      messageBoxRef.current.createMessage('error', 'unable to update your inventory');
     }
   };
 
@@ -60,13 +62,31 @@ const HomeScreen = function HomeScreen({ navigation }) {
     updateInventory();
   }, []);
 
-  const deleteItem = (item) => {
-    const a = listItems;
-    a.splice(item.index, 1);
-    setListItems([...a]);
+  const deleteItem = async ({ item }) => {
+    const oldInventory = listItems;
+    const newInventory = oldInventory.filter((item_) => item_.itemID !== item.itemID);
+    setListItems(newInventory);
+
+    const itemRemoveResult = await removeFromInventory(
+      credentials.userID,
+      credentials.passwordHash,
+      group,
+      item.itemID,
+    );
+
+    if (itemRemoveResult.result) {
+      setListItems(itemRemoveResult.newInventory);
+      dispatch({ type: SET_INVENTORY, payload: itemRemoveResult.newInventory });
+
+      messageBoxRef.current.createMessage('success', `removed ${item.name} from inventory`);
+    } else {
+      setListItems(oldInventory);
+
+      messageBoxRef.current.createMessage('error', `failed to remove ${item.name} from inventory`);
+    }
   };
 
-  const renderItem = ({ item, index }, onClick) => {
+  const renderItem = ({ item }, onClick) => {
     const closeRow = (indexToClose) => {
       if (prevSelectedItem && prevSelectedItem !== itemRow[indexToClose]) {
         prevSelectedItem.close();
@@ -76,14 +96,14 @@ const HomeScreen = function HomeScreen({ navigation }) {
 
     return (
       <FoodListItem
-        innerRef={(ref) => { itemRow[index] = ref; }}
-        key={item.date}
+        innerRef={(ref) => { itemRow[item.itemID] = ref; }}
+        key={item.itemID}
         food={item.name}
         date={new Date(item.date)}
         quantity={item.quantity}
         quantityType={item.type}
         closeRow={closeRow}
-        index={index}
+        itemID={item.itemID}
         deleteItem={onClick}
       />
     );
@@ -100,8 +120,20 @@ const HomeScreen = function HomeScreen({ navigation }) {
           </Text>
         </View>
         <FlatList
-          style={{ borderRadius: 5, flex: 1, marginBottom: 20 }}
+          style={styles.flatList}
           decelerationRate="fast"
+          refreshControl={(
+            <RefreshControl
+              colors={config.secondaryColor}
+              tintColor={config.secondaryColor}
+              refreshing={refreshing}
+              onRefresh={async () => {
+                setRefreshing(true);
+                await updateInventory();
+                setRefreshing(false);
+              }}
+            />
+          )}
           showsVerticalScrollIndicator={false}
           data={listItems}
           extraData={listItems}

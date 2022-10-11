@@ -45,10 +45,11 @@ const LoadingScreen = function LoadingScreen({ navigation }) {
           // navigate to home screen
           navigation.replace('Home');
         } else {
-          navigation.replace('SignIn');
+        // if no VALID credentials stored go to sign in
+          navigation.replace('SignIn', { error: true });
         }
       } catch {
-        // if no valid credentials stored go to sign in
+        // if no credentials stored go to sign in
         navigation.replace('SignIn');
       }
     };
@@ -58,7 +59,7 @@ const LoadingScreen = function LoadingScreen({ navigation }) {
   }, []);
 
   // return loader screen component
-  return (<Loader />);
+  return (<Loader background />);
 };
 
 LoadingScreen.propTypes = {

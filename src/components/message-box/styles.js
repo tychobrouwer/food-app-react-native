@@ -14,6 +14,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '80%',
     height: 50,
+    borderWidth: 1,
+    zIndex: 100,
   },
 
   text: {
@@ -23,14 +25,17 @@ const styles = StyleSheet.create({
 
   message: {
     color: config.primaryTextColor,
+    borderColor: config.primaryTextColor,
   },
 
   error: {
     color: config.errorColor,
+    borderColor: config.errorColor,
   },
 
   success: {
     color: config.successColor,
+    borderColor: config.successColor,
   },
 });
 

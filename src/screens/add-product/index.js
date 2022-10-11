@@ -1,6 +1,12 @@
-import React, { useState, useRef } from 'react';
+import React, {
+  useState, useRef, useContext, useEffect,
+} from 'react';
 import {
-  View, TouchableOpacity, TouchableWithoutFeedback, Keyboard,
+  View,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  Keyboard,
+  Animated,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { BarCodeScanner } from 'expo-barcode-scanner';
@@ -9,7 +15,7 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 import CameraImage from '../../../assets/camera-image';
 
 // import components and utils
-import { GlobalStateContext } from '../../components/global-state';
+import { GlobalDispatchContext, GlobalStateContext, SET_INVENTORY } from '../../components/global-state';
 import ScreenDefault from '../../components/screen-wrapper';
 import Loader from '../../components/loader';
 import TopNavigator from '../../components/top-navigator';
@@ -27,7 +33,10 @@ import stylesMain from '../../styles';
 
 // return the home screen component
 const AddProductScreen = function AddProductScreen({ navigation }) {
-  const { credentials, group } = React.useContext(GlobalStateContext);
+  const { credentials, group } = useContext(GlobalStateContext);
+
+  // set the dispatch to set the local values
+  const dispatch = useContext(GlobalDispatchContext);
 
   // available units to choose from
   const quantityTypes = [
@@ -40,6 +49,7 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
   // bar code scanner variables
   const [hasPermission, setHasPermission] = useState(null);
   const [scanner, setScanner] = useState(false);
+  const [scannerVisible, setScannerVisible] = useState(false);
   const messageBoxRef = useRef();
 
   // variables to store the inputs
@@ -47,6 +57,7 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
   const [quantity, setQuantity] = useState('');
   const [quantityType, setQuantityType] = useState('units');
   const [date, setDate] = useState(new Date());
+  const scannerOpacity = useRef(new Animated.Value(1)).current;
 
   // function variable boolean for loading
   const [loading, setLoading] = useState(false);
@@ -78,8 +89,28 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
     // set ingredient to the retrieved ingredient
     setIngredient(data);
 
+    messageBoxRef.current.createMessage('success', 'Bar code scanned');
+
     console.log(`barcode type: ${type}, with data ${data}`);
   };
+
+  useEffect(() => {
+    if (scanner) {
+      setScannerVisible(true);
+    }
+
+    Animated.parallel([
+      Animated.timing(scannerOpacity, {
+        toValue: scanner ? 1 : 0,
+        duration: 100,
+        useNativeDriver: false,
+      }),
+    ]).start(() => {
+      if (!scanner) {
+        setScannerVisible(false);
+      }
+    });
+  }, [scanner]);
 
   // function handling adding product
   const handleAddProduct = async () => {
@@ -114,9 +145,11 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
     }
 
     if (result.result) {
+      dispatch({ type: SET_INVENTORY, payload: result.newInventory });
+
       messageBoxRef.current.createMessage('success', `${ingredient} successfully added`);
     } else {
-      messageBoxRef.current.createMessage('error', `${ingredient} not added`);
+      messageBoxRef.current.createMessage('error', `failed to add ${ingredient}`);
     }
 
     clearFields();
@@ -126,7 +159,7 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
   // return the add product screen component
   return (
     <ScreenDefault scrollEnabled>
-      <Loader style={!loading ? stylesMain.hidden : {}} />
+      <Loader style={!loading ? stylesMain.hidden : {}} background={false} />
       <MessageBox ref={messageBoxRef} />
 
       <TopNavigator navigation={navigation} />
@@ -184,22 +217,22 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
       </View>
       <BottomNavigator navigation={navigation} />
       <TouchableWithoutFeedback onPress={() => setScanner(false)}>
-        <View style={[styles.scannerContainer, !scanner ? { display: 'none' } : {}]}>
+        <Animated.View style={[styles.scannerContainer, !scannerVisible ? { display: 'none' } : {}, { opacity: scannerOpacity }]}>
           {
             hasPermission === true && (
               <BarCodeScanner
-                onBarCodeScanned={scanner ? handleBarCodeScanned : undefined}
+                style={styles.scanner}
+                onBarCodeScanned={handleBarCodeScanned}
                 barCodeTypes={[
                   BarCodeScanner.Constants.BarCodeType.ean13,
                   BarCodeScanner.Constants.BarCodeType.ean8,
                   BarCodeScanner.Constants.BarCodeType.upc_a,
                   BarCodeScanner.Constants.BarCodeType.upc_e,
                 ]}
-                style={styles.scanner}
               />
             )
           }
-        </View>
+        </Animated.View>
       </TouchableWithoutFeedback>
     </ScreenDefault>
   );

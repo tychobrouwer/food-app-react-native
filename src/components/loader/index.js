@@ -8,9 +8,15 @@ import config from '../../config';
 import styles from './styles';
 
 // return the loader component
-const Loader = function Loader({ style }) {
+const Loader = function Loader({ style, background }) {
   return (
-    <View style={[styles.loader, style]}>
+    <View
+      style={[
+        styles.loader,
+        style,
+        background ? { backgroundColor: config.primaryColor } : {},
+      ]}
+    >
       <ActivityIndicator
         color={config.secondaryColor}
         size="large"
@@ -24,6 +30,7 @@ Loader.propTypes = {
     config.styleProp,
     PropTypes.arrayOf(config.styleProp),
   ]),
+  background: PropTypes.bool.isRequired,
 };
 
 Loader.defaultProps = {

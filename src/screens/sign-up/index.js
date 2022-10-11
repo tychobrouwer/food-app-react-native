@@ -10,6 +10,9 @@ import ScreenDefault from '../../components/screen-wrapper';
 import Loader from '../../components/loader';
 import { authSignUp, newClientSalt } from '../../api/authentication';
 
+// import logo image
+import LogoNameBelowImage from '../../../assets/logo/logo-name-below-image';
+
 // import styles
 import stylesMain from '../../styles';
 import styles from './styles';
@@ -102,10 +105,11 @@ const SignUpScreen = function SignUpScreen({ navigation }) {
   // return the sign up screen component
   return (
     <ScreenDefault scrollEnabled>
-      <Loader style={!loading ? stylesMain.hidden : {}} />
+      <Loader style={!loading ? stylesMain.hidden : {}} background={false} />
 
       <View style={stylesMain.banner}>
         <Text style={[styles.text, styles.titleText]}>Create Account</Text>
+        <LogoNameBelowImage width={160} height={160} />
       </View>
 
       <View style={styles.loginContainer}>

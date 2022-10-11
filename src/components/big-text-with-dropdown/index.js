@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { View, TextInput } from 'react-native';
+import { View, TextInput, Keyboard } from 'react-native';
 import ModalDropdown from 'react-native-modal-dropdown';
 
 import config from '../../config';
@@ -54,7 +54,10 @@ const BigTextWithDropdown = function BigTextWithDropdown(
           dropdownStyle={styles.dropdown}
           options={options}
           animated={false}
-          onDropdownWillShow={() => setStatus(true)}
+          onDropdownWillShow={() => {
+            setStatus(true);
+            Keyboard.dismiss();
+          }}
           onDropdownWillHide={() => setStatus(false)}
           renderRightComponent={() => (
             <View style={styles.dropdownChevron}>

@@ -19,7 +19,6 @@ const styles = StyleSheet.create({
   scanner: {
     width: '85%',
     aspectRatio: 1,
-    borderRadius: 5,
   },
 
   cameraTextContainer: {
