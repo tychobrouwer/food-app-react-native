@@ -20,6 +20,7 @@ import AccountSettingsScreen from './screens/AccountSettings';
 //These last 2 are for the as of now unused settings screen buttons. Replace with actual screens when possible.
 //import TestScreen from './screens/TestScreen';
 //import PlaceHolderScreen from './screens/PlaceHolderScreen';
+import TestPage from './screens/test-page';
 
 // initial values for locally stored values
 const initialState = {
@@ -77,6 +78,10 @@ export default function App() {
           <Stack.Screen
             name="Settings"
             component={SettingsScreen}
+          />
+          <Stack.Screen
+            name="TestPage"
+            component={TestPage}
           />
           <Stack.Screen
             name="PrivacyPolicy"
