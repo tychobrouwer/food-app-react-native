@@ -3,7 +3,7 @@ import {
   Text, View, TouchableOpacity, Animated,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import Swipeable from 'react-native-gesture-handler/Swipeable';
+import { Swipeable, GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import config from '../../config';
 import capitalize from '../../utils/capitalize';
@@ -53,6 +53,7 @@ const FoodListItem = function FoodListItem({
   );
 
   return (
+    <GestureHandlerRootView>
     <Swipeable
       onSwipeableOpen={() => {
         setVisible(true);
@@ -81,6 +82,7 @@ const FoodListItem = function FoodListItem({
         </View>
       </Animated.View>
     </Swipeable>
+    </GestureHandlerRootView>
   );
 };
 
