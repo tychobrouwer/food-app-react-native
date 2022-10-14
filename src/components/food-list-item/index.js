@@ -54,7 +54,6 @@ const FoodListItem = function FoodListItem({
 
   return (
     <GestureHandlerRootView>
-    <GestureHandlerRootView>
       <Swipeable
         onSwipeableOpen={() => {
           setVisible(true);
@@ -87,7 +86,6 @@ const FoodListItem = function FoodListItem({
           </View>
         </Animated.View>
       </Swipeable>
-    </GestureHandlerRootView>
     </GestureHandlerRootView>
   );
 };
