@@ -124,7 +124,7 @@ const HomeScreen = function HomeScreen({ navigation }) {
           decelerationRate="fast"
           refreshControl={(
             <RefreshControl
-              colors={config.secondaryColor}
+              // colors={config.secondaryColor}
               tintColor={config.secondaryColor}
               refreshing={refreshing}
               onRefresh={async () => {
