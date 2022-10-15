@@ -33,7 +33,9 @@ const BottomNavigator = function BottomNavigator({ navigation }) {
         >
           <GroceryListImage style={styles.navLink} width={40} height={40} />
         </TouchableOpacity>
-        <View style={styles.navItem} />
+        <View style={styles.navItem}>
+          <AddProductImage onPress={() => navigation.push('AddProduct')} style={styles.navLink} width={90} height={90} />
+        </View>
         <TouchableOpacity
           style={styles.navItem}
           onPress={() => {
@@ -50,16 +52,16 @@ const BottomNavigator = function BottomNavigator({ navigation }) {
         >
           <SettingsImage style={styles.navLink} width={40} height={40} />
         </TouchableOpacity>
-        <View style={[styles.navItem, styles.bigNavItem]}>
+        {/* <View style={[styles.navItem, styles.bigNavItem]}>
           <AddProductImage
-            style={styles.navLink}
-            width={90}
-            height={90}
+            style={[styles.navLink, { marginTop: 'auto' }]}
+            width="100%"
+            height="100%"
             onPress={() => {
               navigation.push('AddProduct');
             }}
           />
-        </View>
+        </View> */}
       </View>
     </View>
   );

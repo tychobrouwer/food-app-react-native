@@ -45,6 +45,7 @@ const stylesMain = StyleSheet.create({
   banner: {
     alignItems: 'center',
     height: '40%',
+    width: '80%',
   },
 
   link: {

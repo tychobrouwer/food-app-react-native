@@ -74,7 +74,9 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
 
     setHasPermission(status === 'granted');
 
-    if (status !== 'granted') {
+    if (status === 'granted') {
+      setScanner(true);
+    } else {
       setScanner(false);
 
       messageBoxRef.current.createMessage('error', 'Change permissions to access the camera');
@@ -168,7 +170,6 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
           style={styles.cameraButton}
           onPress={() => {
             handlePermissions();
-            setScanner(true);
             Keyboard.dismiss();
           }}
         >

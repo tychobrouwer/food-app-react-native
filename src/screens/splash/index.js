@@ -36,7 +36,11 @@ const LoadingScreen = function LoadingScreen({ navigation }) {
           dispatch({
             type: SET_CREDENTIALS,
             payload: {
-              userID: authResult.data.userID, email, passwordHash,
+              userID: authResult.data.userID,
+              firstName: authResult.data.firstName,
+              lastName: authResult.data.lastName,
+              email,
+              passwordHash,
             },
           });
           dispatch({ type: SET_GROUP, payload: group[0] });

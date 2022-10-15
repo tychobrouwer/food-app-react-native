@@ -19,6 +19,7 @@ import Loader from '../../components/loader';
 import { secureStoreSet } from '../../utils/secure-store';
 import { authSignIn, getClientSalt } from '../../api/authentication';
 import { getUserGroups } from '../../api/inventory';
+import MessageBox from '../../components/message-box';
 
 // import logo image
 import LogoNameBelowImage from '../../../assets/logo/logo-name-below-image';
@@ -26,7 +27,6 @@ import LogoNameBelowImage from '../../../assets/logo/logo-name-below-image';
 // import styles
 import stylesMain from '../../styles';
 import styles from './styles';
-import MessageBox from '../../components/message-box';
 
 // import bcrypt package
 const bcrypt = require('bcryptjs');
@@ -113,7 +113,11 @@ const SignInScreen = function SignInScreen({ route, navigation }) {
       dispatch({
         type: SET_CREDENTIALS,
         payload: {
-          userID: authResult.data.userID, email, passwordHash,
+          userID: authResult.data.userID,
+          firstName: authResult.data.firstName,
+          lastName: authResult.data.lastName,
+          email,
+          passwordHash,
         },
       });
       dispatch({ type: SET_GROUP, payload: group[0] });
@@ -157,7 +161,7 @@ const SignInScreen = function SignInScreen({ route, navigation }) {
 
       <View style={stylesMain.banner}>
         <Text style={[styles.text, styles.titleText]}>Welcome!</Text>
-        <LogoNameBelowImage width={160} height={160} />
+        <LogoNameBelowImage width="50%" height="50%" />
       </View>
 
       <View style={styles.loginContainer}>

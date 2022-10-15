@@ -109,7 +109,7 @@ const SignUpScreen = function SignUpScreen({ navigation }) {
 
       <View style={stylesMain.banner}>
         <Text style={[styles.text, styles.titleText]}>Create Account</Text>
-        <LogoNameBelowImage width={160} height={160} />
+        <LogoNameBelowImage width="50%" height="50%" />
       </View>
 
       <View style={styles.loginContainer}>
@@ -151,7 +151,7 @@ const SignUpScreen = function SignUpScreen({ navigation }) {
 
         <BigTextInput
           style={setRed('password')}
-          placeholder="Password"
+          placeholder="Repeat password"
           autoComplete="password"
           textContentType="newPassword"
           secureTextEntry

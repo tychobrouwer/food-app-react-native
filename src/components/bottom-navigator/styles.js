@@ -23,9 +23,8 @@ const styles = StyleSheet.create({
   navItem: {
     flex: 1,
     alignItems: 'center',
-    height: 90,
+    height: 70,
     marginBottom: -20,
-    marginTop: -20,
   },
 
   bigNavItem: {
@@ -33,11 +32,13 @@ const styles = StyleSheet.create({
     marginLeft: '50%',
     marginRight: '50%',
     paddingBottom: 20,
+    width: 90,
+    height: 90,
   },
 
   navLink: {
-    marginTop: 'auto',
     marginBottom: 'auto',
+    marginTop: 'auto',
   },
 });
 

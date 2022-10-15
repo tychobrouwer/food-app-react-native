@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
-  Text, View, TouchableOpacity,
+  Text, View,
 } from 'react-native';
 import PropTypes from 'prop-types';
 
 // import components and utils
+import { GlobalStateContext } from '../../components/global-state';
 import ScreenDefault from '../../components/screen-wrapper';
 import TopNavigator from '../../components/top-navigator';
 import BottomNavigator from '../../components/bottom-navigator';
+import BigBtn from '../../components/big-btn';
 
 // import styles
 import styles from './styles';
@@ -15,44 +17,36 @@ import stylesMain from '../../styles';
 
 // return the settings screen component
 const SettingsScreen = function SettingsScreen({ navigation }) {
+  const { credentials } = useContext(GlobalStateContext);
+
   return (
-    <ScreenDefault>
+    <ScreenDefault scrollEnabled={false}>
       <TopNavigator navigation={navigation} />
-      <View style={stylesMain.content}>
-        <TouchableOpacity style={styles.contentHeader} 
-            onPress={() => {
+      <View style={styles.banner}>
+        <Text style={styles.titleText}>
+          Welcome
+          {credentials.firstName}
+        </Text>
+      </View>
+      <View style={[stylesMain.content, { alignItems: 'center' }]}>
+        <BigBtn
+          title="User Profile"
+          onPress={() => {
             navigation.push('UserProfile');
-          }}>
-          <Text style={styles.contentHeaderText}>
-            USER PROFILE
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.contentHeader} 
-            onPress={() => {
-            navigation.push('AccountSettings');
-          }}>
-          <Text style={styles.contentHeaderText}>
-            ACCOUNT SETTINGS
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.contentHeader} 
-            onPress={() => {
+          }}
+        />
+        <BigBtn
+          title="User Groups"
+          onPress={() => {
+            navigation.push('UserProfile');
+          }}
+        />
+        <BigBtn
+          title="Privacy Policy"
+          onPress={() => {
             navigation.push('PrivacyPolicy');
-          }}>
-          <Text style={styles.contentHeaderText}>
-            PRIVACY POLICY
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.contentHeader}>
-          <Text style={styles.contentHeaderText}>
-            TEST
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.contentHeader}>
-          <Text style={styles.contentHeaderText}>
-            PLACEHOLDER
-          </Text>
-        </TouchableOpacity>
+          }}
+        />
       </View>
       <BottomNavigator navigation={navigation} />
     </ScreenDefault>
