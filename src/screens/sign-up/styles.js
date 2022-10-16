@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: '36px',
     fontWeight: 'bold',
-    marginTop: '30%',
+    marginTop: '70%',
     marginBottom: '5%',
   },
 
