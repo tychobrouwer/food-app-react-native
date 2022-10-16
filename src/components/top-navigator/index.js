@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, TouchableOpacity } from 'react-native';
+import { View } from 'react-native';
 
 // import images used
 import BackArrowImage from '../../../assets/back-arrow-image';
+import PressableView from '../pressable-view';
 
 // import styles
 import styles from './styles';
@@ -12,13 +13,14 @@ import styles from './styles';
 const TopNavigator = function TopNavigator({ navigation }) {
   return (
     <View style={styles.topNav}>
-      <TouchableOpacity
+      <PressableView
+        style={{ width: 35, height: 35 }}
         onPress={() => {
           navigation.pop();
         }}
       >
         <BackArrowImage style={styles.navLink} width={35} height={35} />
-      </TouchableOpacity>
+      </PressableView>
     </View>
   );
 };

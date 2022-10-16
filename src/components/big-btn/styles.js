@@ -9,8 +9,6 @@ const styles = StyleSheet.create({
     width: '80%',
     borderRadius: 25,
     height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: config.tertiaryColor,
     color: config.primaryColor,
     marginBottom: 20,

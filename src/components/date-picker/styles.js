@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
 
   TextInput: {
     fontSize: 18,
+    width: '100%',
     fontWeight: 'bold',
     color: config.primaryTextColor,
   },

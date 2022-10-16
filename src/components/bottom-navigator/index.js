@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, TouchableOpacity } from 'react-native';
+import { View } from 'react-native';
 
 // import images used
 import SettingsImage from '../../../assets/settings-image';
@@ -8,6 +8,7 @@ import RecipesImage from '../../../assets/recipes-image';
 import GroceryListImage from '../../../assets/grocery-list-image';
 import HomeImage from '../../../assets/home-image';
 import AddProductImage from '../../../assets/add-product-image';
+import PressableView from '../pressable-view';
 
 // import styles
 import styles from './styles';
@@ -17,51 +18,41 @@ const BottomNavigator = function BottomNavigator({ navigation }) {
   return (
     <View style={styles.bottomNav}>
       <View style={styles.bottomNavWrapper}>
-        <TouchableOpacity
+        <PressableView
           style={styles.navItem}
           onPress={() => {
             navigation.push('Home');
           }}
         >
           <HomeImage style={styles.navLink} width={40} height={40} />
-        </TouchableOpacity>
-        <TouchableOpacity
+        </PressableView>
+        <PressableView
           style={styles.navItem}
           onPress={() => {
             navigation.push('GroceryList');
           }}
         >
           <GroceryListImage style={styles.navLink} width={40} height={40} />
-        </TouchableOpacity>
+        </PressableView>
         <View style={styles.navItem}>
           <AddProductImage onPress={() => navigation.push('AddProduct')} style={styles.navLink} width={90} height={90} />
         </View>
-        <TouchableOpacity
+        <PressableView
           style={styles.navItem}
           onPress={() => {
             navigation.push('Recipes');
           }}
         >
           <RecipesImage style={styles.navLink} width={40} height={40} />
-        </TouchableOpacity>
-        <TouchableOpacity
+        </PressableView>
+        <PressableView
           style={styles.navItem}
           onPress={() => {
             navigation.push('Settings');
           }}
         >
           <SettingsImage style={styles.navLink} width={40} height={40} />
-        </TouchableOpacity>
-        {/* <View style={[styles.navItem, styles.bigNavItem]}>
-          <AddProductImage
-            style={[styles.navLink, { marginTop: 'auto' }]}
-            width="100%"
-            height="100%"
-            onPress={() => {
-              navigation.push('AddProduct');
-            }}
-          />
-        </View> */}
+        </PressableView>
       </View>
     </View>
   );

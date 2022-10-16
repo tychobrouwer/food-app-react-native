@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 const config = {
   primaryColor: '#60C9CD',
   secondaryColor: '#B336F7',
-  tertiaryColor: '#FFF',
-  primaryTextColor: '#222',
-  secondaryTextColor: '#999',
-  errorColor: '#F00',
-  successColor: '#0F0',
+  tertiaryColor: '#FFFFFF',
+  primaryTextColor: '#222222',
+  secondaryTextColor: '#999999',
+  errorColor: '#FF0000',
+  successColor: '#00E000',
 
   styleProp: PropTypes.objectOf(PropTypes.oneOfType([
     PropTypes.string,

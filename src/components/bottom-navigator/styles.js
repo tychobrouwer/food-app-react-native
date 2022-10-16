@@ -24,7 +24,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     height: 70,
-    marginBottom: -20,
+    marginBottom: -5,
+    marginTop: -5,
   },
 
   bigNavItem: {
