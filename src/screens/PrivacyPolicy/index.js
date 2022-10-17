@@ -24,14 +24,12 @@ const PrivacyPolicyScreen = function PrivacyPolicyScreen({ navigation }) {
       <Loader style={!loading ? stylesMain.hidden : {}} background={false} />
       <TopNavigator navigation={navigation} />
       <View style={stylesMain.content}>
-        {/* <ScrollView contentContainerStyle={{ flexGrow: 1 }}> */}
         <WebView
           style={{ marginBottom: 30 }}
           source={{ uri: source }}
           onLoadStart={() => setLoading(true)}
           onLoad={() => setLoading(false)}
         />
-        {/* </ScrollView> */}
       </View>
       <BottomNavigator navigation={navigation} />
     </ScreenDefault>

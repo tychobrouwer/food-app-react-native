@@ -39,7 +39,7 @@ const LoadingScreen = function LoadingScreen({ navigation }) {
               userID: authResult.data.userID,
               firstName: authResult.data.firstName,
               lastName: authResult.data.lastName,
-              email,
+              email: email.toLowerCase(),
               passwordHash,
             },
           });
