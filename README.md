@@ -121,6 +121,7 @@ The **assets** folder is designated for images or fonts used in the app like the
 |-- .eslintrc
 |-- .gitignore
 |-- app.json
+|-- AppEntry.js
 |-- babel.config.js
 |-- package-lock.json
 |-- package.json
