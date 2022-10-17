@@ -64,6 +64,7 @@ Expo Go is used to run the project on your own device, without having to submit 
 
 - Make additional pages (grocery list, recipe list).
 - Make group settings logic.
+- Redesign ingredient list item
 - Make recipe database.
 - Reset password logic.
 
