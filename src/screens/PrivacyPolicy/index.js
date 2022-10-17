@@ -1,29 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
-  View, WebView,
+  View,
 } from 'react-native';
+import { WebView } from 'react-native-webview';
 import PropTypes from 'prop-types';
 
 // import components and utils
 import ScreenDefault from '../../components/screen-wrapper';
 import TopNavigator from '../../components/top-navigator';
 import BottomNavigator from '../../components/bottom-navigator';
+import Loader from '../../components/loader';
 
 // import styles
-// import styles from './styles';
 import stylesMain from '../../styles';
 
-// more imports
-
 const PrivacyPolicyScreen = function PrivacyPolicyScreen({ navigation }) {
-  const source = 'https://drive.google.com/viewerng/viewer?embedded=true&url=https://drive.google.com/file/d/1VQwxnlV_nZU_DmmvUsZ_UbWMesOZKgPo';
+  const [loading, setLoading] = useState(false);
+
+  const source = 'https://drive.google.com/u/2/uc?id=1VQwxnlV_nZU_DmmvUsZ_UbWMesOZKgPo&export=download';
 
   return (
     <ScreenDefault scrollEnabled={false}>
+      <Loader style={!loading ? stylesMain.hidden : {}} background={false} />
       <TopNavigator navigation={navigation} />
       <View style={stylesMain.content}>
         {/* <ScrollView contentContainerStyle={{ flexGrow: 1 }}> */}
-        <WebView javaScriptEnabled style={{ flex: 1 }} source={{ source }} />
+        <WebView
+          style={{ marginBottom: 30 }}
+          source={{ uri: source }}
+          onLoadStart={() => setLoading(true)}
+          onLoad={() => setLoading(false)}
+        />
         {/* </ScrollView> */}
       </View>
       <BottomNavigator navigation={navigation} />
