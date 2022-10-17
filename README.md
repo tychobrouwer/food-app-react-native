@@ -83,6 +83,7 @@ The **assets** folder is designated for images or fonts used in the app like the
 |    |-- api
 |    |    |-- authentication
 |    |    |-- inventory
+|    |    |-- user
 |    |    |-- constants
 |    |-- components
 |    |    |-- big-btn
@@ -94,17 +95,21 @@ The **assets** folder is designated for images or fonts used in the app like the
 |    |    |-- global-state
 |    |    |-- loader
 |    |    |-- message-box
+|    |    |-- pressable-view
 |    |    |-- screen-wrapper
 |    |    |-- top-navigator
 |    |-- screens
 |    |    |-- add-product
 |    |    |-- grocery-list
 |    |    |-- home
+|    |    |-- privacy-policy
 |    |    |-- recipes
 |    |    |-- settings
 |    |    |-- sign-in
 |    |    |-- sign-up
 |    |    |-- splash
+|    |    |-- user-group
+|    |    |-- user-profile
 |    |-- styles
 |    |-- utils
 |    |    |-- capitalize
