@@ -62,11 +62,10 @@ Expo Go is used to run the project on your own device, without having to submit 
 
 ### TO DO's (and thoughts)
 
-- Make additional pages (settings, grocery list, recipe list).
-- Remove ingredient from database.
-- Reset password logic.
-- Change password logic.
+- Make additional pages (grocery list, recipe list).
+- Make group settings logic.
 - Make recipe database.
+- Reset password logic.
 
 ### Folder Explanation
 
