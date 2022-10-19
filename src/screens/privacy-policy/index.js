@@ -1,36 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
-  Text, View, ScrollView,
+  View,
 } from 'react-native';
-// import { WebView } from 'react-native-webview';
+import { WebView } from 'react-native-webview';
 import PropTypes from 'prop-types';
-// import { Constants } from "expo";
 
 // import components and utils
 import ScreenDefault from '../../components/screen-wrapper';
 import TopNavigator from '../../components/top-navigator';
 import BottomNavigator from '../../components/bottom-navigator';
+import Loader from '../../components/loader';
 
 // import styles
-import styles from './styles';
 import stylesMain from '../../styles';
 
-// more imports
-
-// return the pdf
-// I have not been able to get this to work properly so far
-
-// Scrollview renderer, this does not work.
 const PrivacyPolicyScreen = function PrivacyPolicyScreen({ navigation }) {
+  const [loading, setLoading] = useState(false);
+
+  const source = 'https://drive.google.com/u/2/uc?id=1VQwxnlV_nZU_DmmvUsZ_UbWMesOZKgPo&export=download';
+
   return (
-    <ScreenDefault>
+    <ScreenDefault scrollEnabled={false}>
+      <Loader style={!loading ? stylesMain.hidden : {}} background={false} />
       <TopNavigator navigation={navigation} />
       <View style={stylesMain.content}>
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-          <Text style={styles.contentHeaderText}>
-            LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-          </Text>
-        </ScrollView>
+        <WebView
+          style={{ marginBottom: 30 }}
+          source={{ uri: source }}
+          onLoadStart={() => setLoading(true)}
+          onLoad={() => setLoading(false)}
+        />
       </View>
       <BottomNavigator navigation={navigation} />
     </ScreenDefault>

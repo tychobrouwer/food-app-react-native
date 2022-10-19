@@ -62,11 +62,11 @@ Expo Go is used to run the project on your own device, without having to submit 
 
 ### TO DO's (and thoughts)
 
-- Make additional pages (settings, grocery list, recipe list).
-- Remove ingredient from database.
-- Reset password logic.
+- Make additional pages (grocery list, recipe list).
+- Make group settings logic.
+- Redesign ingredient list item
 - Make recipe database.
-- Recipe sorting and logic.
+- Reset password logic.
 
 ### Folder Explanation
 
@@ -84,6 +84,7 @@ The **assets** folder is designated for images or fonts used in the app like the
 |    |-- api
 |    |    |-- authentication
 |    |    |-- inventory
+|    |    |-- user
 |    |    |-- constants
 |    |-- components
 |    |    |-- big-btn
@@ -95,17 +96,21 @@ The **assets** folder is designated for images or fonts used in the app like the
 |    |    |-- global-state
 |    |    |-- loader
 |    |    |-- message-box
+|    |    |-- pressable-view
 |    |    |-- screen-wrapper
 |    |    |-- top-navigator
 |    |-- screens
 |    |    |-- add-product
 |    |    |-- grocery-list
 |    |    |-- home
+|    |    |-- privacy-policy
 |    |    |-- recipes
 |    |    |-- settings
 |    |    |-- sign-in
 |    |    |-- sign-up
 |    |    |-- splash
+|    |    |-- user-group
+|    |    |-- user-profile
 |    |-- styles
 |    |-- utils
 |    |    |-- capitalize
@@ -117,6 +122,7 @@ The **assets** folder is designated for images or fonts used in the app like the
 |-- .eslintrc
 |-- .gitignore
 |-- app.json
+|-- AppEntry.js
 |-- babel.config.js
 |-- package-lock.json
 |-- package.json

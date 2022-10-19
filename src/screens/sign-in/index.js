@@ -100,7 +100,6 @@ const SignInScreen = function SignInScreen({ route, navigation }) {
     const salt = await getClientSalt(email);
 
     // hash the password with the salt
-    // const passwordHash = bcrypt.hashSync(password, salt);
     const passwordHash = await bcrypt.hash(password, salt);
 
     // get the sign in result
@@ -116,7 +115,7 @@ const SignInScreen = function SignInScreen({ route, navigation }) {
           userID: authResult.data.userID,
           firstName: authResult.data.firstName,
           lastName: authResult.data.lastName,
-          email,
+          email: email.toLowerCase(),
           passwordHash,
         },
       });

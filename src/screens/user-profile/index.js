@@ -15,13 +15,14 @@ import BigTextInput from '../../components/big-text-input';
 import BigBtn from '../../components/big-btn';
 import { getClientSalt } from '../../api/authentication';
 import validateEmail from '../../utils/validate-email';
+import updateUserDetails from '../../api/user';
+import capitalize from '../../utils/capitalize';
 
 import config from '../../config';
 
 // import styles
 import styles from './styles';
 import stylesMain from '../../styles';
-import { updateUserDetails } from '../../api/user';
 
 // import bcrypt package
 const bcrypt = require('bcryptjs');
@@ -53,33 +54,47 @@ const UserProfileScreen = function UserProfileScreen({ navigation }) {
     // set loading to true
     setLoading(true);
 
-    const toUpdate = {};
+    const newCredentials = {};
+    const updateQuery = {};
+    let valid = false;
 
-    if (firstName !== '' && firstName !== credentials.firstName) toUpdate.firstName = firstName;
-    if (lastName !== '' && lastName !== credentials.lastName) toUpdate.lastName = lastName;
+    if (firstName !== '' && firstName !== credentials.firstName) {
+      newCredentials.firstName = firstName;
+      updateQuery.FirstName = firstName;
+      valid = true;
+    }
+
+    if (lastName !== '' && lastName !== credentials.lastName) {
+      newCredentials.lastName = lastName;
+      updateQuery.LastName = lastName;
+      valid = true;
+    }
 
     if (email !== '' && email !== credentials.email) {
       const emailValidCheck = validateEmail(email) !== null;
 
       if (emailValidCheck) {
-        toUpdate.email = email;
+        newCredentials.email = email;
+        updateQuery.Email = email;
+        valid = true;
       } else {
         setEmailText('Enter a valid email.');
       }
     }
 
-    const salt = getClientSalt();
-
-    // hash the passwords with the salt
-    const [passwordHash, passwordHash1] = await Promise.all([
-      bcrypt.hash(password, salt),
-      bcrypt.hash(password1, salt),
-    ]);
-
     if (password !== '' && password1 !== '') {
+      const salt = await getClientSalt(credentials.email);
+
+      const [passwordHash, passwordHash1] = await Promise.all([
+        bcrypt.hash(password, salt),
+        bcrypt.hash(password1, salt),
+      ]);
+
       if (passwordHash === passwordHash1) {
         if (passwordHash !== credentials.passwordHash) {
-          toUpdate.passwordHash = passwordHash;
+          newCredentials.passwordHash = passwordHash;
+          updateQuery.Password = passwordHash;
+          valid = true;
         } else {
           setPasswordText('Password same as current password');
         }
@@ -88,14 +103,20 @@ const UserProfileScreen = function UserProfileScreen({ navigation }) {
       }
     }
 
-    const updateResult = updateUserDetails(credentials.userID, credentials.passwordHash, toUpdate);
+    if (valid) {
+      const updateResult = await updateUserDetails(
+        credentials.userID,
+        credentials.passwordHash,
+        updateQuery,
+      );
 
-    if (updateResult) {
-      dispatch({ type: SET_CREDENTIALS, payload: Object.assign(credentials, toUpdate) });
+      if (updateResult.result) {
+        dispatch({ type: SET_CREDENTIALS, payload: Object.assign(credentials, newCredentials) });
 
-      messageBoxRef.current.createMessage('success', 'Successfully updated account details');
-    } else {
-      messageBoxRef.current.createMessage('error', 'Failed to update account details');
+        messageBoxRef.current.createMessage('success', 'Successfully updated account details');
+      } else {
+        messageBoxRef.current.createMessage('error', 'Failed to update account details');
+      }
     }
 
     setLoading(false);
@@ -125,7 +146,7 @@ const UserProfileScreen = function UserProfileScreen({ navigation }) {
         <BigTextInput
           style={{ marginBottom: 25 }}
           placeholder="First name"
-          value={firstName || ''}
+          value={capitalize(firstName) || ''}
           onChangeText={(firstNameValue) => {
             setFirstName(firstNameValue);
           }}
@@ -133,7 +154,7 @@ const UserProfileScreen = function UserProfileScreen({ navigation }) {
         <BigTextInput
           style={{ marginBottom: 25 }}
           placeholder="Last name"
-          value={lastName || ''}
+          value={capitalize(lastName) || ''}
           onChangeText={(lastNameValue) => {
             setLastName(lastNameValue);
           }}
@@ -200,6 +221,7 @@ const UserProfileScreen = function UserProfileScreen({ navigation }) {
         </View>
 
         <BigBtn
+          style={styles.saveBtn}
           title="SAVE"
           onPress={() => {
             saveCredentials();

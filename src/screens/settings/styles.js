@@ -5,31 +5,23 @@ import config from '../../config';
 
 // styles for the settings screen
 const styles = StyleSheet.create({
-  topNav: {
-    width: '85%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: '15%',
+  banner: {
+    height: '20%',
+    justifyContent: 'center',
   },
 
-  contentHeader: {
-    width: '100%',
-    height: 80,
-    backgroundColor: config.tertiaryColor,
-    color: config.primaryTextColor,
-    alignItems: 'center',
-    borderRadius: 15,
-    padding: 0,
-    flex: 0,
-
-  },
-
-  contentHeaderText: {
-    fontSize: 32,
-    marginTop: 'auto',
-    marginBottom: 'auto',
+  titleText: {
     fontWeight: 'bold',
-    color: config.primaryTextColor,
+    fontSize: 36,
+    textAlign: 'center',
+  },
+
+  secondaryText: {
+    textAlign: 'center',
+    marginTop: 5,
+    fontWeight: 'bold',
+    fontSize: 18,
+    color: config.secondaryColor,
   },
 });
 

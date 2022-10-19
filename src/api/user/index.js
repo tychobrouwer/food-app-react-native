@@ -1,15 +1,15 @@
 import constants from '../constants';
 
-export const updateUserDetails = async (userID, passwordHash, details) => {
+const updateUserDetails = async (userID, passwordHash, details) => {
   try {
     // fetch request for adding an item to an inventory
-    const response = await fetch(constants.endpoint('add-item'), {
+    const response = await fetch(constants.endpoint('update-user'), {
       method: 'POST',
       headers: constants.headers,
       body: JSON.stringify({
         userID,
         password: passwordHash,
-        details,
+        toUpdate: details,
       }),
     });
 
@@ -26,27 +26,29 @@ export const updateUserDetails = async (userID, passwordHash, details) => {
   }
 };
 
-export const getUserDetails = async (userID, passwordHash) => {
-  try {
-    // fetch request for getting the user groups
-    const response = await fetch(constants.endpoint('get-groups'), {
-      method: 'POST',
-      headers: constants.headers,
-      body: JSON.stringify({
-        userID,
-        password: passwordHash,
-      }),
-    });
+export default updateUserDetails;
 
-    // await the json response of the server
-    const result = await response.json();
+// export const getUserDetails = async (userID, passwordHash) => {
+//   try {
+//     // fetch request for getting the user groups
+//     const response = await fetch(constants.endpoint('get-groups'), {
+//       method: 'POST',
+//       headers: constants.headers,
+//       body: JSON.stringify({
+//         userID,
+//         password: passwordHash,
+//       }),
+//     });
 
-    if (result.result) {
-      return JSON.parse(result.data);
-    }
+//     // await the json response of the server
+//     const result = await response.json();
 
-    return {};
-  } catch (error) {
-    return {};
-  }
-};
+//     if (result.result) {
+//       return JSON.parse(result.data);
+//     }
+
+//     return {};
+//   } catch (error) {
+//     return {};
+//   }
+// };

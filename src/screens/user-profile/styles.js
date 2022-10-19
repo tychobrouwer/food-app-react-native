@@ -1,8 +1,5 @@
 import { StyleSheet } from 'react-native';
 
-// import the style config
-// import config from '../../config';
-
 // styles for the settings screen
 const styles = StyleSheet.create({
   settingTitle: {
@@ -11,6 +8,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 27,
     fontSize: 18,
     fontWeight: 'bold',
+  },
+
+  saveBtn: {
+    marginTop: '10%',
   },
 });
 

@@ -25,7 +25,10 @@ const SettingsScreen = function SettingsScreen({ navigation }) {
       <View style={styles.banner}>
         <Text style={styles.titleText}>
           Welcome
-          {credentials.firstName}
+          {` ${credentials.firstName}`}
+        </Text>
+        <Text style={styles.secondaryText}>
+          {credentials.email}
         </Text>
       </View>
       <View style={[stylesMain.content, { alignItems: 'center' }]}>
