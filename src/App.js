@@ -14,12 +14,20 @@ import RecipesScreen from './screens/recipes';
 import SettingsScreen from './screens/settings';
 import GroceryListScreen from './screens/grocery-list';
 import AddProductScreen from './screens/add-product';
+<<<<<<< HEAD
 import PrivacyPolicyScreen from './screens/privacy-policy';
 import UserProfileScreen from './screens/user-profile';
 // import UserGroupScreen from './screens/user-group';
 // import RecipesSearchScreen from './screens/recipe-search';
 // import RecipesSuggestedScreen from './screens/suggested-meals';
 // import RecipesMyMealsScreen from './screens/my-meals';
+=======
+import PrivacyPolicyScreen from './screens/PrivacyPolicy';
+import UserProfileScreen from './screens/UserProfile';
+import RecipesSearchScreen from './screens/recipeSearch';
+import RecipesSuggestedScreen from './screens/suggestedMeals';
+import RecipesMyMealsScreen from './screens/myMeals';
+>>>>>>> d23d8313195376847dabdd9791c791f5be7286ba
 
 // initial values for locally stored values
 const initialState = {
@@ -38,9 +46,7 @@ export default function App() {
     <GlobalState initialState={state} dispatch={dispatch}>
       <NavigationContainer>
         <Stack.Navigator
-          // change 'initialRouteName' to change the starting screen
-          // for final app this should be 'Splash'
-          initialRouteName="Splash"
+          initialRouteName="Recipes"
           screenOptions={{
             headerShown: false,
             animation: 'none',
@@ -86,6 +92,19 @@ export default function App() {
             name="UserProfile"
             component={UserProfileScreen}
           />
+          <Stack.Screen
+            name="RecipeSearch"
+            component={RecipesSearchScreen}
+          />
+           <Stack.Screen
+            name="RecipeSuggested"
+            component={RecipesSuggestedScreen}
+          />
+           <Stack.Screen
+            name="RecipeMyMeals"
+            component={RecipesMyMealsScreen}
+          />
+
         </Stack.Navigator>
       </NavigationContainer>
     </GlobalState>
