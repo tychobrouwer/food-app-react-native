@@ -1,22 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View, Text, TouchableOpacity,
 } from 'react-native';
 import PropTypes from 'prop-types';
+
 
 // import components and utils
 import ScreenDefault from '../../components/screen-wrapper';
 import TopNavigator from '../../components/top-navigator';
 import BottomNavigator from '../../components/bottom-navigator';
 
+
 // import styles
 import styles from './styles';
 import stylesMain from '../../styles';
 
+
 // return the home screen component
-const RecipesScreen = function RecipesScreen({ navigation }) {
+const RecipesScreen = function RecipesScreen({navigation}) {
+
+  const [value, setValue] = useState('');
+
   return (
-    <ScreenDefault scrollEnabled>
+    <ScreenDefault scrollEnabled scrollEnabled>
       <TopNavigator navigation={navigation} />
       <View style={stylesMain.content}>
 
