@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 // import the config
 import config from '../../config';
 
-// styles for the grocery screen
+// styles for the home screen
 const styles = StyleSheet.create({
   contentHeader: {
     width: '100%',
@@ -17,29 +17,6 @@ const styles = StyleSheet.create({
 
   contentHeaderText: {
     fontSize: 32,
-    marginTop: 'auto',
-    marginBottom: 'auto',
-    fontWeight: 'bold',
-    color: config.primaryTextColor,
-  },
-
-  contentSubHeader: {
-    marginTop: '10%',
-    width: '40%',
-    height: 30,
-    backgroundColor: config.tertiaryColor,
-    color: config.primaryTextColor,
-    alignItems: 'center',
-    borderRadius: 5,
-
-  },
-
-  directionRow: {
-    flexDirection: 'row',
-  },
-
-  contentSubHeaderText: {
-    fontSize: 25,
     marginTop: 'auto',
     marginBottom: 'auto',
     fontWeight: 'bold',

@@ -24,7 +24,7 @@ const UserGroupScreen = function UserGroupScreen({ navigation }) {
   const messageBoxRef = useRef();
 
   // function variable boolean for loading
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
 
   return (
     <ScreenDefault scrollEnabled>

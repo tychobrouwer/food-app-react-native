@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     paddingVertical: '15%',
     paddingHorizontal: '0%',
     backgroundColor: config.secondaryColor,
-    marginTop: '13%',
+    marginTop: '5%',
   },
 
   buttonText: {
@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: '15%',
   },
-
 });
 
 export default styles;

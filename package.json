@@ -13,22 +13,26 @@
   "dependencies": {
     "@react-navigation/native": "^6.0.12",
     "@react-navigation/native-stack": "^6.8.0",
+    "add": "^2.0.6",
     "bcryptjs": "^2.4.3",
     "expo": "~46.0.16",
     "expo-barcode-scanner": "~11.4.0",
     "expo-checkbox": "~2.2.0",
     "expo-secure-store": "~11.3.0",
     "expo-splash-screen": "~0.16.2",
+    "or": "^0.2.0",
     "prop-types": "^15.8.1",
     "react": "18.0.0",
     "react-native": "0.69.6",
     "react-native-gesture-handler": "2.5.0",
     "react-native-modal-dropdown": "^1.0.2",
+    "react-native-platform-searchbar": "^1.2.3",
     "react-native-safe-area-context": "4.3.1",
     "react-native-screens": "~3.15.0",
     "react-native-svg": "12.3.0",
     "react-native-webview": "11.23.0",
-    "tbrouwer-react-native-modern-datepicker": "^1.0.3"
+    "tbrouwer-react-native-modern-datepicker": "^1.0.3",
+    "yarn": "^1.22.19"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

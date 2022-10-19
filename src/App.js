@@ -16,7 +16,10 @@ import GroceryListScreen from './screens/grocery-list';
 import AddProductScreen from './screens/add-product';
 import PrivacyPolicyScreen from './screens/privacy-policy';
 import UserProfileScreen from './screens/user-profile';
-import UserGroupScreen from './screens/user-group';
+// import UserGroupScreen from './screens/user-group';
+// import RecipesSearchScreen from './screens/recipe-search';
+// import RecipesSuggestedScreen from './screens/suggested-meals';
+// import RecipesMyMealsScreen from './screens/my-meals';
 
 // initial values for locally stored values
 const initialState = {
@@ -35,6 +38,8 @@ export default function App() {
     <GlobalState initialState={state} dispatch={dispatch}>
       <NavigationContainer>
         <Stack.Navigator
+          // change 'initialRouteName' to change the starting screen
+          // for final app this should be 'Splash'
           initialRouteName="Splash"
           screenOptions={{
             headerShown: false,
@@ -58,12 +63,12 @@ export default function App() {
             component={HomeScreen}
           />
           <Stack.Screen
-            name="GroceryList"
-            component={GroceryListScreen}
-          />
-          <Stack.Screen
             name="Recipes"
             component={RecipesScreen}
+          />
+          <Stack.Screen
+            name="GroceryList"
+            component={GroceryListScreen}
           />
           <Stack.Screen
             name="AddProduct"
@@ -80,10 +85,6 @@ export default function App() {
           <Stack.Screen
             name="UserProfile"
             component={UserProfileScreen}
-          />
-          <Stack.Screen
-            name="UserGroup"
-            component={UserGroupScreen}
           />
         </Stack.Navigator>
       </NavigationContainer>
