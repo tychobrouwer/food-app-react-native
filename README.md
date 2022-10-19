@@ -26,12 +26,13 @@ This is a project for the course Engineering Design - group 172. Instructions on
 11. Run ```git remote add upstream https://github.com/TychoBrouwer/Food_App_React_Native.git```.
 12. Run ```git pull origin main```.
 13. Run ```npm install``` to install the necessary packages.
-14. In your text editor in ```node_modules/expo/AppEntry.js``` change the App import to ```'../../src/App'```.
-15. In the ```src/api/constants.template.js``` file set the **serverIP** and remove **template** from the filename.
-16. Run ```npm start``` to start the Expo server.
-17. Scan the QR code from the console with your phone (for IOS with the camera app).
+14. In your text editor in ```node_modules/expo/AppEntry.js``` change ```'../src/App'``` to ```'../../src/App'```.
+15. Duplicate the ```src/api/constants.template.js``` file and remove **template** from the filename.
+16. Set the **serverIP** in the ```src/api/constants.js``` file.
+17. Run ```npm start``` to start the Expo server.
+18. Scan the QR code from the console with your phone (for IOS with the camera app).
 
-### To push updates to your fork repository
+### To push updates to your repository
 
 1. Run ```cd path/project/directory``` to navigate to your project folder.
 2. Run ```npm run lint-fix``` to fix any styling issues.
@@ -46,13 +47,12 @@ This is a project for the course Engineering Design - group 172. Instructions on
 
 ### To push updates to the original repository
 
-1. First push updates to your fork repository.
-2. Go to ```https://github.com/"Your GitHub username"/Food_App_React_Native.git```.
+1. First push updates to your repository.
+2. Go to ```https://github.com/"Your GitHub username"/Food_App_React_Native``` in your web browser.
 3. Navigate to **Pull requests**.
 4. Press on **New pull request**.
 5. You can leave the default settings and press **Create pull request**.
 6. Give the request a title and maybe a comment and press **Create pull request**.
-7. You will have to wait for me to accept the request for it to be added to the repository.
 
 ## App
 
@@ -62,14 +62,11 @@ Expo Go is used to run the project on your own device, without having to submit 
 
 ### TO DO's (and thoughts)
 
-- Make additional pages (settings, add product, grocery list, recipe list).
-- Implement access and refresh tokens into the authorization server.
-- Make user data table.
+- Make additional pages (settings, grocery list, recipe list).
+- Remove ingredient from database.
 - Reset password logic.
 - Change password logic.
-- Make household table.
 - Make recipe database.
-- Link user database to household database.
 
 ### Folder Explanation
 
@@ -86,25 +83,37 @@ The **assets** folder is designated for images or fonts used in the app like the
 |-- src
 |    |-- api
 |    |    |-- authentication
+|    |    |-- inventory
 |    |    |-- constants
 |    |-- components
 |    |    |-- big-btn
 |    |    |-- big-text-input
+|    |    |-- big-text-with-dropdown
+|    |    |-- bottom-navigator
+|    |    |-- date-picker
+|    |    |-- food-list-item
 |    |    |-- global-state
 |    |    |-- loader
+|    |    |-- message-box
 |    |    |-- screen-wrapper
+|    |    |-- top-navigator
 |    |-- screens
+|    |    |-- add-product
+|    |    |-- grocery-list
 |    |    |-- home
+|    |    |-- recipes
+|    |    |-- settings
 |    |    |-- sign-in
 |    |    |-- sign-up
 |    |    |-- splash
 |    |-- styles
-|    |    |-- config
 |    |-- utils
 |    |    |-- capitalize
+|    |    |-- format-date
 |    |    |-- secure-store
 |    |    |-- validate-email
 |    |-- App.js
+|    |-- config.js
 |-- .eslintrc
 |-- .gitignore
 |-- app.json

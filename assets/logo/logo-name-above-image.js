@@ -11,7 +11,7 @@ import Svg, {
 } from 'react-native-svg';
 import PropTypes from 'prop-types';
 
-import config from '../../src/styles/config';
+import config from '../../src/config';
 
 const LogoNameAboveImage = function LogoNameAboveImage({ width, height, style }) {
   return (
@@ -195,18 +195,19 @@ const LogoNameAboveImage = function LogoNameAboveImage({ width, height, style })
   );
 };
 
-const styleProp = PropTypes.objectOf(PropTypes.oneOfType([
-  PropTypes.string,
-  PropTypes.number,
-]));
-
 LogoNameAboveImage.propTypes = {
   style: PropTypes.oneOfType([
-    styleProp,
-    PropTypes.arrayOf(styleProp),
+    config.styleProp,
+    PropTypes.arrayOf(config.styleProp),
   ]),
-  width: PropTypes.number.isRequired,
-  height: PropTypes.number.isRequired,
+  width: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]).isRequired,
+  height: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]).isRequired,
 };
 
 LogoNameAboveImage.defaultProps = {

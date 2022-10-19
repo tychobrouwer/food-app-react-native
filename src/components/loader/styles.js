@@ -1,8 +1,5 @@
 import { StyleSheet } from 'react-native';
 
-// import the style config
-import config from '../../styles/config';
-
 // styles for the loader component
 const styles = StyleSheet.create({
   loader: {
@@ -12,7 +9,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     justifyContent: 'center',
-    backgroundColor: config.primaryColor,
+    zIndex: 20,
   },
 });
 

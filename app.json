@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "Food_App_React_Native",
-    "slug": "Food_App_React_Native",
+    "name": "Food App React Native",
+    "slug": "food-app-react-native",
+    "owner": "tbrouwer",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icons/icon.png",
@@ -9,7 +10,7 @@
     "splash": {
       "image": "./assets/icons/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#60c9cd"
+      "backgroundColor": "#60C9CD"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -23,7 +24,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/icons/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "backgroundColor": "#60C9CD"
       }
     },
     "web": {

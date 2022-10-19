@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View, TextInput } from 'react-native';
 
+import config from '../../config';
+
 // import styles
 import styles from './styles';
 
@@ -24,7 +26,7 @@ const BigTextInput = function BigTextInput(
         style={styles.TextInput}
         value={value}
         placeholder={placeholder}
-        placeholderTextColor="grey"
+        placeholderTextColor={config.secondaryTextColor}
         autoComplete={autoComplete}
         keyboardType={keyboardType}
         secureTextEntry={secureTextEntry}
@@ -36,19 +38,14 @@ const BigTextInput = function BigTextInput(
   );
 };
 
-const styleProp = PropTypes.objectOf(PropTypes.oneOfType([
-  PropTypes.string,
-  PropTypes.number,
-]));
-
 BigTextInput.propTypes = {
   style: PropTypes.oneOfType([
-    styleProp,
-    PropTypes.arrayOf(styleProp),
+    config.styleProp,
+    PropTypes.arrayOf(config.styleProp),
   ]),
   value: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
-  autoComplete: PropTypes.string.isRequired,
+  autoComplete: PropTypes.string,
   keyboardType: PropTypes.string,
   secureTextEntry: PropTypes.bool,
   onChangeText: PropTypes.func.isRequired,
@@ -57,6 +54,7 @@ BigTextInput.propTypes = {
 
 BigTextInput.defaultProps = {
   style: {},
+  autoComplete: undefined,
   secureTextEntry: false,
   keyboardType: 'default',
   onEndEditing: () => {},

@@ -1,4 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, {
+  useContext, useState, useRef, useEffect,
+} from 'react';
 import {
   Text, View, TouchableOpacity,
 } from 'react-native';
@@ -6,13 +8,18 @@ import Checkbox from 'expo-checkbox';
 import PropTypes from 'prop-types';
 
 // import components and utils
-import { GlobalDispatchContext, SET_CREDENTIALS } from '../../components/global-state';
+import config from '../../config';
+import {
+  GlobalDispatchContext, SET_CREDENTIALS, SET_GROUP, SET_INVENTORY,
+} from '../../components/global-state';
 import BigBtn from '../../components/big-btn';
 import BigTextInput from '../../components/big-text-input';
 import ScreenDefault from '../../components/screen-wrapper';
 import Loader from '../../components/loader';
 import { secureStoreSet } from '../../utils/secure-store';
 import { authSignIn, getClientSalt } from '../../api/authentication';
+import { getUserGroups } from '../../api/inventory';
+import MessageBox from '../../components/message-box';
 
 // import logo image
 import LogoNameBelowImage from '../../../assets/logo/logo-name-below-image';
@@ -25,9 +32,11 @@ import styles from './styles';
 const bcrypt = require('bcryptjs');
 
 // sign in screen function
-const SignInScreen = function SignInScreen({ navigation }) {
+const SignInScreen = function SignInScreen({ route, navigation }) {
   // set the dispatch to set the local values
   const dispatch = useContext(GlobalDispatchContext);
+
+  const messageBoxRef = useRef();
 
   // function variables for the user input
   const [email, setEmail] = useState('');
@@ -42,8 +51,18 @@ const SignInScreen = function SignInScreen({ navigation }) {
   // function variables for setting both fields to red
   const [bothRed, setBothRed] = useState(false);
 
+  useEffect(() => {
+    if (route.params) {
+      const { error } = route.params;
+
+      if (error) {
+        messageBoxRef.current.createMessage('error', 'Unable to login using stored credentials');
+      }
+    }
+  }, []);
+
   // function to reset the error texts
-  const resetCheckLogin = () => {
+  const resetLoginCheck = () => {
     setPasswordText('');
     setEmailText('');
     setBothRed(false);
@@ -62,11 +81,11 @@ const SignInScreen = function SignInScreen({ navigation }) {
 
     // return style only if applicable
     if (field === 'email' && emailText !== '') {
-      returnStyle = { borderColor: 'red' };
+      returnStyle = { borderColor: config.errorColor };
     } else if (field === 'password' && passwordText !== '') {
-      returnStyle = { borderColor: 'red' };
+      returnStyle = { borderColor: config.errorColor };
     } else if (bothRed) {
-      returnStyle = { borderColor: 'red' };
+      returnStyle = { borderColor: config.errorColor };
     }
 
     return returnStyle;
@@ -88,8 +107,21 @@ const SignInScreen = function SignInScreen({ navigation }) {
     const authResult = await authSignIn(email, passwordHash, salt);
 
     if (authResult.result) {
+      const group = await getUserGroups(authResult.userID, passwordHash);
+
       // set local variables to the credentials
-      dispatch({ type: SET_CREDENTIALS, payload: { email, token: passwordHash } });
+      dispatch({
+        type: SET_CREDENTIALS,
+        payload: {
+          userID: authResult.data.userID,
+          firstName: authResult.data.firstName,
+          lastName: authResult.data.lastName,
+          email,
+          passwordHash,
+        },
+      });
+      dispatch({ type: SET_GROUP, payload: group[0] });
+      dispatch({ type: SET_INVENTORY, payload: authResult.data.inventory });
 
       // if stay signed in store credentials in secure store
       if (staySignedIn) {
@@ -123,12 +155,13 @@ const SignInScreen = function SignInScreen({ navigation }) {
 
   // return the sign in screen component
   return (
-    <ScreenDefault>
-      <Loader style={!loading ? stylesMain.hidden : {}} />
+    <ScreenDefault scrollEnabled>
+      <Loader style={!loading ? stylesMain.hidden : {}} background={false} />
+      <MessageBox ref={messageBoxRef} />
 
       <View style={stylesMain.banner}>
-        <Text style={[stylesMain.text, styles.titleText]}>Welcome!</Text>
-        <LogoNameBelowImage width={160} height={160} />
+        <Text style={[styles.text, styles.titleText]}>Welcome!</Text>
+        <LogoNameBelowImage width="50%" height="50%" />
       </View>
 
       <View style={styles.loginContainer}>
@@ -141,7 +174,7 @@ const SignInScreen = function SignInScreen({ navigation }) {
           value={email}
           onChangeText={(emailValue) => {
             setEmail(emailValue);
-            resetCheckLogin();
+            resetLoginCheck();
           }}
         />
 
@@ -158,7 +191,7 @@ const SignInScreen = function SignInScreen({ navigation }) {
           value={password}
           onChangeText={(passwordValue) => {
             setPassword(passwordValue);
-            resetCheckLogin();
+            resetLoginCheck();
           }}
           onEndEditing={(event) => {
             if (event.nativeEvent.text.length === 0) {
@@ -179,11 +212,11 @@ const SignInScreen = function SignInScreen({ navigation }) {
             <Checkbox
               value={staySignedIn}
               style={stylesMain.checkbox}
-              color={staySignedIn ? '#c98fe9' : undefined}
+              color={staySignedIn ? config.secondaryColor : undefined}
               onValueChange={setStaySignedIn}
             />
 
-            <Text style={stylesMain.text}>Remember me</Text>
+            <Text style={styles.text}>Remember me</Text>
           </TouchableOpacity>
 
           <TouchableOpacity>
@@ -197,10 +230,10 @@ const SignInScreen = function SignInScreen({ navigation }) {
         />
 
         <View style={stylesMain.flex}>
-          <Text style={stylesMain.text}>Not registered yet? </Text>
+          <Text style={styles.text}>Not registered yet? </Text>
           <TouchableOpacity
             onPress={() => {
-              resetCheckLogin();
+              resetLoginCheck();
               navigation.push('SignUp');
             }}
           >
@@ -217,6 +250,19 @@ SignInScreen.propTypes = {
     replace: PropTypes.func.isRequired,
     push: PropTypes.func.isRequired,
   }).isRequired,
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      error: PropTypes.bool.isRequired,
+    }),
+  }),
+};
+
+SignInScreen.defaultProps = {
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      error: false,
+    }),
+  }),
 };
 
 export default SignInScreen;

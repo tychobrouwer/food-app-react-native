@@ -1,40 +1,66 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
-  Text, View, TouchableOpacity, Button, TextInput, StyleSheet,
+  View,Text, TouchableOpacity
 } from 'react-native';
+import PropTypes from 'prop-types';
 
-// import vector icons used in search bar
-import { Feather, Entypo } from '@expo/vector-icons';
 
 // import components and utils
 import ScreenDefault from '../../components/screen-wrapper';
+import TopNavigator from '../../components/top-navigator';
+import BottomNavigator from '../../components/bottom-navigator';
+
 
 // import styles
 import styles from './styles';
+import stylesMain from '../../styles';
 
-// return the recipe screen component
-const RecipesScreen = function RecipesScreen() {
+
+// return the home screen component
+const RecipesScreen = function RecipesScreen({navigation}) {
+
+  const [value, setValue] = useState('');
+
   return (
-    <ScreenDefault>
+    <ScreenDefault scrollEnabled>
+      <TopNavigator navigation={navigation} />
+      <View style={stylesMain.content}>
+         
+        <TouchableOpacity onPress={() => {
+              navigation.push('RecipeSuggested');
+            }}>
+            <View style={styles.buttonRecipes}>
+                <Text style={styles.buttonText}> Susggestions</Text>
+            </View>
+        </TouchableOpacity>
+        
+        <TouchableOpacity onPress={() => {
+              navigation.push('RecipeMyMeals');
+            }} >
+            <View style={styles.buttonRecipes}>
+                <Text style={styles.buttonText}> My Meals</Text>
+            </View>
+        </TouchableOpacity>
 
-      <View style={styles.contentHeader}>
-        <Text style={styles.contentHeaderText}>Recipe Book</Text>
+        <TouchableOpacity onPress={() => {
+              navigation.push('RecipeSearch');
+            }}>
+            <View style={styles.buttonRecipes}>
+                <Text style={styles.buttonText}> Search</Text>
+            </View> 
+        </TouchableOpacity>
+
+    
       </View>
-
-      <View style={styles.container}>
-        <TextInput style={styles.searchInput} placeholder="Search for recipe..." />
-      </View>
-
-      <View style={styles.contentHeader2}>
-        <Text style={styles.contentHeaderText}> Suggestions</Text>
-      </View>
-
-      <View style={styles.contentHeader2}>
-        <Text style={styles.contentHeaderText}> My Meals</Text>
-      </View>
-
+      <BottomNavigator navigation={navigation} />
     </ScreenDefault>
   );
+};
+
+RecipesScreen.propTypes = {
+  navigation: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default RecipesScreen;

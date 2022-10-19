@@ -11,6 +11,14 @@ import SignInScreen from './screens/sign-in';
 import SignUpScreen from './screens/sign-up';
 import HomeScreen from './screens/home';
 import RecipesScreen from './screens/recipes';
+import SettingsScreen from './screens/settings';
+import GroceryListScreen from './screens/grocery-list';
+import AddProductScreen from './screens/add-product';
+import PrivacyPolicyScreen from './screens/PrivacyPolicy';
+import UserProfileScreen from './screens/UserProfile';
+import RecipesSearchScreen from './screens/recipeSearch';
+import RecipesSuggestedScreen from './screens/suggestedMeals';
+import RecipesMyMealsScreen from './screens/myMeals';
 
 // initial values for locally stored values
 const initialState = {
@@ -55,6 +63,39 @@ export default function App() {
             name="Recipes"
             component={RecipesScreen}
           />
+          <Stack.Screen
+            name="GroceryList"
+            component={GroceryListScreen}
+          />
+          <Stack.Screen
+            name="AddProduct"
+            component={AddProductScreen}
+          />
+          <Stack.Screen
+            name="Settings"
+            component={SettingsScreen}
+          />
+          <Stack.Screen
+            name="PrivacyPolicy"
+            component={PrivacyPolicyScreen}
+          />
+          <Stack.Screen
+            name="UserProfile"
+            component={UserProfileScreen}
+          />
+          <Stack.Screen
+            name="RecipeSearch"
+            component={RecipesSearchScreen}
+          />
+           <Stack.Screen
+            name="RecipeSuggested"
+            component={RecipesSuggestedScreen}
+          />
+           <Stack.Screen
+            name="RecipeMyMeals"
+            component={RecipesMyMealsScreen}
+          />
+
         </Stack.Navigator>
       </NavigationContainer>
     </GlobalState>

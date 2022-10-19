@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
-// import the style config
-import config from '../../styles/config';
+// import the config
+import config from '../../config';
 
 // styles for the bif text input component
 const styles = StyleSheet.create({
@@ -10,20 +10,19 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderStyle: 'solid',
     borderRadius: 5,
-    width: '100%',
     height: 45,
     marginBottom: 5,
     alignItems: 'center',
+    width: '100%',
   },
 
   TextInput: {
     width: '90%',
-    flex: 1,
-    padding: 10,
-    marginLeft: 'auto',
-    marginRight: 'auto',
+    paddingHorizontal: 10,
+    paddingVertical: 12,
     fontSize: 18,
     fontWeight: 'bold',
+    color: config.primaryTextColor,
   },
 });
 

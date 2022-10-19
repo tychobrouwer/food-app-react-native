@@ -1,9 +1,12 @@
 import { StyleSheet } from 'react-native';
 
+// import the config
+import config from '../../config';
+
 // styles for the sign in screen
 const styles = StyleSheet.create({
   titleText: {
-    fontSize: '36px',
+    fontSize: 36,
     fontWeight: 'bold',
     marginTop: '30%',
     marginBottom: '5%',
@@ -13,6 +16,11 @@ const styles = StyleSheet.create({
     marginTop: '5%',
     width: '70%',
     alignItems: 'center',
+  },
+
+  text: {
+    color: config.tertiaryColor,
+    fontSize: 18,
   },
 });
 

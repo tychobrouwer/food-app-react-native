@@ -3,11 +3,15 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 
 // import components and utils
+import config from '../../config';
 import BigBtn from '../../components/big-btn';
 import BigTextInput from '../../components/big-text-input';
 import ScreenDefault from '../../components/screen-wrapper';
 import Loader from '../../components/loader';
 import { authSignUp, newClientSalt } from '../../api/authentication';
+
+// import logo image
+import LogoNameBelowImage from '../../../assets/logo/logo-name-below-image';
 
 // import styles
 import stylesMain from '../../styles';
@@ -49,9 +53,9 @@ const SignUpScreen = function SignUpScreen({ navigation }) {
 
     // return style only if applicable
     if (field === 'email' && emailText !== '') {
-      returnStyle = { borderColor: 'red' };
+      returnStyle = { borderColor: config.errorColor };
     } else if (field === 'password' && passwordText !== '') {
-      returnStyle = { borderColor: 'red' };
+      returnStyle = { borderColor: config.errorColor };
     }
 
     return returnStyle;
@@ -100,11 +104,12 @@ const SignUpScreen = function SignUpScreen({ navigation }) {
 
   // return the sign up screen component
   return (
-    <ScreenDefault>
-      <Loader style={!loading ? stylesMain.hidden : {}} />
+    <ScreenDefault scrollEnabled>
+      <Loader style={!loading ? stylesMain.hidden : {}} background={false} />
 
       <View style={stylesMain.banner}>
-        <Text style={[stylesMain.text, styles.titleText]}>Create Account</Text>
+        <Text style={[styles.text, styles.titleText]}>Create Account</Text>
+        <LogoNameBelowImage width="50%" height="50%" />
       </View>
 
       <View style={styles.loginContainer}>
@@ -146,7 +151,7 @@ const SignUpScreen = function SignUpScreen({ navigation }) {
 
         <BigTextInput
           style={setRed('password')}
-          placeholder="Password"
+          placeholder="Repeat password"
           autoComplete="password"
           textContentType="newPassword"
           secureTextEntry
@@ -175,7 +180,7 @@ const SignUpScreen = function SignUpScreen({ navigation }) {
         />
 
         <View style={stylesMain.flex}>
-          <Text style={stylesMain.text}>Already a user? </Text>
+          <Text style={styles.text}>Already a user? </Text>
           <TouchableOpacity
             onPress={() => navigation.pop(1)}
           >

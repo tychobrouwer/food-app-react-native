@@ -2,31 +2,35 @@ import React from 'react';
 import { View, ActivityIndicator } from 'react-native';
 import PropTypes from 'prop-types';
 
+import config from '../../config';
+
 // import styles
 import styles from './styles';
 
 // return the loader component
-const Loader = function Loader({ style }) {
+const Loader = function Loader({ style, background }) {
   return (
-    <View style={[styles.loader, style]}>
+    <View
+      style={[
+        styles.loader,
+        style,
+        background ? { backgroundColor: config.primaryColor } : {},
+      ]}
+    >
       <ActivityIndicator
-        color="#c98fe9"
+        color={config.secondaryColor}
         size="large"
       />
     </View>
   );
 };
 
-const styleProp = PropTypes.objectOf(PropTypes.oneOfType([
-  PropTypes.string,
-  PropTypes.number,
-]));
-
 Loader.propTypes = {
   style: PropTypes.oneOfType([
-    styleProp,
-    PropTypes.arrayOf(styleProp),
+    config.styleProp,
+    PropTypes.arrayOf(config.styleProp),
   ]),
+  background: PropTypes.bool.isRequired,
 };
 
 Loader.defaultProps = {
