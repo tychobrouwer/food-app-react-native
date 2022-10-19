@@ -70,8 +70,6 @@ const SignUpScreen = function SignUpScreen({ navigation }) {
     const salt = await newClientSalt(email);
 
     // hash the passwords with the salt
-    // const passwordHash = bcrypt.hashSync(password, salt);
-    // const passwordHash1 = bcrypt.hashSync(password1, salt);
     const [passwordHash, passwordHash1] = await Promise.all([
       bcrypt.hash(password, salt),
       bcrypt.hash(password1, salt),
