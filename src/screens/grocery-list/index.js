@@ -16,7 +16,7 @@ import stylesMain from '../../styles';
 // return the home screen component
 const GroceryListScreen = function GroceryListScreen({ navigation }) {
   return (
-    <ScreenDefault>
+    <ScreenDefault scrollEnabled>
       <TopNavigator navigation={navigation} />
 
       <View style={stylesMain.content}>
