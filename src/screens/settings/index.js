@@ -41,7 +41,7 @@ const SettingsScreen = function SettingsScreen({ navigation }) {
         <BigBtn
           title="User Groups"
           onPress={() => {
-            navigation.push('UserProfile');
+            navigation.push('UserGroup');
           }}
         />
         <BigBtn

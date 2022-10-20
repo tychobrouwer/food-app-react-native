@@ -97,7 +97,6 @@ const HomeScreen = function HomeScreen({ navigation }) {
     return (
       <FoodListItem
         innerRef={(ref) => { itemRow[item.itemID] = ref; }}
-        key={item.itemID}
         food={item.name}
         date={new Date(item.date)}
         quantity={item.quantity}
@@ -124,7 +123,7 @@ const HomeScreen = function HomeScreen({ navigation }) {
           decelerationRate="fast"
           refreshControl={(
             <RefreshControl
-              // colors={config.secondaryColor}
+              colors={config.secondaryColor}
               tintColor={config.secondaryColor}
               refreshing={refreshing}
               onRefresh={async () => {

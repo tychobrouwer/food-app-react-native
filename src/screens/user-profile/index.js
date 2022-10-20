@@ -142,6 +142,11 @@ const UserProfileScreen = function UserProfileScreen({ navigation }) {
       <MessageBox ref={messageBoxRef} />
       <TopNavigator navigation={navigation} />
       <View style={[stylesMain.content, { alignItems: 'center' }]}>
+        <View style={styles.contentHeader}>
+          <Text style={styles.contentHeaderText}>
+            User Profile
+          </Text>
+        </View>
         <Text style={styles.settingTitle}>Update Name</Text>
         <BigTextInput
           style={{ marginBottom: 25 }}
