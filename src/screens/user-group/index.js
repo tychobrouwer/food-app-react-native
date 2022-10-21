@@ -152,22 +152,34 @@ const UserGroupScreen = function UserGroupScreen({ navigation }) {
       prevSelectedItem = itemRow[indexToClose];
     };
 
+    const listContent = (
+      <View style={styles.listItem}>
+        <Text>
+          {item.email}
+          {item.owner ? ' (owner)' : ''}
+        </Text>
+      </View>
+    );
+
     return (
-      <SwipeableListItem
-        style={styles.listItem}
-        innerRef={(ref) => { itemRow[item.userID] = ref; }}
-        closeRow={closeRow}
-        itemID={item.userID}
-        deleteItem={onClick}
-        height={40}
-      >
-        <View style={styles.listItem}>
-          <Text>
-            {item.email}
-            {item.owner ? ' (owner)' : ''}
-          </Text>
+      groupOwner ? (
+        <SwipeableListItem
+          style={styles.listItem}
+          innerRef={(ref) => { itemRow[item.userID] = ref; }}
+          closeRow={closeRow}
+          itemID={item.userID}
+          deleteItem={onClick}
+          height={40}
+        >
+          {listContent}
+        </SwipeableListItem>
+      ) : (
+        <View
+          style={styles.listItem}
+        >
+          {listContent}
         </View>
-      </SwipeableListItem>
+      )
     );
   };
 
