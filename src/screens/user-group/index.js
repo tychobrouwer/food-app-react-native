@@ -128,23 +128,19 @@ const UserGroupScreen = function UserGroupScreen({ navigation }) {
   }, []);
 
   const deleteItem = async ({ item }) => {
-    if (credentials.userID !== groupOwner) {
-      const removeResult = await removeFromGroup(
-        credentials.userID,
-        credentials.passwordHash,
-        groupID,
-        item.userID,
-      );
+    const removeResult = await removeFromGroup(
+      credentials.userID,
+      credentials.passwordHash,
+      groupID,
+      item.userID,
+    );
 
-      if (removeResult) {
-        messageBoxRef.current.createMessage('success', `Successfully removed ${item.email}`);
-      } else {
-        updateGroup();
-
-        messageBoxRef.current.createMessage('error', `Error removing ${item.email}`);
-      }
+    if (removeResult) {
+      messageBoxRef.current.createMessage('success', `Successfully removed ${item.email}`);
     } else {
-      messageBoxRef.current.createMessage('message', 'Only the owner can remove people');
+      updateGroup();
+
+      messageBoxRef.current.createMessage('error', `Error removing ${item.email}`);
     }
   };
 
