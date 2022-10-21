@@ -42,7 +42,7 @@ const HomeScreen = function HomeScreen({ navigation }) {
       if (groups.includes(group)) {
         result = await getInventory(credentials.userID, credentials.passwordHash, group);
       } else {
-        messageBoxRef.current.createMessage('error', 'no permission to add to group');
+        messageBoxRef.current.createMessage('error', 'No permission to add to group');
       }
     } else {
       result = await getInventory(credentials.userID, credentials.passwordHash, undefined);
@@ -54,7 +54,7 @@ const HomeScreen = function HomeScreen({ navigation }) {
 
       dispatch({ type: SET_INVENTORY, payload: newItems });
     } else {
-      messageBoxRef.current.createMessage('error', 'unable to update your inventory');
+      messageBoxRef.current.createMessage('error', 'Unable to update your inventory');
     }
   };
 

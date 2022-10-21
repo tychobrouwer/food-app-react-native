@@ -36,10 +36,9 @@ const LoadingScreen = function LoadingScreen({ navigation }) {
 
           let group = Number(await secureStoreGet('group'));
 
-          if (group) {
-            // check if user is in group otherwise set to undefined
-          } else if (!group && groups.length !== 0) {
+          if ((group && !groups.includes(group)) || (!group && groups.length !== 0)) {
             [group] = groups;
+
             secureStoreSet('group', String(group));
           }
 
