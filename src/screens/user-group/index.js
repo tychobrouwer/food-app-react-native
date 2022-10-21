@@ -47,17 +47,21 @@ const UserGroupScreen = function UserGroupScreen({ navigation }) {
   const { credentials } = useContext(GlobalStateContext);
   const [groupID, setGroup] = useState(1);
   const [groups, setGroups] = useState([]);
+  const [groupOwner, setGroupOwner] = useState(-1);
 
   const itemRow = [];
   let prevSelectedItem;
 
   const updateGroup = async () => {
-    const groupUsers = (
-      await getGroupUsers(credentials.userID, credentials.passwordHash, groupID)
-    ).data.map((groupData) => ({
-      userID: groupData.UserID,
-      email: groupData.Email,
-      relationID: groupData.RelationID,
+    const groupData = await getGroupUsers(credentials.userID, credentials.passwordHash, groupID);
+
+    setGroupOwner(groupData.groupOwner);
+
+    const groupUsers = groupData.data.map((userData) => ({
+      userID: userData.UserID,
+      email: userData.Email,
+      relationID: userData.RelationID,
+      owner: groupData.groupOwner === userData.UserID,
     }));
 
     setListItems(groupUsers);
@@ -124,14 +128,24 @@ const UserGroupScreen = function UserGroupScreen({ navigation }) {
   }, []);
 
   const deleteItem = async ({ item }) => {
-    const removeResult = await removeFromGroup(
-      credentials.userID,
-      credentials.passwordHash,
-      groupID,
-      item.userID,
-    );
+    if (credentials.userID !== groupOwner) {
+      const removeResult = await removeFromGroup(
+        credentials.userID,
+        credentials.passwordHash,
+        groupID,
+        item.userID,
+      );
 
-    console.log(removeResult);
+      if (removeResult) {
+        messageBoxRef.current.createMessage('success', `Successfully removed ${item.email}`);
+      } else {
+        updateGroup();
+
+        messageBoxRef.current.createMessage('error', `Error removing ${item.email}`);
+      }
+    } else {
+      messageBoxRef.current.createMessage('message', 'Only the owner can remove people');
+    }
   };
 
   const renderItem = ({ item }, onClick) => {
@@ -151,8 +165,11 @@ const UserGroupScreen = function UserGroupScreen({ navigation }) {
         deleteItem={onClick}
         height={40}
       >
-        <View style={{ height: '100%', justifyContent: 'center', alignItems: 'center' }}>
-          <Text>{item.email}</Text>
+        <View style={styles.listItem}>
+          <Text>
+            {item.email}
+            {item.owner ? ' (owner)' : ''}
+          </Text>
         </View>
       </SwipeableListItem>
     );

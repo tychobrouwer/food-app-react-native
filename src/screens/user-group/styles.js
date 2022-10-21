@@ -35,6 +35,12 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 40,
   },
+
+  listItem: {
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
 export default styles;
