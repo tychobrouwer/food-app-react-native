@@ -41,8 +41,6 @@ const HomeScreen = function HomeScreen({ navigation }) {
     if (group) {
       if (groups.includes(group)) {
         result = await getInventory(credentials.userID, credentials.passwordHash, group);
-
-        console.log(credentials.userID, credentials.passwordHash, group);
       } else {
         messageBoxRef.current.createMessage('error', 'no permission to add to group');
       }

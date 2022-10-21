@@ -60,8 +60,6 @@ const UserGroupScreen = function UserGroupScreen({ navigation }) {
       relationID: groupData.RelationID,
     }));
 
-    console.log(groupUsers);
-
     setListItems(groupUsers);
   };
 

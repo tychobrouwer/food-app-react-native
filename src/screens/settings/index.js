@@ -14,6 +14,7 @@ import BigBtn from '../../components/big-btn';
 // import styles
 import styles from './styles';
 import stylesMain from '../../styles';
+import { secureStoreDelete } from '../../utils/secure-store';
 
 // return the settings screen component
 const SettingsScreen = function SettingsScreen({ navigation }) {
@@ -25,7 +26,7 @@ const SettingsScreen = function SettingsScreen({ navigation }) {
       <View style={styles.banner}>
         <Text style={styles.titleText}>
           Welcome
-          {` ${credentials.firstName}`}
+          {` ${credentials.firstName || ''}`}
         </Text>
         <Text style={styles.secondaryText}>
           {credentials.email}
@@ -50,6 +51,18 @@ const SettingsScreen = function SettingsScreen({ navigation }) {
             navigation.push('PrivacyPolicy');
           }}
         />
+        <BigBtn
+          style={styles.signOutBtn}
+          title="Log Out"
+          onPress={() => {
+            secureStoreDelete('email');
+            secureStoreDelete('token');
+            secureStoreDelete('group');
+
+            navigation.replace('SignIn');
+          }}
+        />
+
       </View>
       <BottomNavigator navigation={navigation} />
     </ScreenDefault>
@@ -59,6 +72,7 @@ const SettingsScreen = function SettingsScreen({ navigation }) {
 SettingsScreen.propTypes = {
   navigation: PropTypes.shape({
     push: PropTypes.func.isRequired,
+    replace: PropTypes.func.isRequired,
   }).isRequired,
 };
 

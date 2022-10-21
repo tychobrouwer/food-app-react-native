@@ -36,13 +36,11 @@ const LoadingScreen = function LoadingScreen({ navigation }) {
 
           let group = Number(await secureStoreGet('group'));
 
-          if (!group) {
-            if (groups[0]) {
-              [group] = groups;
-              secureStoreSet('group', String(group));
-            } else {
-              group = undefined;
-            }
+          if (group) {
+            // check if user is in group otherwise set to undefined
+          } else if (!group && groups.length !== 0) {
+            [group] = groups;
+            secureStoreSet('group', String(group));
           }
 
           // set local variables to the credentials

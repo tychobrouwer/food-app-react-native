@@ -131,7 +131,7 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
           },
         );
       } else {
-        messageBoxRef.current.createMessage('error', 'no permission to add to group');
+        messageBoxRef.current.createMessage('error', 'No permission to add to group');
       }
     } else {
       result = await addToInventory(
@@ -149,7 +149,7 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
 
       messageBoxRef.current.createMessage('success', `${ingredient} successfully added`);
     } else {
-      messageBoxRef.current.createMessage('error', `failed to add ${ingredient}`);
+      messageBoxRef.current.createMessage('error', `Failed to add ${ingredient}`);
     }
 
     clearFields();

@@ -15,7 +15,7 @@ const BigBtn = function BigBtn({ onPress, title, style }) {
       style={[styles.bigBtn, style]}
       onPress={onPress}
     >
-      <Text style={styles.bigBtnText}>{title}</Text>
+      <Text style={[styles.bigBtnText, style]}>{title}</Text>
     </PressableView>
   );
 };

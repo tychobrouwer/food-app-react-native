@@ -23,6 +23,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: config.secondaryColor,
   },
+
+  signOutBtn: {
+    backgroundColor: config.errorColor,
+    color: config.tertiaryColor,
+  },
 });
 
 export default styles;
