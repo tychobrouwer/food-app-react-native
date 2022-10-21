@@ -12,7 +12,7 @@ import ScreenDefault from '../../components/screen-wrapper';
 import TopNavigator from '../../components/top-navigator';
 import BottomNavigator from '../../components/bottom-navigator';
 import FoodListItem from '../../components/food-list-item';
-import { getInventory, getUserGroups, removeFromInventory } from '../../api/inventory';
+import { getInventory, removeFromInventory } from '../../api/inventory';
 import MessageBox from '../../components/message-box';
 
 // import styles
@@ -26,7 +26,9 @@ const HomeScreen = function HomeScreen({ navigation }) {
   const dispatch = useContext(GlobalDispatchContext);
 
   const messageBoxRef = useRef();
-  const { credentials, group, inventory } = useContext(GlobalStateContext);
+  const {
+    credentials, group, groups, inventory,
+  } = useContext(GlobalStateContext);
   const [listItems, setListItems] = useState(inventory.sort((a, b) => b.date - a.date).reverse());
   const [refreshing, setRefreshing] = useState(false);
 
@@ -34,13 +36,13 @@ const HomeScreen = function HomeScreen({ navigation }) {
   let prevSelectedItem;
 
   const updateInventory = async () => {
-    const groups = await getUserGroups(credentials.userID, credentials.passwordHash);
-
     let result;
 
     if (group) {
       if (groups.includes(group)) {
         result = await getInventory(credentials.userID, credentials.passwordHash, group);
+
+        console.log(credentials.userID, credentials.passwordHash, group);
       } else {
         messageBoxRef.current.createMessage('error', 'no permission to add to group');
       }

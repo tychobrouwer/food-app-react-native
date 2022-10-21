@@ -10,15 +10,14 @@ import PropTypes from 'prop-types';
 // import components and utils
 import config from '../../config';
 import {
-  GlobalDispatchContext, SET_CREDENTIALS, SET_GROUP, SET_INVENTORY,
+  GlobalDispatchContext, SET_CREDENTIALS, SET_GROUP, SET_GROUPS, SET_INVENTORY,
 } from '../../components/global-state';
 import BigBtn from '../../components/big-btn';
 import BigTextInput from '../../components/big-text-input';
 import ScreenDefault from '../../components/screen-wrapper';
 import Loader from '../../components/loader';
-import { secureStoreSet } from '../../utils/secure-store';
+import { secureStoreGet, secureStoreSet } from '../../utils/secure-store';
 import { authSignIn, getClientSalt } from '../../api/authentication';
-import { getUserGroups } from '../../api/inventory';
 import MessageBox from '../../components/message-box';
 
 // import logo image
@@ -27,6 +26,7 @@ import LogoNameBelowImage from '../../../assets/logo/logo-name-below-image';
 // import styles
 import stylesMain from '../../styles';
 import styles from './styles';
+import { getGroups } from '../../api/group';
 
 // import bcrypt package
 const bcrypt = require('bcryptjs');
@@ -106,7 +106,21 @@ const SignInScreen = function SignInScreen({ route, navigation }) {
     const authResult = await authSignIn(email, passwordHash, salt);
 
     if (authResult.result) {
-      const group = await getUserGroups(authResult.userID, passwordHash);
+      const groups = (await getGroups(
+        authResult.data.userID,
+        passwordHash,
+      )).data.map((groupData) => groupData.GroupID);
+
+      let group = secureStoreGet('group');
+
+      if (!group) {
+        if (groups[0]) {
+          [group] = groups;
+          secureStoreSet('group', group);
+        } else {
+          group = undefined;
+        }
+      }
 
       // set local variables to the credentials
       dispatch({
@@ -119,7 +133,8 @@ const SignInScreen = function SignInScreen({ route, navigation }) {
           passwordHash,
         },
       });
-      dispatch({ type: SET_GROUP, payload: group[0] });
+      dispatch({ type: SET_GROUPS, payload: groups });
+      dispatch({ type: SET_GROUP, payload: group });
       dispatch({ type: SET_INVENTORY, payload: authResult.data.inventory });
 
       // if stay signed in store credentials in secure store

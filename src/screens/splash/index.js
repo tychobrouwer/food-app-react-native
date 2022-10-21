@@ -2,13 +2,13 @@ import React, { useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 
 // import components and utils
-import { secureStoreGet } from '../../utils/secure-store';
+import { secureStoreGet, secureStoreSet } from '../../utils/secure-store';
 import {
-  GlobalDispatchContext, SET_CREDENTIALS, SET_GROUP, SET_INVENTORY,
+  GlobalDispatchContext, SET_CREDENTIALS, SET_GROUP, SET_GROUPS, SET_INVENTORY,
 } from '../../components/global-state';
 import { authSignIn, getClientSalt } from '../../api/authentication';
 import Loader from '../../components/loader';
-import { getUserGroups } from '../../api/inventory';
+import { getGroups } from '../../api/group';
 
 // loading screen function
 const LoadingScreen = function LoadingScreen({ navigation }) {
@@ -29,8 +29,21 @@ const LoadingScreen = function LoadingScreen({ navigation }) {
         const authResult = await authSignIn(email, passwordHash, salt);
 
         if (authResult.result) {
-          // set local variables with the credentials
-          const group = await getUserGroups(authResult.userID, passwordHash);
+          const groups = (await getGroups(
+            authResult.data.userID,
+            passwordHash,
+          )).data.map((groupData) => groupData.GroupID);
+
+          let group = Number(await secureStoreGet('group'));
+
+          if (!group) {
+            if (groups[0]) {
+              [group] = groups;
+              secureStoreSet('group', String(group));
+            } else {
+              group = undefined;
+            }
+          }
 
           // set local variables to the credentials
           dispatch({
@@ -43,7 +56,8 @@ const LoadingScreen = function LoadingScreen({ navigation }) {
               passwordHash,
             },
           });
-          dispatch({ type: SET_GROUP, payload: group[0] });
+          dispatch({ type: SET_GROUPS, payload: groups });
+          dispatch({ type: SET_GROUP, payload: group });
           dispatch({ type: SET_INVENTORY, payload: authResult.data.inventory });
 
           // navigate to home screen

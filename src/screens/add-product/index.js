@@ -25,7 +25,7 @@ import BigTextWithDropdown from '../../components/big-text-with-dropdown';
 import BigBtn from '../../components/big-btn';
 import DateSelector from '../../components/date-picker';
 import MessageBox from '../../components/message-box';
-import { addToInventory, getUserGroups } from '../../api/inventory';
+import { addToInventory } from '../../api/inventory';
 
 // import styles
 import styles from './styles';
@@ -33,7 +33,7 @@ import stylesMain from '../../styles';
 
 // return the home screen component
 const AddProductScreen = function AddProductScreen({ navigation }) {
-  const { credentials, group } = useContext(GlobalStateContext);
+  const { credentials, group, groups } = useContext(GlobalStateContext);
 
   // set the dispatch to set the local values
   const dispatch = useContext(GlobalDispatchContext);
@@ -117,8 +117,6 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
   // function handling adding product
   const handleAddProduct = async () => {
     setLoading(true);
-
-    const groups = await getUserGroups(credentials.userID, credentials.passwordHash);
 
     let result;
 

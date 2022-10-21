@@ -7,7 +7,9 @@ import {
 import PropTypes from 'prop-types';
 
 // import components and utils
-import { GlobalDispatchContext, GlobalStateContext, SET_GROUPS } from '../../components/global-state';
+import {
+  GlobalDispatchContext, GlobalStateContext, SET_GROUP, SET_GROUPS,
+} from '../../components/global-state';
 import ScreenDefault from '../../components/screen-wrapper';
 import MessageBox from '../../components/message-box';
 import Loader from '../../components/loader';
@@ -17,7 +19,7 @@ import BigTextInput from '../../components/big-text-input';
 import SwipeableListItem from '../../components/swipeable-list-item';
 import BigBtn from '../../components/big-btn';
 import {
-  addToGroup, createGroup, getGroups, getGroupUsers,
+  addToGroup, createGroup, getGroups, getGroupUsers, removeFromGroup,
 } from '../../api/group';
 
 import config from '../../config';
@@ -42,36 +44,54 @@ const UserGroupScreen = function UserGroupScreen({ navigation }) {
   // function variables
   const [email, setEmail] = useState('');
   const [listItems, setListItems] = useState([]);
-  const { credentials, groups } = useContext(GlobalStateContext);
+  const { credentials } = useContext(GlobalStateContext);
+  const [groupID, setGroup] = useState(1);
+  const [groups, setGroups] = useState([]);
 
   const itemRow = [];
   let prevSelectedItem;
 
+  const updateGroup = async () => {
+    const groupUsers = (
+      await getGroupUsers(credentials.userID, credentials.passwordHash, groupID)
+    ).data.map((groupData) => ({
+      userID: groupData.UserID,
+      email: groupData.Email,
+      relationID: groupData.RelationID,
+    }));
+
+    console.log(groupUsers);
+
+    setListItems(groupUsers);
+  };
+
   const addUserToGroup = async () => {
     setLoading(true);
 
-    if (groups.length === 0) {
+    if (groups.length === 0 || !groups.includes(groupID)) {
       const newGroupResult = await createGroup(credentials.userID, credentials.passwordHash);
+      const newGroupID = newGroupResult.groupID;
 
-      const newGroups = JSON.parse(JSON.stringify(groups));
-      newGroups.push(newGroupResult.groupID);
+      setGroup(newGroupID);
+      setGroups([...groups, newGroupID]);
 
       const addToNewGroupResult = await addToGroup(
         credentials.userID,
         credentials.passwordHash,
-        newGroupResult.groupID,
+        newGroupID,
         credentials.email,
       );
 
       if (addToNewGroupResult.result) {
-        dispatch({ type: SET_GROUPS, payload: newGroups });
+        dispatch({ type: SET_GROUPS, payload: groups });
+        dispatch({ type: SET_GROUP, payload: newGroupID });
       }
     }
 
     const addToGroupResult = await addToGroup(
       credentials.userID,
       credentials.passwordHash,
-      groups[0],
+      groupID,
       email,
     );
 
@@ -79,6 +99,8 @@ const UserGroupScreen = function UserGroupScreen({ navigation }) {
       if (addToGroupResult.already) {
         messageBoxRef.current.createMessage('message', `${email} already in group`);
       } else {
+        updateGroup();
+
         messageBoxRef.current.createMessage('success', `Successfully added ${email}`);
       }
 
@@ -90,25 +112,28 @@ const UserGroupScreen = function UserGroupScreen({ navigation }) {
     setLoading(false);
   };
 
-  const updateGroup = async () => {
-    const newGroups = (
-      await getGroups(credentials.userID, credentials.passwordHash)
-    ).data.map((groupData) => groupData.GroupID);
-    dispatch({ type: SET_GROUPS, payload: newGroups });
-
-    const groupUsers = (
-      await getGroupUsers(credentials.userID, credentials.passwordHash, newGroups[0])
-    ).data.map((groupData) => ({ userID: groupData.UserID, email: groupData.Email }));
-
-    setListItems(groupUsers);
-  };
-
   useEffect(() => {
     updateGroup();
+
+    const getUserGroups = async () => {
+      setGroups((await getGroups(
+        credentials.userID,
+        credentials.passwordHash,
+      )).data.map((groupData) => groupData.GroupID));
+    };
+
+    getUserGroups();
   }, []);
 
   const deleteItem = async ({ item }) => {
-    //
+    const removeResult = await removeFromGroup(
+      credentials.userID,
+      credentials.passwordHash,
+      groupID,
+      item.userID,
+    );
+
+    console.log(removeResult);
   };
 
   const renderItem = ({ item }, onClick) => {
