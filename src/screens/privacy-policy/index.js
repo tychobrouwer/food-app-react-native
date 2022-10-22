@@ -17,7 +17,7 @@ import stylesMain from '../../styles';
 const PrivacyPolicyScreen = function PrivacyPolicyScreen({ navigation }) {
   const [loading, setLoading] = useState(false);
 
-  const source = 'https://drive.google.com/u/2/uc?id=1VQwxnlV_nZU_DmmvUsZ_UbWMesOZKgPo&export=download';
+  const source = 'https://drive.google.com/u/2/uc?id=1MLZmkRLvNFwcfRVvUFS-aztT3qc09C9s&export=download';
 
   return (
     <ScreenDefault scrollEnabled={false}>
