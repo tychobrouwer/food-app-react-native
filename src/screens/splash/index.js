@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 // import components and utils
 import { secureStoreGet, secureStoreSet } from '../../utils/secure-store';
 import {
-  GlobalDispatchContext, SET_CREDENTIALS, SET_GROUP, SET_GROUPS, SET_INVENTORY,
+  GlobalDispatchContext, SET_CREDENTIALS, SET_GROCERY, SET_GROUP, SET_GROUPS, SET_INVENTORY,
 } from '../../components/global-state';
 import { authSignIn, getClientSalt } from '../../api/authentication';
 import Loader from '../../components/loader';
@@ -56,6 +56,7 @@ const LoadingScreen = function LoadingScreen({ navigation }) {
           dispatch({ type: SET_GROUPS, payload: groups });
           dispatch({ type: SET_GROUP, payload: group });
           dispatch({ type: SET_INVENTORY, payload: authResult.data.inventory });
+          dispatch({ type: SET_GROCERY, payload: authResult.data.grocery });
 
           // navigate to home screen
           navigation.replace('Home');

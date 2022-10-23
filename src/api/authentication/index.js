@@ -83,9 +83,12 @@ export const authSignIn = async (email, passwordHash, salt) => {
           firstName: result.firstName,
           lastName: result.lastName,
           inventory: result.inventory,
+          grocery: result.grocery,
         };
       }
     } catch (error) {
+      console.log(error);
+
       // do nothing if error
       // this may happen if email password pair is invalid
     }
@@ -124,7 +127,6 @@ export const authSignUp = async (email, passwordHash, passwordHash1, salt) => {
   if (emailEmptyCheck && emailValidCheck && passwordNotSameCheck) {
     try {
       // hashing empty string for checking empty password
-      // const emptyHash = bcrypt.hashSync('', salt);
       const emptyHash = await bcrypt.hash('', salt);
 
       // checking for empty password

@@ -10,6 +10,7 @@ export const SET_CREDENTIALS = 'SET_CREDENTIALS';
 export const SET_GROUPS = 'SET_GROUPS';
 export const SET_GROUP = 'SET_GROUP';
 export const SET_INVENTORY = 'SET_INVENTORY';
+export const SET_GROCERY = 'SET_GROCERY';
 
 // reducer function for setting local variables
 export const reducer = (state, action) => {
@@ -38,6 +39,12 @@ export const reducer = (state, action) => {
       return {
         ...state,
         inventory: payload,
+      };
+    }
+    case SET_GROCERY: {
+      return {
+        ...state,
+        grocery: payload,
       };
     }
 

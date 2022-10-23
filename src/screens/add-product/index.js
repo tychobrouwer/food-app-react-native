@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import {
   View,
-  TouchableOpacity,
+  Text,
   TouchableWithoutFeedback,
   Keyboard,
   Animated,
@@ -15,7 +15,9 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 import CameraImage from '../../../assets/camera-image';
 
 // import components and utils
-import { GlobalDispatchContext, GlobalStateContext, SET_INVENTORY } from '../../components/global-state';
+import {
+  GlobalDispatchContext, GlobalStateContext, SET_GROCERY, SET_INVENTORY,
+} from '../../components/global-state';
 import ScreenDefault from '../../components/screen-wrapper';
 import Loader from '../../components/loader';
 import TopNavigator from '../../components/top-navigator';
@@ -30,6 +32,7 @@ import { addToInventory } from '../../api/inventory';
 // import styles
 import styles from './styles';
 import stylesMain from '../../styles';
+import PressableView from '../../components/pressable-view';
 
 // return the home screen component
 const AddProductScreen = function AddProductScreen({ navigation }) {
@@ -57,6 +60,7 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
   const [quantity, setQuantity] = useState('');
   const [quantityType, setQuantityType] = useState('units');
   const [date, setDate] = useState(new Date());
+  const [grocery, setGrocery] = useState(false);
   const scannerOpacity = useRef(new Animated.Value(1)).current;
 
   // function variable boolean for loading
@@ -126,6 +130,7 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
           credentials.userID,
           credentials.passwordHash,
           group,
+          grocery,
           {
             name: ingredient, date: date.getTime(), quantity, type: quantityType,
           },
@@ -138,6 +143,7 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
         credentials.userID,
         credentials.passwordHash,
         undefined,
+        grocery,
         {
           name: ingredient, date: date.getTime(), quantity, type: quantityType,
         },
@@ -145,7 +151,11 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
     }
 
     if (result.result) {
-      dispatch({ type: SET_INVENTORY, payload: result.newInventory });
+      if (grocery) {
+        dispatch({ type: SET_GROCERY, payload: result.newInventory });
+      } else {
+        dispatch({ type: SET_INVENTORY, payload: result.newInventory });
+      }
 
       messageBoxRef.current.createMessage('success', `${ingredient} successfully added`);
     } else {
@@ -164,7 +174,7 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
 
       <TopNavigator navigation={navigation} />
       <View style={stylesMain.content}>
-        <TouchableOpacity
+        <PressableView
           style={styles.cameraButton}
           onPress={() => {
             handlePermissions();
@@ -172,7 +182,20 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
           }}
         >
           <CameraImage width="70%" height="70%" />
-        </TouchableOpacity>
+        </PressableView>
+        <PressableView
+          style={styles.destinationWrapper}
+          onPress={() => {
+            setGrocery(!grocery);
+          }}
+        >
+          <View style={[styles.destinationBtn, !grocery ? styles.selectorActive : {}]}>
+            <Text style={styles.selectorText}>Inventory</Text>
+          </View>
+          <View style={[styles.destinationBtn, grocery ? styles.selectorActive : {}]}>
+            <Text style={styles.selectorText}>Grocery</Text>
+          </View>
+        </PressableView>
         <BigTextInput
           style={styles.inputStyle}
           placeholder="Ingredient"

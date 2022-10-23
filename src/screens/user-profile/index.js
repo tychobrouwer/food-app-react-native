@@ -226,7 +226,6 @@ const UserProfileScreen = function UserProfileScreen({ navigation }) {
         </View>
 
         <BigBtn
-          style={styles.saveBtn}
           title="SAVE"
           onPress={() => {
             saveCredentials();

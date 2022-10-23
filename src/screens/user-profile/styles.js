@@ -13,10 +13,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 
-  saveBtn: {
-    marginTop: '2%',
-  },
-
   contentHeader: {
     width: '100%',
     height: 50,

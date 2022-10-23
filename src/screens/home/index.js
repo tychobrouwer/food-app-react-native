@@ -40,12 +40,12 @@ const HomeScreen = function HomeScreen({ navigation }) {
 
     if (group) {
       if (groups.includes(group)) {
-        result = await getInventory(credentials.userID, credentials.passwordHash, group);
+        result = await getInventory(credentials.userID, credentials.passwordHash, group, false);
       } else {
-        messageBoxRef.current.createMessage('error', 'No permission to add to group');
+        messageBoxRef.current.createMessage('error', 'No permission for this group');
       }
     } else {
-      result = await getInventory(credentials.userID, credentials.passwordHash, undefined);
+      result = await getInventory(credentials.userID, credentials.passwordHash, undefined, false);
     }
 
     if (result.result) {
@@ -71,6 +71,7 @@ const HomeScreen = function HomeScreen({ navigation }) {
       credentials.userID,
       credentials.passwordHash,
       group,
+      false,
       item.itemID,
     );
 
@@ -78,11 +79,11 @@ const HomeScreen = function HomeScreen({ navigation }) {
       setListItems(itemRemoveResult.newInventory);
       dispatch({ type: SET_INVENTORY, payload: itemRemoveResult.newInventory });
 
-      messageBoxRef.current.createMessage('success', `removed ${item.name} from inventory`);
+      messageBoxRef.current.createMessage('success', `Removed ${item.name} from inventory`);
     } else {
       setListItems(oldInventory);
 
-      messageBoxRef.current.createMessage('error', `failed to remove ${item.name} from inventory`);
+      messageBoxRef.current.createMessage('error', `Failed to remove ${item.name} from inventory`);
     }
   };
 
@@ -115,7 +116,7 @@ const HomeScreen = function HomeScreen({ navigation }) {
       <View style={stylesMain.content}>
         <View style={styles.contentHeader}>
           <Text style={styles.contentHeaderText}>
-            CALENDAR
+            Calendar
           </Text>
         </View>
         <FlatList

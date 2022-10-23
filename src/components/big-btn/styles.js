@@ -12,12 +12,13 @@ const styles = StyleSheet.create({
     backgroundColor: config.tertiaryColor,
     color: config.primaryColor,
     marginBottom: 20,
+    alignItems: 'center',
   },
 
   bigBtnText: {
     fontWeight: 'bold',
     color: config.secondaryColor,
-    fontSize: 21,
+    fontSize: 18,
   },
 });
 

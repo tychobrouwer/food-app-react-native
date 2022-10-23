@@ -19,8 +19,7 @@ const styles = StyleSheet.create({
 
   TextInputWrapper: {
     width: '90%',
-    paddingHorizontal: 10,
-    paddingVertical: 12,
+    marginLeft: 5,
   },
 
   TextInput: {

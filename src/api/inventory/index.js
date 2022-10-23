@@ -1,6 +1,6 @@
 import constants from '../constants';
 
-export const addToInventory = async (userID, passwordHash, groupID, itemData) => {
+export const addToInventory = async (userID, passwordHash, groupID, isGrocery, itemData) => {
   try {
     // fetch request for adding an item to an inventory
     const response = await fetch(constants.endpoint('add-item'), {
@@ -10,6 +10,7 @@ export const addToInventory = async (userID, passwordHash, groupID, itemData) =>
         userID,
         password: passwordHash,
         groupID,
+        isGrocery,
         itemData,
       }),
     });
@@ -27,7 +28,7 @@ export const addToInventory = async (userID, passwordHash, groupID, itemData) =>
   }
 };
 
-export const removeFromInventory = async (userID, passwordHash, groupID, itemID) => {
+export const removeFromInventory = async (userID, passwordHash, groupID, isGrocery, itemID) => {
   try {
     // fetch request for adding an item to an inventory
     const response = await fetch(constants.endpoint('remove-item'), {
@@ -37,6 +38,7 @@ export const removeFromInventory = async (userID, passwordHash, groupID, itemID)
         userID,
         password: passwordHash,
         groupID,
+        isGrocery,
         itemID,
       }),
     });
@@ -54,7 +56,7 @@ export const removeFromInventory = async (userID, passwordHash, groupID, itemID)
   }
 };
 
-export const getInventory = async (userID, passwordHash, groupID) => {
+export const getInventory = async (userID, passwordHash, groupID, isGrocery) => {
   try {
     // fetch request for adding an item to an inventory
     const response = await fetch(constants.endpoint('get-inventory'), {
@@ -64,6 +66,7 @@ export const getInventory = async (userID, passwordHash, groupID) => {
         userID,
         password: passwordHash,
         groupID,
+        isGrocery,
       }),
     });
 

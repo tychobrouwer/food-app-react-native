@@ -48,6 +48,33 @@ const styles = StyleSheet.create({
     borderRadius: 25,
   },
 
+  destinationWrapper: {
+    width: '100%',
+    backgroundColor: config.tertiaryColor,
+    borderRadius: 5,
+    height: 50,
+    flexDirection: 'row',
+    marginBottom: 20,
+  },
+
+  destinationBtn: {
+    width: '50%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  selectorActive: {
+    backgroundColor: config.secondaryTextColor,
+    borderRadius: 5,
+  },
+
+  selectorText: {
+    color: config.primaryTextColor,
+    fontWeight: 'bold',
+    fontSize: 18,
+  },
+
   inputStyle: {
     marginBottom: '8%',
   },

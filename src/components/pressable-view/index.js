@@ -23,12 +23,12 @@ const PressableView = function PressableView({ children, style, onPress }) {
   return (
     <Animated.View style={[style, { opacity }]}>
       <Pressable
-        style={{
+        style={[{
           height: '100%',
           width: '100%',
           alignItems: 'center',
           justifyContent: 'center',
-        }}
+        }, style]}
         onPress={onPress}
         onPressIn={() => animate(true)}
         onPressOut={() => animate(false)}

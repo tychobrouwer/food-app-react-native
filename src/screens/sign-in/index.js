@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 // import components and utils
 import config from '../../config';
 import {
-  GlobalDispatchContext, SET_CREDENTIALS, SET_GROUP, SET_GROUPS, SET_INVENTORY,
+  GlobalDispatchContext, SET_CREDENTIALS, SET_GROCERY, SET_GROUP, SET_GROUPS, SET_INVENTORY,
 } from '../../components/global-state';
 import BigBtn from '../../components/big-btn';
 import BigTextInput from '../../components/big-text-input';
@@ -111,15 +111,12 @@ const SignInScreen = function SignInScreen({ route, navigation }) {
         passwordHash,
       )).data.map((groupData) => groupData.GroupID);
 
-      let group = secureStoreGet('group');
+      let group = Number(await secureStoreGet('group'));
 
-      if (!group) {
-        if (groups[0]) {
-          [group] = groups;
-          secureStoreSet('group', group);
-        } else {
-          group = undefined;
-        }
+      if ((group && !groups.includes(group)) || (!group && groups.length !== 0)) {
+        [group] = groups;
+
+        secureStoreSet('group', String(group));
       }
 
       // set local variables to the credentials
@@ -136,6 +133,7 @@ const SignInScreen = function SignInScreen({ route, navigation }) {
       dispatch({ type: SET_GROUPS, payload: groups });
       dispatch({ type: SET_GROUP, payload: group });
       dispatch({ type: SET_INVENTORY, payload: authResult.data.inventory });
+      dispatch({ type: SET_GROCERY, payload: authResult.data.grocery });
 
       // if stay signed in store credentials in secure store
       if (staySignedIn) {
