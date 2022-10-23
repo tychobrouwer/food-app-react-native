@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   itemTextBox: {
     marginTop: 'auto',
     marginBottom: 'auto',
-    width: '70%',
+    width: '80%',
   },
 
   expiration: {
