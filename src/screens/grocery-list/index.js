@@ -108,6 +108,7 @@ const GroceryListScreen = function GroceryListScreen({ navigation }) {
         closeRow={closeRow}
         itemID={item.itemID}
         deleteItem={onClick}
+        showExpiration={false}
       />
     );
   };

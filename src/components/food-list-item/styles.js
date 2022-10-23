@@ -20,36 +20,15 @@ const styles = StyleSheet.create({
   itemTextBox: {
     marginTop: 'auto',
     marginBottom: 'auto',
+    width: '70%',
   },
 
-  itemText: {
-    paddingVertical: 2,
+  expiration: {
+    fontSize: 21,
   },
 
   title: {
-    fontSize: 21,
-  },
-
-  propTitle: {
-    color: config.secondaryTextColor,
-  },
-
-  deleteView: {
-    backgroundColor: config.errorColor,
-    borderBottomRightRadius: 5,
-    borderTopRightRadius: 5,
-    width: '30%',
-  },
-
-  deleteTextView: {
-    height: '100%',
-    justifyContent: 'center',
-  },
-
-  deleteText: {
-    fontSize: 21,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontSize: 28,
   },
 });
 

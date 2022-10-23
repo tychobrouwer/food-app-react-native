@@ -8,15 +8,16 @@ import config from '../../config';
 import capitalize from '../../utils/capitalize';
 
 // import styles
-import stylesMain from '../../styles';
+// import stylesMain from '../../styles';
 import styles from './styles';
 import SwipeableListItem from '../swipeable-list-item';
 
 // return the big button component
 const FoodListItem = function FoodListItem({
-  food, date, quantity, quantityType, style, itemID, closeRow, deleteItem, innerRef,
+  food, date, quantity, quantityType, style, itemID, closeRow, deleteItem, innerRef, showExpiration,
 }) {
   const quantityString = (quantityType === 'units') ? '' : quantityType;
+  const expired = showExpiration && date.getTime() < new Date().getTime();
 
   return (
     <SwipeableListItem
@@ -24,21 +25,22 @@ const FoodListItem = function FoodListItem({
       closeRow={closeRow}
       itemID={itemID}
       deleteItem={deleteItem}
-      style={style}
-      height={80}
+      style={[
+        style,
+        { height: showExpiration ? 80 : 55 },
+      ]}
+      height={showExpiration ? 80 : 55}
     >
       <View style={styles.itemTextBox}>
-        <Text style={[stylesMain.text, styles.itemText]}>
-          <Text style={styles.title}>{capitalize(food)}</Text>
-        </Text>
-        <Text style={[stylesMain.text, styles.itemText]}>
-          <Text style={styles.propTitle}>QUANTITY: </Text>
-          <Text>{`${quantity} ${quantityString}`}</Text>
-        </Text>
-        <Text style={[stylesMain.text, styles.itemText]}>
-          <Text style={styles.propTitle}>EXPIRATION DATE: </Text>
-          <Text>{date.toLocaleDateString()}</Text>
-        </Text>
+        <View style={{ flexDirection: 'row' }}>
+          <Text style={[styles.title, { width: '60%' }]}>{capitalize(food)}</Text>
+          <Text style={styles.title}>{`${quantity} ${quantityString}`}</Text>
+        </View>
+        { showExpiration && (
+          <Text style={[styles.expiration, expired ? { color: config.errorColor } : {}]}>
+            {expired ? 'EXPIRED' : date.toLocaleDateString()}
+          </Text>
+        )}
       </View>
     </SwipeableListItem>
   );
@@ -57,6 +59,7 @@ FoodListItem.propTypes = {
   closeRow: PropTypes.func.isRequired,
   deleteItem: PropTypes.func.isRequired,
   innerRef: PropTypes.func.isRequired,
+  showExpiration: PropTypes.bool.isRequired,
 };
 
 FoodListItem.defaultProps = {

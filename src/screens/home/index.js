@@ -105,6 +105,7 @@ const HomeScreen = function HomeScreen({ navigation }) {
         closeRow={closeRow}
         itemID={item.itemID}
         deleteItem={onClick}
+        showExpiration
       />
     );
   };

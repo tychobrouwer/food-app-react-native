@@ -218,11 +218,17 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
           defaultValue={quantityTypes[0]}
           options={quantityTypes}
         />
-        <DateSelector
-          style={styles.inputStyle}
-          date={date}
-          onDateChange={(selectedDate) => setDate(new Date(selectedDate))}
-        />
+        {
+          !grocery ? (
+            <DateSelector
+              style={styles.inputStyle}
+              date={date}
+              onDateChange={(selectedDate) => setDate(new Date(selectedDate))}
+            />
+          ) : (
+            <View style={[styles.inputStyle, { height: 45 }]} />
+          )
+        }
         <BigBtn
           style={styles.addButton}
           title="ADD PRODUCT"
