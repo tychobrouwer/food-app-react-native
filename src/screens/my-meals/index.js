@@ -1,10 +1,6 @@
 import React from 'react';
 import {
-<<<<<<< HEAD:src/screens/my-meals/index.js
   View, Text,
-=======
-  View, Text, TouchableOpacity,
->>>>>>> d0a9d6dd864dec1f9dd535ac8ca6b3756375bda0:src/screens/myMeals/index.js
 } from 'react-native';
 import PropTypes from 'prop-types';
 

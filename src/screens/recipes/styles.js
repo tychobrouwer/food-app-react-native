@@ -19,13 +19,6 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     fontSize: 35,
     textAlign: 'center',
-<<<<<<< HEAD
-=======
-    color: 'white',
->>>>>>> d0a9d6dd864dec1f9dd535ac8ca6b3756375bda0
-  },
-
-  topNav: {
     width: '85%',
     flexDirection: 'row',
     justifyContent: 'space-between',

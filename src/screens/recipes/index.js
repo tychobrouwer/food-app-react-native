@@ -27,11 +27,7 @@ const RecipesScreen = function RecipesScreen({ navigation }) {
         }}
         >
           <View style={styles.buttonRecipes}>
-<<<<<<< HEAD
             <Text style={styles.buttonText}> Suggestions</Text>
-=======
-            <Text style={styles.buttonText}> Susggestions</Text>
->>>>>>> d0a9d6dd864dec1f9dd535ac8ca6b3756375bda0
           </View>
         </TouchableOpacity>
 
