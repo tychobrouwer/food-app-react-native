@@ -17,7 +17,21 @@ const FoodListItem = function FoodListItem({
   food, date, quantity, quantityType, style, itemID, closeRow, deleteItem, innerRef, showExpiration,
 }) {
   const quantityString = (quantityType === 'units') ? '' : quantityType;
-  const expired = showExpiration && date.getTime() < new Date().getTime();
+
+  const today = new Date();
+  const expired = showExpiration
+    && date.getTime() < new Date(today.setHours(0, 0, 0, 0)).getTime();
+  const expiredClose = showExpiration
+    && date.getTime() < new Date(
+      new Date(today.setHours(0, 0, 0, 0)).setDate(today.getDate() + 3),
+    ).getTime();
+
+  let dateColor = config.primaryTextColor;
+  if (expired) {
+    dateColor = config.errorColor;
+  } else if (expiredClose) {
+    dateColor = config.warningColor;
+  }
 
   return (
     <SwipeableListItem
@@ -37,8 +51,8 @@ const FoodListItem = function FoodListItem({
           <Text style={styles.title}>{`${quantity} ${quantityString}`}</Text>
         </View>
         { showExpiration && (
-          <Text style={[styles.expiration, expired ? { color: config.errorColor } : {}]}>
-            {expired ? 'EXPIRED' : date.toLocaleDateString()}
+          <Text style={[styles.expiration, { color: dateColor }]}>
+            {date.toLocaleDateString()}
           </Text>
         )}
       </View>

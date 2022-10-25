@@ -106,6 +106,7 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
 
       setIngredient(capitalize(barCodeResult.data.Name));
       setQuantity(String(barCodeResult.data.Quantity));
+      setQuantityType(barCodeResult.data.QuantityType);
       dropDownRef.current.select(quantityTypes.indexOf(barCodeResult.data.QuantityType));
     } else {
       messageBoxRef.current.createMessage('message', 'Bar code was not found');
