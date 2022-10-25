@@ -2,7 +2,11 @@ import React, {
   useContext, useEffect, useRef, useState,
 } from 'react';
 import {
+<<<<<<< HEAD
   View, Text, FlatList, RefreshControl,
+=======
+  View, Text,
+>>>>>>> d0a9d6dd864dec1f9dd535ac8ca6b3756375bda0
 } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -114,8 +118,12 @@ const GroceryListScreen = function GroceryListScreen({ navigation }) {
   };
 
   return (
+<<<<<<< HEAD
     <ScreenDefault scrollEnabled={false}>
       <MessageBox ref={messageBoxRef} />
+=======
+    <ScreenDefault>
+>>>>>>> d0a9d6dd864dec1f9dd535ac8ca6b3756375bda0
       <TopNavigator navigation={navigation} />
 
       <View style={stylesMain.content}>
@@ -124,6 +132,7 @@ const GroceryListScreen = function GroceryListScreen({ navigation }) {
             Grocery List
           </Text>
         </View>
+<<<<<<< HEAD
         <FlatList
           style={styles.flatList}
           decelerationRate="fast"
@@ -151,6 +160,26 @@ const GroceryListScreen = function GroceryListScreen({ navigation }) {
         />
       </View>
 
+=======
+
+        <View style={styles.directionRow}>
+          <View style={styles.contentSubHeader}>
+            <Text style={styles.contentSubHeaderText}>
+              Product
+            </Text>
+          </View>
+
+          <View style={styles.contentSubHeader} marginLeft="20%">
+            <Text style={styles.contentSubHeaderText}>
+              Quantity
+            </Text>
+
+          </View>
+        </View>
+
+      </View>
+
+>>>>>>> d0a9d6dd864dec1f9dd535ac8ca6b3756375bda0
       <BottomNavigator navigation={navigation} />
     </ScreenDefault>
   );
