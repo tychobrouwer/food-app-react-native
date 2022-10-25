@@ -7,13 +7,16 @@ import {
 import PropTypes from 'prop-types';
 
 // import components and utils
-import { GlobalDispatchContext, GlobalStateContext, SET_INVENTORY } from '../../components/global-state';
+import {
+  GlobalDispatchContext, GlobalStateContext, SET_GROUPS, SET_INVENTORY,
+} from '../../components/global-state';
 import ScreenDefault from '../../components/screen-wrapper';
 import TopNavigator from '../../components/top-navigator';
 import BottomNavigator from '../../components/bottom-navigator';
 import FoodListItem from '../../components/food-list-item';
 import { getInventory, removeFromInventory } from '../../api/inventory';
 import MessageBox from '../../components/message-box';
+import { getGroups } from '../../api/group';
 
 // import styles
 import styles from './styles';
@@ -27,7 +30,7 @@ const HomeScreen = function HomeScreen({ navigation }) {
 
   const messageBoxRef = useRef();
   const {
-    credentials, group, groups, inventory,
+    credentials, group, inventory,
   } = useContext(GlobalStateContext);
   const [listItems, setListItems] = useState(inventory.sort((a, b) => b.date - a.date).reverse());
   const [refreshing, setRefreshing] = useState(false);
@@ -38,8 +41,15 @@ const HomeScreen = function HomeScreen({ navigation }) {
   const updateInventory = async () => {
     let result;
 
+    const updateGroups = (await getGroups(
+      credentials.userID,
+      credentials.passwordHash,
+    )).data.map((groupData) => groupData.GroupID);
+
+    dispatch({ type: SET_GROUPS, payload: updateGroups });
+
     if (group) {
-      if (groups.includes(group)) {
+      if (updateGroups.includes(group)) {
         result = await getInventory(credentials.userID, credentials.passwordHash, group, false);
       } else {
         messageBoxRef.current.createMessage('error', 'No permission for this group');
@@ -143,7 +153,7 @@ const HomeScreen = function HomeScreen({ navigation }) {
               deleteItem(v);
             })
           )}
-          keyExtractor={(item) => item.date}
+          keyExtractor={(item) => item.itemID}
         />
       </View>
       <BottomNavigator navigation={navigation} />

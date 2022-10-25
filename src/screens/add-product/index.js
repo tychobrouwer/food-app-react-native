@@ -28,11 +28,13 @@ import BigBtn from '../../components/big-btn';
 import DateSelector from '../../components/date-picker';
 import MessageBox from '../../components/message-box';
 import { addToInventory } from '../../api/inventory';
+import capitalize from '../../utils/capitalize';
+import { addBarCode, getBarCode } from '../../api/bar-code';
+import PressableView from '../../components/pressable-view';
 
 // import styles
 import styles from './styles';
 import stylesMain from '../../styles';
-import PressableView from '../../components/pressable-view';
 
 // return the home screen component
 const AddProductScreen = function AddProductScreen({ navigation }) {
@@ -54,14 +56,17 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
   const [scanner, setScanner] = useState(false);
   const [scannerVisible, setScannerVisible] = useState(false);
   const messageBoxRef = useRef();
+  const dropDownRef = useRef();
 
   // variables to store the inputs
   const [ingredient, setIngredient] = useState('');
   const [quantity, setQuantity] = useState('');
-  const [quantityType, setQuantityType] = useState('units');
+  const [quantityType, setQuantityType] = useState(quantityTypes[0]);
   const [date, setDate] = useState(new Date());
   const [grocery, setGrocery] = useState(false);
   const scannerOpacity = useRef(new Animated.Value(1)).current;
+  const [code, setCode] = useState();
+  const [barCodeResult, setBarCodeResult] = useState();
 
   // function variable boolean for loading
   const [loading, setLoading] = useState(false);
@@ -88,16 +93,23 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
   };
 
   // function handling bar code scanned
-  const handleBarCodeScanned = ({ type, data }) => {
+  const handleBarCodeScanned = async ({ data }) => {
     setScanner(false);
+    setCode(data);
 
-    // send data of barcode to the server to see if code is already known
-    // set ingredient to the retrieved ingredient
-    setIngredient(data);
+    if (data !== code) {
+      setBarCodeResult(await getBarCode(data));
+    }
 
-    messageBoxRef.current.createMessage('success', 'Bar code scanned');
+    if (barCodeResult) {
+      messageBoxRef.current.createMessage('success', 'Bar code scanned');
 
-    console.log(`barcode type: ${type}, with data ${data}`);
+      setIngredient(capitalize(barCodeResult.data.Name));
+      setQuantity(String(barCodeResult.data.Quantity));
+      dropDownRef.current.select(quantityTypes.indexOf(barCodeResult.data.QuantityType));
+    } else {
+      messageBoxRef.current.createMessage('message', 'Bar code was not found');
+    }
   };
 
   useEffect(() => {
@@ -162,6 +174,12 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
       messageBoxRef.current.createMessage('error', `Failed to add ${ingredient}`);
     }
 
+    if (code) {
+      await addBarCode(code, ingredient, quantity, quantityType);
+
+      setCode(undefined);
+    }
+
     clearFields();
     setLoading(false);
   };
@@ -205,6 +223,7 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
           }}
         />
         <BigTextWithDropdown
+          dropDownRef={dropDownRef}
           style={styles.inputStyle}
           keyboardType="numeric"
           placeholder="Quantity"
@@ -248,12 +267,12 @@ const AddProductScreen = function AddProductScreen({ navigation }) {
         <Animated.View
           style={[
             styles.scannerContainer,
-            !scannerVisible ? { zIndex: -10 } : {},
+            !scannerVisible ? { display: 'none' } : {},
             { opacity: scannerOpacity },
           ]}
         >
           {
-            hasPermission === true && (
+            hasPermission === true && scannerVisible && (
               <BarCodeScanner
                 style={styles.scanner}
                 onBarCodeScanned={handleBarCodeScanned}

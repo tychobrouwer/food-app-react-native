@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { View, TextInput, Keyboard } from 'react-native';
+import {
+  View, TextInput, Keyboard, HTMLInputElement,
+} from 'react-native';
 import ModalDropdown from 'react-native-modal-dropdown';
 
 import config from '../../config';
@@ -24,6 +26,7 @@ const BigTextWithDropdown = function BigTextWithDropdown(
     options,
     defaultValue,
     onChangeOption,
+    dropDownRef,
   },
 ) {
   const [status, setStatus] = useState(false);
@@ -46,8 +49,10 @@ const BigTextWithDropdown = function BigTextWithDropdown(
           />
         </View>
         <ModalDropdown
+          ref={dropDownRef}
           style={styles.dropdownStyle}
           defaultValue={defaultValue}
+          defaultIndex={0}
           onSelect={onChangeOption}
           textStyle={[styles.dropdownText, styles.dropdownBtn]}
           dropdownTextStyle={styles.dropdownText}
@@ -89,6 +94,12 @@ BigTextWithDropdown.propTypes = {
   defaultValue: PropTypes.string.isRequired,
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
   onChangeOption: PropTypes.func.isRequired,
+  dropDownRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({
+      current: PropTypes.instanceOf(HTMLInputElement),
+    }),
+  ]),
 };
 
 BigTextWithDropdown.defaultProps = {
@@ -97,6 +108,7 @@ BigTextWithDropdown.defaultProps = {
   secureTextEntry: false,
   keyboardType: 'default',
   onEndEditing: () => {},
+  dropDownRef: undefined,
 };
 
 export default BigTextWithDropdown;
