@@ -87,11 +87,11 @@ export default function App() {
             name="RecipeSearch"
             component={RecipesSearchScreen}
           />
-           <Stack.Screen
+          <Stack.Screen
             name="RecipeSuggested"
             component={RecipesSuggestedScreen}
           />
-           <Stack.Screen
+          <Stack.Screen
             name="RecipeMyMeals"
             component={RecipesMyMealsScreen}
           />

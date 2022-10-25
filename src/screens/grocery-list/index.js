@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  View, Text
+  View, Text,
 } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -17,33 +17,33 @@ import stylesMain from '../../styles';
 const GroceryListScreen = function GroceryListScreen({ navigation }) {
   return (
     <ScreenDefault>
-        <TopNavigator navigation={navigation} />
-      
-          <View style={stylesMain.content}>
-            <View style={styles.contentHeader}>
-              <Text style={styles.contentHeaderText}>
-                Grocery List
-              </Text>
-            </View>
-            
-        <View style = {styles.directionRow}>
-            <View style={styles.contentSubHeader}>
-              <Text style={styles.contentSubHeaderText}>
-                Product
-              </Text>
-            </View>
+      <TopNavigator navigation={navigation} />
 
-            <View style={styles.contentSubHeader} marginLeft='20%'>
-              <Text style={styles.contentSubHeaderText}>
-                Quantity
-              </Text>
-            
-            </View>
+      <View style={stylesMain.content}>
+        <View style={styles.contentHeader}>
+          <Text style={styles.contentHeaderText}>
+            Grocery List
+          </Text>
         </View>
-            
-         </View>
 
-        <BottomNavigator navigation={navigation} />
+        <View style={styles.directionRow}>
+          <View style={styles.contentSubHeader}>
+            <Text style={styles.contentSubHeaderText}>
+              Product
+            </Text>
+          </View>
+
+          <View style={styles.contentSubHeader} marginLeft="20%">
+            <Text style={styles.contentSubHeaderText}>
+              Quantity
+            </Text>
+
+          </View>
+        </View>
+
+      </View>
+
+      <BottomNavigator navigation={navigation} />
     </ScreenDefault>
   );
 };

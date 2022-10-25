@@ -5,30 +5,29 @@ import config from '../../styles/config';
 
 // styles for the home screen
 const styles = StyleSheet.create({
-    buttonRecipes: {
-        borderRadius: 15,
-        paddingVertical: '15%',
-        paddingHorizontal: '0%',
-        backgroundColor: config.secondaryColor,
-        marginTop: '5%',
-    },
+  buttonRecipes: {
+    borderRadius: 15,
+    paddingVertical: '15%',
+    paddingHorizontal: '0%',
+    backgroundColor: config.secondaryColor,
+    marginTop: '5%',
+  },
 
-    buttonText: {
-        color: 'white',
-        fontWeight: 'bold',
-        textTransform: 'uppercase',
-        fontSize: 35,
-        textAlign: 'center',
-        color:'white'
-    },
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
+    fontSize: 35,
+    textAlign: 'center',
+    color: 'white',
+  },
 
-    topNav: {
-        width: '85%',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginTop: '15%',
-      },
-    
+  topNav: {
+    width: '85%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: '15%',
+  },
 
 });
 

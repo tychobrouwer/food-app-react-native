@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 // import the config
 import config from '../../config';
 
-
 // styles for the home screen
 const styles = StyleSheet.create({
   contentHeader: {
