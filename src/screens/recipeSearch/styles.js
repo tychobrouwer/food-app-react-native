@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 // import the style config
-import config from '../../config';
+import config from '../../styles/config';
 
 // styles for the home screen
 const styles = StyleSheet.create({
@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     paddingVertical: '15%',
     paddingHorizontal: '0%',
     backgroundColor: config.secondaryColor,
-    marginTop: '13%',
+    marginTop: '5%',
   },
 
   buttonText: {
@@ -19,10 +19,7 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     fontSize: 35,
     textAlign: 'center',
-<<<<<<< HEAD
-=======
     color: 'white',
->>>>>>> d0a9d6dd864dec1f9dd535ac8ca6b3756375bda0
   },
 
   topNav: {
