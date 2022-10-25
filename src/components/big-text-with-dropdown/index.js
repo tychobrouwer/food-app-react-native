@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-  View, TextInput, Keyboard, HTMLInputElement,
+  View, TextInput, Keyboard,
 } from 'react-native';
 import ModalDropdown from 'react-native-modal-dropdown';
 
@@ -97,7 +97,7 @@ BigTextWithDropdown.propTypes = {
   dropDownRef: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({
-      current: PropTypes.instanceOf(HTMLInputElement),
+      current: PropTypes.instanceOf(Component),
     }),
   ]),
 };
