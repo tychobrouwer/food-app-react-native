@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import {
-<<<<<<< HEAD:src/screens/recipe-search/index.js
   View,
-=======
-  View, Text, TouchableOpacity,
->>>>>>> d0a9d6dd864dec1f9dd535ac8ca6b3756375bda0:src/screens/recipeSearch/index.js
 } from 'react-native';
 import PropTypes from 'prop-types';
 import SearchBar from 'react-native-platform-searchbar';
