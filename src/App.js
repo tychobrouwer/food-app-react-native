@@ -19,7 +19,6 @@ import UserProfileScreen from './screens/user-profile';
 import UserGroupScreen from './screens/user-group';
 import RecipesSearchScreen from './screens/recipe-search';
 import RecipesSuggestedScreen from './screens/suggested-meals';
-import RecipesMyMealsScreen from './screens/my-meals';
 
 // initial values for locally stored values
 const initialState = {
@@ -96,10 +95,7 @@ export default function App() {
             name="RecipeSuggested"
             component={RecipesSuggestedScreen}
           />
-          <Stack.Screen
-            name="RecipeMyMeals"
-            component={RecipesMyMealsScreen}
-          />
+
         </Stack.Navigator>
       </NavigationContainer>
     </GlobalState>
