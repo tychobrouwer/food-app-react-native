@@ -44,7 +44,6 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     height: 50,
     alignItems: 'center',
-    color: config.secondaryColor,
   },
 
   dropdownChevron: {

@@ -3,7 +3,7 @@ import constants from '../constants';
 export const searchIngredientRecipe = async (ingredients) => {
   try {
     // fetch request for adding an item to an inventory
-    const response = await fetch(constants.endpoint('search-ingredient-recipe'), {
+    const response = await fetch(constants.endpoint('search-ingredient-recipes'), {
       method: 'POST',
       headers: constants.headers,
       body: JSON.stringify({
@@ -28,7 +28,7 @@ export const searchIngredientRecipe = async (ingredients) => {
 export const searchRecipe = async (name) => {
   try {
     // fetch request for adding an item to an inventory
-    const response = await fetch(constants.endpoint('search-recipe'), {
+    const response = await fetch(constants.endpoint('search-recipes'), {
       method: 'POST',
       headers: constants.headers,
       body: JSON.stringify({
