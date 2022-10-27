@@ -26,11 +26,10 @@ const RecipeListItem = function RecipeListItem({
     const ingredient = recipe.ingredients[i];
 
     ingredients.push(
-      <View style={styles.ingredient}>
+      <View key={ingredient.ingredient_ID} style={styles.ingredient}>
         <Text style={styles.ingredientItem}>-  </Text>
         <Text
           style={[styles.ingredientItem, { paddingRight: 15, flex: 1, flexWrap: 'wrap' }]}
-          key={ingredient.ingredient_ID}
         >
           {capitalize(ingredient.ingredient_name)}
         </Text>
