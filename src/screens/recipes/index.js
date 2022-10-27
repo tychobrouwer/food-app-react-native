@@ -27,16 +27,7 @@ const RecipesScreen = function RecipesScreen({ navigation }) {
         }}
         >
           <View style={styles.buttonRecipes}>
-            <Text style={styles.buttonText}> Suggestions</Text>
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => {
-          navigation.push('RecipeMyMeals');
-        }}
-        >
-          <View style={styles.buttonRecipes}>
-            <Text style={styles.buttonText}> My Meals</Text>
+            <Text style={styles.buttonText}>Suggestions</Text>
           </View>
         </TouchableOpacity>
 
@@ -45,7 +36,7 @@ const RecipesScreen = function RecipesScreen({ navigation }) {
         }}
         >
           <View style={styles.buttonRecipes}>
-            <Text style={styles.buttonText}> Search</Text>
+            <Text style={styles.buttonText}>Search</Text>
           </View>
         </TouchableOpacity>
 

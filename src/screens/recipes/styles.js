@@ -10,7 +10,10 @@ const styles = StyleSheet.create({
     paddingVertical: '15%',
     paddingHorizontal: '0%',
     backgroundColor: config.secondaryColor,
-    marginTop: '13%',
+    marginTop: '25%',
+    marginBottom: '13%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   buttonText: {
@@ -20,9 +23,8 @@ const styles = StyleSheet.create({
     fontSize: 35,
     textAlign: 'center',
     width: '85%',
-    flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: '15%',
+    justifyContent: 'center',
   },
 
 });
