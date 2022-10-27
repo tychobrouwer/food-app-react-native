@@ -59,10 +59,6 @@ The app is written in [React Native](https://reactnative.dev/docs/getting-starte
 
 Expo Go is used to run the project on your own device, without having to submit the app to the AppStore or PlayStore. Expo Go can also hot reload the app as soon as changes where made to the code.
 
-### TO DO's (and thoughts)
-
-- Make additional pages (recipe list).
-
 ### Folder Explanation
 
 The **assets** folder is designated for images or fonts used in the app like the icon of the app in different sizes. The **src** folder contains the main part of the code. The **App.js** file is the entry file, here the app starts, it contains the part of the code that switches between the screens. Within the **src** folder there are multiple folders, the most important of which is the **screens** folder. This folder contains the different screens (or pages) of the app. Furthermore the components folder contains, as the name implies, React components. The most important reason for separating these components is so they can be easily reused in multiple places and pages. The **utils** folder contains smaller parts of the code that have one function to perform, such as the **validate-email**, which validates if the inputted string is a valid email. The **api** folder includes files that communicate to the server, this includes the authentication functions. Finally the styles folder contains more general style sheets for the app. The **app.json** file in the root directory contains information about the app for the operating system, such as its name, version, and icon. The remaining files in the root directory are supporting files for building and running.
@@ -78,9 +74,11 @@ The **assets** folder is designated for images or fonts used in the app like the
 |-- src
 |    |-- api
 |    |    |-- authentication
+|    |    |-- bar-code
 |    |    |-- inventory
+|    |    |-- recipes
 |    |    |-- user
-|    |    |-- constants
+|    |    |-- constants.js
 |    |-- components
 |    |    |-- big-btn
 |    |    |-- big-text-input
@@ -92,18 +90,22 @@ The **assets** folder is designated for images or fonts used in the app like the
 |    |    |-- loader
 |    |    |-- message-box
 |    |    |-- pressable-view
+|    |    |-- recipe-list-item
 |    |    |-- screen-wrapper
+|    |    |-- swipeable-list-item
 |    |    |-- top-navigator
 |    |-- screens
 |    |    |-- add-product
 |    |    |-- grocery-list
 |    |    |-- home
 |    |    |-- privacy-policy
+|    |    |-- recipe-search
 |    |    |-- recipes
 |    |    |-- settings
 |    |    |-- sign-in
 |    |    |-- sign-up
 |    |    |-- splash
+|    |    |-- suggested-meals
 |    |    |-- user-group
 |    |    |-- user-profile
 |    |-- styles
