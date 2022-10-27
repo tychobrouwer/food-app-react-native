@@ -68,7 +68,7 @@ const FoodListItem = function FoodListItem({
             <Text
               style={[styles.expiration, { color: dateColor }]}
             >
-              {date.getDate() - today.getDate()}
+              {Math.floor((date.getTime() - today.getTime()) / (1000 * 3600 * 24))}
               {' days left'}
             </Text>
             <Text
