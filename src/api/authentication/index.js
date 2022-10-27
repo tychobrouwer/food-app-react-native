@@ -87,8 +87,6 @@ export const authSignIn = async (email, passwordHash, salt) => {
         };
       }
     } catch (error) {
-      console.log(error);
-
       // do nothing if error
       // this may happen if email password pair is invalid
     }

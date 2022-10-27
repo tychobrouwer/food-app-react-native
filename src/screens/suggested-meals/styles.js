@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     alignItems: 'center',
     color: config.primaryTextColor,
-
   },
 
   flatList: {
@@ -30,39 +29,6 @@ const styles = StyleSheet.create({
     flex: 1,
     marginBottom: 20,
   },
-
-  contentText: {
-    fontSize: '20',
-    color: config.primaryTextColor,
-  },
-
-  buttonRecipes: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: config.secondaryColor,
-    marginBottom: 30,
-    marginTop: 20,
-  },
-
-  TextRec: {
-    fontSize: 17,
-    color: config.primaryTextColor,
-  },
-
-  contentWrap: {
-    width: '100%',
-    height: 70,
-    backgroundColor: config.tertiaryColor,
-    color: config.primaryTextColor,
-    alignItems: 'center',
-    borderRadius: 5,
-  },
-
-  container: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
 });
 
 export default styles;

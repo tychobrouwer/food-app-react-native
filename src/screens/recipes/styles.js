@@ -8,25 +8,19 @@ const styles = StyleSheet.create({
   buttonRecipes: {
     borderRadius: 15,
     paddingVertical: '15%',
-    paddingHorizontal: '0%',
     backgroundColor: config.secondaryColor,
     marginTop: '25%',
-    marginBottom: '13%',
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginBottom: '15%',
   },
 
   buttonText: {
-    color: 'white',
+    color: config.tertiaryColor,
     fontWeight: 'bold',
     textTransform: 'uppercase',
     fontSize: 35,
+    width: '100%',
     textAlign: 'center',
-    width: '85%',
-    justifyContent: 'space-between',
-    justifyContent: 'center',
   },
-
 });
 
 export default styles;

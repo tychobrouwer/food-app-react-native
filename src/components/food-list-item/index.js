@@ -4,13 +4,14 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 
-import config from '../../config';
 import capitalize from '../../utils/capitalize';
+import SwipeableListItem from '../swipeable-list-item';
+
+import config from '../../config';
 
 // import styles
 // import stylesMain from '../../styles';
 import styles from './styles';
-import SwipeableListItem from '../swipeable-list-item';
 
 // return the big button component
 const FoodListItem = function FoodListItem({

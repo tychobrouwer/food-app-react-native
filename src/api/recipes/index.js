@@ -17,7 +17,6 @@ export const searchIngredientRecipe = async (ingredients) => {
 
     return result;
   } catch (error) {
-    console.log(error);
     return false;
   }
 };
@@ -36,11 +35,7 @@ export const searchRecipe = async (name) => {
     // await the json response of the server
     const result = await response.json();
 
-    if (result.result) {
-      return result;
-    }
-
-    return false;
+    return result;
   } catch (error) {
     return false;
   }

@@ -1,31 +1,18 @@
 import { StyleSheet } from 'react-native';
 
 // import the style config
-import config from '../../config';
+// import config from '../../config';
 
 // styles for the home screen
 const styles = StyleSheet.create({
-  buttonRecipes: {
-    borderRadius: 15,
-    paddingVertical: '15%',
-    paddingHorizontal: '0%',
-    backgroundColor: config.secondaryColor,
-    marginTop: '5%',
+  searchBar: {
+    marginBottom: 20,
   },
 
-  buttonText: {
-    color: 'white',
-    fontWeight: 'bold',
-    textTransform: 'uppercase',
-    fontSize: 35,
-    textAlign: 'center',
-  },
-
-  topNav: {
-    width: '85%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: '15%',
+  flatList: {
+    borderRadius: 5,
+    flex: 1,
+    marginBottom: 20,
   },
 });
 
