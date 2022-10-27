@@ -25,10 +25,12 @@ const styles = StyleSheet.create({
 
   expiration: {
     fontSize: 21,
+    justifyContent: 'space-between',
+    fontWeight: 'bold',
   },
 
   title: {
-    fontSize: 28,
+    fontSize: 24,
   },
 });
 

@@ -19,19 +19,31 @@ const FoodListItem = function FoodListItem({
 }) {
   const quantityString = (quantityType === 'units') ? '' : quantityType;
 
-  const today = new Date();
+  const today = new Date(new Date().setHours(0, 0, 0, 0));
   const expired = showExpiration
-    && date.getTime() < new Date(today.setHours(0, 0, 0, 0)).getTime();
+    && date.getTime() < new Date(today).getTime();
+  const expiredCloser = showExpiration
+    && date.getTime() < new Date(
+      new Date(today).setDate(today.getDate() + 1),
+    ).getTime();
   const expiredClose = showExpiration
     && date.getTime() < new Date(
-      new Date(today.setHours(0, 0, 0, 0)).setDate(today.getDate() + 3),
+      new Date(today).setDate(today.getDate() + 3),
+    ).getTime();
+  const expiredLessClose = showExpiration
+    && date.getTime() < new Date(
+      new Date(today).setDate(today.getDate() + 5),
     ).getTime();
 
   let dateColor = config.primaryTextColor;
   if (expired) {
     dateColor = config.errorColor;
+  } else if (expiredCloser) {
+    dateColor = config.closeWarningColor;
   } else if (expiredClose) {
     dateColor = config.warningColor;
+  } else if (expiredLessClose) {
+    dateColor = config.middleWarningColor;
   }
 
   return (
@@ -52,9 +64,19 @@ const FoodListItem = function FoodListItem({
           <Text style={styles.title}>{`${quantity} ${quantityString}`}</Text>
         </View>
         { showExpiration && (
-          <Text style={[styles.expiration, { color: dateColor }]}>
-            {date.toLocaleDateString()}
-          </Text>
+          <View style={{ flexDirection: 'row' }}>
+            <Text
+              style={[styles.expiration, { color: dateColor }]}
+            >
+              {date.getDate() - today.getDate()}
+              {' days left'}
+            </Text>
+            <Text
+              style={[styles.expiration, { color: dateColor, marginLeft: '10%' }]}
+            >
+              {date.toDateString()}
+            </Text>
+          </View>
         )}
       </View>
     </SwipeableListItem>

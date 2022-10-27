@@ -7,9 +7,11 @@ const config = {
   tertiaryColor: '#FFFFFF',
   primaryTextColor: '#222222',
   secondaryTextColor: '#999999',
-  errorColor: '#FF0000',
-  warningColor: '#FF9966',
-  successColor: '#00E000',
+  errorColor: '#FF3300',
+  warningColor: '#FFCC00',
+  closeWarningColor: '#FF9966',
+  middleWarningColor: '#99CC33',
+  successColor: '#339900',
 
   styleProp: PropTypes.objectOf(PropTypes.oneOfType([
     PropTypes.string,
